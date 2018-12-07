@@ -19,7 +19,7 @@ namespace RoleShuffle.Application.Games.Insider
             m_runningRounds = new ConcurrentDictionary<string, InsiderRound>();
         }
 
-        public short GameNumber => Constants.GameNumbers.SecretHitler;
+        public short GameNumber => Constants.GameNumbers.Insider;
 
         public string GameName => "Insider";
 
