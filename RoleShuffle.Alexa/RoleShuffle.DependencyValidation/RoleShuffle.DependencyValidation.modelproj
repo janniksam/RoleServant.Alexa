@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{20dbc995-02a7-4edd-bab0-34583d900df0}</ProjectGuid>
+    <ArchitectureToolsVersion>2.0.0.0</ArchitectureToolsVersion>
+    <Name>Kinoheld.DependencyValidation</Name>
+    <RootNamespace>Kinoheld.DependencyValidation</RootNamespace>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Validate Include="DependencyValidation.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="DependencyValidation.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>DependencyValidation.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="DependencyValidation.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>DependencyValidation.layerdiagram</DependentUpon>
+    </Validate>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RoleShuffle.Application.Abstractions\RoleShuffle.Application.Abstractions.csproj">
+      <Name>RoleShuffle.Application.Abstractions</Name>
+      <Project>{6a69b8cf-b87e-44c8-92dc-41153ad20434}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\RoleShuffle.Application\RoleShuffle.Application.csproj">
+      <Name>RoleShuffle.Application</Name>
+      <Project>{3de82c5a-e7da-4f1a-92f0-66ffb0039ff5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\RoleShuffle.Base\RoleShuffle.Base.csproj">
+      <Name>RoleShuffle.Base</Name>
+      <Project>{442a0f55-233b-4661-8a68-12391767aef9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\RoleShuffle.Domain.Model\RoleShuffle.Domain.Model.csproj">
+      <Name>RoleShuffle.Domain.Model</Name>
+      <Project>{661b019c-be31-43d9-bcff-32335578bf29}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\RoleShuffle.Domain.Services.Abstractions\RoleShuffle.Domain.Services.Abstractions.csproj">
+      <Name>RoleShuffle.Domain.Services.Abstractions</Name>
+      <Project>{7209bc31-94d9-411f-8084-e8dc44415fcc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\RoleShuffle.Domain.Services\RoleShuffle.Domain.Services.csproj">
+      <Name>RoleShuffle.Domain.Services</Name>
+      <Project>{4291ee0b-7c55-4f7a-83d2-3a77f2368191}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\RoleShuffle.Web\RoleShuffle.Web.csproj">
+      <Name>RoleShuffle.Web</Name>
+      <Project>{a901d379-e165-4cd9-9958-6d6e49f2df2c}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
+</Project>

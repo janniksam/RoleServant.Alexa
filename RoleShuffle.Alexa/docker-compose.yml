@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  roleshuffle.web:
+    image: roleshuffleweb
+    build:
+      context: .
+      dockerfile: RoleShuffle.Web/Dockerfile

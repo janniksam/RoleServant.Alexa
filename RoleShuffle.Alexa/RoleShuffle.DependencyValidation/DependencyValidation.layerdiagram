@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="0c507d54-82a7-4956-b0c9-0664076a2299" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="b2429734-b298-484d-a186-4f8fe335392b" name="RoleShuffle.Web">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="4c00b68f-ac4a-4e8c-a34b-ccf38432bfb9" direction="Forward">
+          <layerMoniker Id="02f415c0-5e20-4a13-ab3b-c9b91a743cc6" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="5105d1ae-a111-4cd0-8ff2-5c66b8cfec7f" direction="Forward">
+          <layerMoniker Id="ae0cce91-318d-4c62-8d71-b97ea7e574a3" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="37fcdf30-9dd1-465b-85a4-919ef28b037f" name="RoleShuffle.Web">
+          <ArtifactNode Label="RoleShuffle.Web" Category="CodeSchema_Project" Id="(Assembly=../RoleShuffle.Web/RoleShuffle.Web.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=RoleShuffle.Web)" Label="RoleShuffle.Web.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="ae0cce91-318d-4c62-8d71-b97ea7e574a3" name="RoleShuffle.Base">
+      <references>
+        <reference Id="3d7396c8-5c71-4f57-b5bf-f2c850620332" name="RoleShuffle.Base">
+          <ArtifactNode Label="RoleShuffle.Base" Category="CodeSchema_Project" Id="(Assembly=../RoleShuffle.Base/RoleShuffle.Base.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=RoleShuffle.Base)" Label="RoleShuffle.Base.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="da29f145-ad23-4746-be18-9b3b6c302f28" name="RoleShuffle.Domain.Services">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="e8d930e6-7f01-421f-b993-fea34d6ac491" direction="Forward">
+          <layerMoniker Id="07101a11-717f-4cc2-9c00-ef254445f390" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="7fc18d88-5cfc-43ce-b00a-fd08d10b8ccc" name="RoleShuffle.Domain.Services">
+          <ArtifactNode Label="RoleShuffle.Domain.Services" Category="CodeSchema_Project" Id="(Assembly=../RoleShuffle.Domain.Services/RoleShuffle.Domain.Services.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=RoleShuffle.Domain.Services)" Label="RoleShuffle.Domain.Services.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="07101a11-717f-4cc2-9c00-ef254445f390" name="RoleShuffle.Domain.Model">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="58e1c017-b228-451c-9481-b98f1c32837d" direction="Forward">
+          <layerMoniker Id="395fa2f3-3849-4162-b482-49f6758f5e1d" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="5ee334bd-e056-46ff-b7e2-48f8eb6de602" name="RoleShuffle.Domain.Model">
+          <ArtifactNode Label="RoleShuffle.Domain.Model" Category="CodeSchema_Project" Id="(Assembly=../RoleShuffle.Domain.Model/RoleShuffle.Domain.Model.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=RoleShuffle.Domain.Model)" Label="RoleShuffle.Domain.Model.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="395fa2f3-3849-4162-b482-49f6758f5e1d" name="RoleShuffle.Domain.Services.Abstractions">
+      <references>
+        <reference Id="7fc5ab97-6eba-432e-81bd-6b2ba12989b6" name="RoleShuffle.Domain.Services.Abstractions">
+          <ArtifactNode Label="RoleShuffle.Domain.Services.Abstractions" Category="CodeSchema_Project" Id="(Assembly=../RoleShuffle.Domain.Services.Abstractions/RoleShuffle.Domain.Services.Abstractions.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=RoleShuffle.Domain.Services.Abstractions)" Label="RoleShuffle.Domain.Services.Abstractions.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="2e1a7f2e-1e35-42b1-b2e3-69f39ab1c5eb" name="RoleShuffle.Application">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="45ef4f18-0167-4e24-87d8-88ca1cea3d01" direction="Forward">
+          <layerMoniker Id="02f415c0-5e20-4a13-ab3b-c9b91a743cc6" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="fa142fac-2305-4682-a2f2-adfaa9a67dbd" direction="Forward">
+          <layerMoniker Id="395fa2f3-3849-4162-b482-49f6758f5e1d" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="d372556b-3b91-46e2-a39a-c76d36587992" direction="Forward">
+          <layerMoniker Id="ae0cce91-318d-4c62-8d71-b97ea7e574a3" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <references>
+        <reference Id="2293abd9-3781-4ef8-8250-aa57671d38c8" name="RoleShuffle.Application">
+          <ArtifactNode Label="RoleShuffle.Application" Category="CodeSchema_Project" Id="(Assembly=../RoleShuffle.Application/RoleShuffle.Application.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=RoleShuffle.Application)" Label="RoleShuffle.Application.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+    <layer Id="02f415c0-5e20-4a13-ab3b-c9b91a743cc6" name="RoleShuffle.Application.Abstractions">
+      <references>
+        <reference Id="67d95492-eae5-4e15-9517-3289d3f84687" name="RoleShuffle.Application.Abstractions">
+          <ArtifactNode Label="RoleShuffle.Application.Abstractions" Category="CodeSchema_Project" Id="(Assembly=../RoleShuffle.Application.Abstractions/RoleShuffle.Application.Abstractions.csproj)">
+            <Category Ref="File" />
+          </ArtifactNode>
+          <ExpandedNode Id="(Assembly=RoleShuffle.Application.Abstractions)" Label="RoleShuffle.Application.Abstractions.dll" Category="CodeSchema_Assembly">
+            <Category Ref="FileSystem.Category.FileOfType.dll" />
+            <LinkCategory Ref="Produces" />
+            <LinkCategory Ref="Represents" />
+          </ExpandedNode>
+        </reference>
+      </references>
+    </layer>
+  </layers>
+</layerModel>

@@ -1,0 +1,211 @@
+﻿@model RoleShuffle.Application.Abstractions.Model.RoleSelection
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Vollmondnacht: Werwölfe - Wähle deine Karten</title>
+    <style>
+        .button {
+            background-color: #555555; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body style="background: #191919; color: white">
+    <div>
+        <h1>Vollmondnacht: Werwölfe</h1>
+
+        <h2>Ein vorgefertigtes Deck laden...</h2>
+        
+        @using (Html.BeginForm(FormMethod.Post))
+        {
+            var listItems = new List<SelectListItem>
+            {
+                new SelectListItem
+                {
+                    Text = "Einfach - Die erste Nacht - 3 Spieler",
+                    Value = "DEN3"
+                },
+                new SelectListItem
+                {
+                    Text = "Einfach - Die erste Nacht - 4 Spieler",
+                    Value = "DEN4"
+                },
+                new SelectListItem
+                {
+                    Text = "Einfach - Die erste Nacht - 5 Spieler",
+                    Value = "DEN5"
+                },
+                new SelectListItem
+                {
+                    Text = "Einfach - Mondsucht - 3 Spieler",
+                    Value = "MS3"
+                },
+                new SelectListItem
+                {
+                    Text = "Einfach - Mondsucht - 4 Spieler",
+                    Value = "MS4"
+                },
+                new SelectListItem
+                {
+                    Text = "Einfach - Mondsucht - 5 Spieler",
+                    Value = "MS5"
+                },
+                new SelectListItem
+                {
+                    Text = "Einfach - Mondsucht - 6 Spieler",
+                    Value = "MS6"
+                },
+                new SelectListItem
+                {
+                    Text = "Einfach - Einsame Nacht - 3 Spieler",
+                    Value = "EN3"
+                },
+                new SelectListItem
+                {
+                    Text = "Einfach - Einsame Nacht - 4 Spieler",
+                    Value = "EN4"
+                },
+                new SelectListItem
+                {
+                    Text = "Mittel - Konfusion - 3 Spieler",
+                    Value = "KF3"
+                },
+                new SelectListItem
+                {
+                    Text = "Mittel - Konfusion - 4 Spieler",
+                    Value = "KF4"
+                },
+                new SelectListItem
+                {
+                    Text = "Mittel - Konfusion - 5 Spieler",
+                    Value = "KF5"
+                },
+                new SelectListItem
+                {
+                    Text = "Mittel - Konfusion - 6 Spieler",
+                    Value = "KF6"
+                },
+                new SelectListItem
+                {
+                    Text = "Mittel - Konfusion - 7 Spieler",
+                    Value = "KF7"
+                },
+                new SelectListItem
+                {
+                    Text = "Mittel - Konfusion - 8 Spieler",
+                    Value = "KF8"
+                },
+                new SelectListItem
+                {
+                    Text = "Mittel - Konfusion - 9 Spieler",
+                    Value = "KF9"
+                }
+            };
+            
+            <p>@Html.DropDownListFor(model => model.PreSelection, listItems, "-- Deck auswählen --", new { style = "background: #191919; color: white;" })</p>
+
+            <button type="submit" class="button">Deck laden</button>
+        }
+        
+        <h2>Die Rollen auswählen...</h2>
+
+        @using (Html.BeginForm(FormMethod.Post))
+        {
+            if (Model.DeckId.HasValue)
+            {
+                <p style="color: green;">Das Deck ist jetzt unter der ID @Model.DeckId verfügbar.</p>
+            }
+            
+            @Html.ValidationSummary(false, string.Empty, new { @style = "color: red"})
+
+            <button type="submit" class="button">Deck-ID generieren</button>
+
+            <h3>Dorfgemeinschaft:</h3>
+
+            <div>
+                <div align="center" style="float: left; margin: 10px">
+                    <img src="https://i.pinimg.com/564x/54/88/e6/5488e6f311fe28e479becd7bf14d7eb7.jpg" height="150" /><br />
+                    <b>Betrunkener</b><br />
+                    @Html.TextBoxFor(i => i.Drunk, new { @type = "number", style = "width: 50px; background: #191919; color: white;" })
+                </div>
+                <div align="center" style="float: left; margin: 10px">
+                    <img src="https://i.imgur.com/rW7lge3.png" height="150" /><br />
+                    <b>Dorfbewohner</b><br />
+                    @Html.TextBoxFor(i => i.Villager, new { @type = "number", style = "width: 50px; background: #191919; color: white;" })
+                </div>
+                <div align="center" style="float: left; margin: 10px">
+                    <img src="https://i.pinimg.com/564x/80/34/3d/80343d7c53753a22ce4f067fd52b7dbd.jpg" height="150" /><br />
+                    <b>Freimaurer</b><br />
+                    @Html.TextBoxFor(i => i.Mason, new { @type = "number", style = "width: 50px; background: #191919; color: white;" })
+                </div>
+                <div align="center" style="float: left; margin: 10px">
+                    <img src="https://i.pinimg.com/564x/0c/1d/35/0c1d356dc87c821bcf17075d6f8a5a3b.jpg" height="150" /><br />
+                    <b>Jäger</b><br />
+                    @Html.TextBoxFor(i => i.Hunter, new { @type = "number", style = "width: 50px; background: #191919; color: white;" })
+                </div>
+                <div align="center" style="float: left; margin: 10px">
+                    <img src="https://i.pinimg.com/564x/4a/f0/5c/4af05c8008883581e2dd2dca5bced9fd.jpg" height="150" /><br />
+                    <b>Räuber</b><br />
+                    @Html.TextBoxFor(i => i.Robber, new { @type = "number", style = "width: 50px; background: #191919; color: white;" })
+                </div>
+                <div align="center" style="float: left; margin: 10px">
+                    <img src="https://i.pinimg.com/564x/29/f4/f6/29f4f6390f717a3e786b38863f4449ac.jpg" height="150" /><br />
+                    <b>Schlaflose</b><br />
+                    @Html.TextBoxFor(i => i.Insomniac, new { @type = "number", style = "width: 50px; background: #191919; color: white;" })
+                </div>
+                <div align="center" style="float: left; margin: 10px">
+                    <img src="https://i.pinimg.com/564x/f3/ae/79/f3ae79a637c3a8e1a866772e32c21e57.jpg" height="150" /><br />
+                    <b>Seherin</b><br />
+                    @Html.TextBoxFor(i => i.Seer, new { @type = "number", style = "width: 50px; background: #191919; color: white;" })
+                </div>
+                <div align="center" style="float: left; margin: 10px">
+                    <img src="https://i.pinimg.com/564x/1c/f9/02/1cf9021785ffbe933a2da4459e85c74a.jpg" height="150" /><br />
+                    <b>Unruhestifterin</b><br />
+                    @Html.TextBoxFor(i => i.Troublemaker, new { @type = "number", style = "width: 50px; background: #191919; color: white;" })
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+
+            <h3>Neutral:</h3>
+
+            <div>
+                <div align="center" style="float: left; margin: 10px">
+                    <img src="https://i.pinimg.com/564x/8a/26/8f/8a268f91144fd9511c9c4898075e278a.jpg" height="150" /><br />
+                    <b>Dorfgängerin</b><br />
+                    @Html.TextBoxFor(i => i.Doppelganger, new { @type = "number", style = "width: 50px; background: #191919; color: white;" })
+                </div>
+                <div align="center" style="float: left; margin: 10px">
+                    <img src="https://i.pinimg.com/564x/89/0f/93/890f933264bead728678509ea9b6235f.jpg" height="150" /><br />
+                    <b>Gerber</b><br />
+                    @Html.TextBoxFor(i => i.Tanner, new { @type = "number", style = "width: 50px; background: #191919; color: white;" })
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+
+            <h3>Wolfsrudel:</h3>
+
+            <div>
+                <div align="center" style="float: left; margin: 10px">
+                    <img src="https://i.pinimg.com/564x/7d/c2/3b/7dc23bdd4192e598c35941b0da0e5d89.jpg" height="150" /><br />
+                    <b>Günstling</b><br />
+                    @Html.TextBoxFor(i => i.Minion, new { @type = "number", style = "width: 50px; background: #191919; color: white;" })
+                </div>
+                <div align="center" style="float: left; margin: 10px">
+                    <img src="https://i.pinimg.com/564x/8d/b2/ec/8db2ecdf326d0fad735bb37fb10313c4.jpg" height="150" /><br />
+                    <b>Werwolf</b><br />
+                    @Html.TextBoxFor(i => i.Werewolf, new { @type = "number", style = "width: 50px; background: #191919; color: white;" })
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+        }
+    </div>
+</body>
+</html>
