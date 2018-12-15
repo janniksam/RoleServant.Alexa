@@ -17,7 +17,15 @@
         {
             public const string PlayerAmount = "PlayerAmount";
             public const string GameNumber = "GameNumber";
-            public static string DeckId = "DeckId";
+            public const string DeckId = "DeckId";
+            public const string ConfirmAction = "ConfirmAction";
+        }
+
+
+        public static class SlotResult
+        {
+            public const string Yes = "Ja";
+            public const string No = "Nein";
         }
 
         public static class GameNumbers

@@ -1,15 +1,16 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Text;
 using Alexa.NET;
 using Alexa.NET.Request;
 using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
+using RoleShuffle.Application.Abstractions.Model;
 using RoleShuffle.Application.Abstractions.RoleManager;
 using RoleShuffle.Application.Extensions;
-using RoleShuffle.Application.Games.OneNightUltimateWerewolf;
 using RoleShuffle.Base;
 
-namespace RoleShuffle.Application.Games.SecretHitler
+namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
 {
     public class OneNightUltimateWerewolfGame : IGame
     {
@@ -29,30 +30,25 @@ namespace RoleShuffle.Application.Games.SecretHitler
             var deckIdRaw = request.Intent.GetSlot(Constants.Slots.DeckId);
             if (!int.TryParse(deckIdRaw, out var deckId))
             {
-                var outputText = "<speak>";
-                outputText += $"Bitte wählen Sie für {GameName} eine Deck-{IdIpa} aus, die sie sich vorher generiert haben lassen.";
-                outputText += "</speak>";
-                return ResponseBuilder.DialogElicitSlot(
-                    new SsmlOutputSpeech
-                    {
-                        Ssml = outputText
-                    },
-                    Constants.Slots.DeckId);
+                return AskForDeckId();
             }
 
             var roleSelection = m_roleManager.GetRoleSelection(deckId);
             if (roleSelection == null)
             {
-                var outputText = "<speak>";
-                outputText += $"<p>Die Deck-{IdIpa} konnte nicht gefunden werden.</p>";
-                outputText += $"<p>Bitte wählen Sie für {GameName} eine Deck-{IdIpa} aus, die sie sich vorher generiert haben lassen.</p>";
-                outputText += "</speak>";
-                return ResponseBuilder.DialogElicitSlot(
-                    new PlainTextOutputSpeech
-                    {
-                        Text = outputText
-                    },
-                    Constants.Slots.DeckId);
+                return ReAskForDeckId();
+            }
+
+            var confirmValue = request.Intent.GetSlot(Constants.Slots.ConfirmAction);
+            if (confirmValue == null)
+            {
+                return AskForDeckConfimation(roleSelection);
+            }
+            if(!confirmValue.Equals(Constants.SlotResult.Yes, StringComparison.InvariantCultureIgnoreCase))
+            {
+                request.Intent.Slots[Constants.Slots.ConfirmAction].Value = null;
+                request.Intent.Slots[Constants.Slots.DeckId].Value = null;
+                return AskForDeckId(request.Intent);
             }
 
             var userId = skillRequest.Context.System.User.UserId;
@@ -64,6 +60,55 @@ namespace RoleShuffle.Application.Games.SecretHitler
                 "Falls du jetzt mit der Nacht Phase beginnen möchtest, kannst du jetzt \"Starte die Nacht Phase\" sagen.");
             response.Response.ShouldEndSession = false;
             return response;
+        }
+
+        private SkillResponse AskForDeckId(Intent updatedIntent = null)
+        {
+            var outputText = "<speak>";
+            outputText += $"Bitte wählen Sie für {GameName} eine Deck-{IdIpa} aus, die sie sich vorher generiert haben lassen.";
+            outputText += "</speak>";
+            return ResponseBuilder.DialogElicitSlot(
+                new SsmlOutputSpeech
+                {
+                    Ssml = outputText
+                },
+                Constants.Slots.DeckId, 
+                updatedIntent);
+        }
+
+        private SkillResponse AskForDeckConfimation(RoleSelection roleSelection)
+        {
+            if (roleSelection == null)
+            {
+                throw new ArgumentNullException(nameof(roleSelection));
+            }
+
+            var outputText = "<speak>";
+            outputText += "<p>Das ausgewählte Deck enthält folgende Karten:</p>";
+            outputText += $"<p>{roleSelection.DeckSummary}.</p>";
+            outputText += "<p>Soll das Spiel mit diesem Deck gestartet werden?</p>";
+            outputText += "</speak>";
+            return ResponseBuilder.DialogElicitSlot(
+                new SsmlOutputSpeech
+                {
+                    Ssml = outputText
+                },
+                Constants.Slots.ConfirmAction);
+        }
+
+        private SkillResponse ReAskForDeckId()
+        {
+            var outputText = "<speak>";
+            outputText += $"<p>Die Deck-{IdIpa} konnte nicht gefunden werden.</p>";
+            outputText +=
+                $"<p>Bitte wählen Sie für {GameName} eine Deck-{IdIpa} aus, die sie sich vorher generiert haben lassen.</p>";
+            outputText += "</speak>";
+            return ResponseBuilder.DialogElicitSlot(
+                new SsmlOutputSpeech
+                {
+                    Ssml = outputText
+                },
+                Constants.Slots.DeckId);
         }
 
         public SkillResponse DistributeRoles(SkillRequest request)

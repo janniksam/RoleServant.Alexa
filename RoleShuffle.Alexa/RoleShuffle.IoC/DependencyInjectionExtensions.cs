@@ -3,6 +3,7 @@ using RoleShuffle.Application.Abstractions.RequestHandler;
 using RoleShuffle.Application.Abstractions.RoleManager;
 using RoleShuffle.Application.Games;
 using RoleShuffle.Application.Games.Insider;
+using RoleShuffle.Application.Games.OneNightUltimateWerewolf;
 using RoleShuffle.Application.Games.SecretHitler;
 using RoleShuffle.Application.Intents;
 using RoleShuffle.Application.RequestHandler;
