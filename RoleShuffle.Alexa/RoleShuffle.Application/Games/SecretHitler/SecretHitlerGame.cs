@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Text;
+﻿using System.Text;
 using Alexa.NET;
 using Alexa.NET.Request;
 using Alexa.NET.Request.Type;
@@ -10,36 +9,26 @@ using RoleShuffle.Base;
 
 namespace RoleShuffle.Application.Games.SecretHitler
 {
-    public class SecretHitlerGame : IGame
+    public class SecretHitlerGame : BaseGame<SecretHitlerRound>
     {
         private const short MinPlayers = 5;
         private const short MaxPlayers = 10;
         private readonly IMessages m_messages;
-        private readonly ConcurrentDictionary<string, SecretHitlerRound> m_runningRounds;
         
         public SecretHitlerGame(IMessages messages)
+            : base("Secret Hitler", Constants.GameNumbers.SecretHitler)
         {
             m_messages = messages;
-            m_runningRounds = new ConcurrentDictionary<string, SecretHitlerRound>();
         }
 
-        public short GameNumber => Constants.GameNumbers.SecretHitler;
-
-        public string GameName => "Secret Hitler";
-
-        public SkillResponse PerformNightPhase(SkillRequest request)
+        public override SkillResponse PerformNightPhase(SkillRequest request)
         {
-            return ResponseBuilder.Tell($"In dem Spiel {GameName} gibt es keine Nachtphase.");
+            return ResponseBuilder.Tell($"In dem Spiel \"{GameName}\" gibt es keine Nachtphase. Versuche es stattdessen mit \"Starte die Rollenverteilung\".");
         }
 
-        public bool IsPlaying(string userId)
+        public override SkillResponse DistributeRoles(SkillRequest request)
         {
-            return m_runningRounds.ContainsKey(userId);
-        }
-
-        public SkillResponse DistributeRoles(SkillRequest request)
-        {
-            if (!m_runningRounds.TryGetValue(request.Context.System.User.UserId, out var round) || round == null)
+            if (!RunningRounds.TryGetValue(request.Context.System.User.UserId, out var round) || round == null)
             {
                 return ResponseBuilder.Tell($"Für das Spiel {GameName} ist keine aktive Runde vorhanden.");
             }
@@ -98,7 +87,7 @@ namespace RoleShuffle.Application.Games.SecretHitler
             return ResponseBuilder.Tell(new SsmlOutputSpeech {Ssml = builder.ToString()});
         }
 
-        public SkillResponse StartGameRequested(SkillRequest skillRequest)
+        public override SkillResponse StartGameRequested(SkillRequest skillRequest)
         {
             var request = (IntentRequest)skillRequest.Request;
             var playerAmountRaw = request.Intent.GetSlot(Constants.Slots.PlayerAmount);
@@ -114,7 +103,7 @@ namespace RoleShuffle.Application.Games.SecretHitler
 
             var userId = skillRequest.Context.System.User.UserId;
             var newRound = new SecretHitlerRound(playerAmount);
-            m_runningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
+            RunningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
             
             var response = ResponseBuilder.Tell(
                 $"{GameName} wurde mit einer Spieleranzahl von {playerAmount} gestartet. " +

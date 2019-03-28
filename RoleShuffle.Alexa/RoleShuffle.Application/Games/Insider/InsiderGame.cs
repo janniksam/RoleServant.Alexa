@@ -8,22 +8,17 @@ using RoleShuffle.Base;
 
 namespace RoleShuffle.Application.Games.Insider
 {
-    public class InsiderGame : IGame
+    public class InsiderGame : BaseGame<InsiderRound>
     {
         private readonly IMessages m_messages;
-        private readonly ConcurrentDictionary<string, InsiderRound> m_runningRounds;
         
         public InsiderGame(IMessages messages)
+            : base("Insider", Constants.GameNumbers.Insider)
         {
             m_messages = messages;
-            m_runningRounds = new ConcurrentDictionary<string, InsiderRound>();
         }
 
-        public short GameNumber => Constants.GameNumbers.Insider;
-
-        public string GameName => "Insider";
-
-        public SkillResponse PerformNightPhase(SkillRequest request)
+        public override SkillResponse PerformNightPhase(SkillRequest request)
         {
             var builder = new StringBuilder();
             builder.AppendLine("<speak>");
@@ -54,22 +49,17 @@ namespace RoleShuffle.Application.Games.Insider
             return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = builder.ToString() });
         }
 
-        public bool IsPlaying(string userId)
-        {
-            return m_runningRounds.ContainsKey(userId);
-        }
-
-        public SkillResponse DistributeRoles(SkillRequest request)
+        public override SkillResponse DistributeRoles(SkillRequest request)
         {
             return ResponseBuilder.Tell($"In dem Spiel {GameName} gibt es keine Rollenverteilung");
         }
 
-        public SkillResponse StartGameRequested(SkillRequest skillRequest)
+        public override SkillResponse StartGameRequested(SkillRequest skillRequest)
         {
             var userId = skillRequest.Context.System.User.UserId;
 
             var newRound = new InsiderRound();
-            m_runningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
+            RunningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
             
             var response = ResponseBuilder.Tell(
                 $"Die Runde {GameName} wurde gestartet. " +

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Text;
 using Alexa.NET;
 using Alexa.NET.Request;
@@ -12,19 +11,18 @@ using RoleShuffle.Base;
 
 namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
 {
-    public class OneNightUltimateWerewolfGame : IGame
+    public class OneNightUltimateWerewolfGame : BaseGame<OneNightUltimateWerewolfRound>
     {
         private readonly IOneNightUltimateWerewolfRoleManager m_roleManager;
-        private readonly ConcurrentDictionary<string, OneNightUltimateWerewolfRound> m_runningRounds;
         private const string IdIpa = "<phoneme alphabet=\"ipa\" ph=\"ˈaiˈdiː\">ID</phoneme>";
 
         public OneNightUltimateWerewolfGame(IOneNightUltimateWerewolfRoleManager roleManager)
+            : base("Vollmondnacht Werwölfe", Constants.GameNumbers.OneNightUltimateWerewolf)
         {
             m_roleManager = roleManager;
-            m_runningRounds = new ConcurrentDictionary<string, OneNightUltimateWerewolfRound>();
         }
 
-        public SkillResponse StartGameRequested(SkillRequest skillRequest)
+        public override SkillResponse StartGameRequested(SkillRequest skillRequest)
         {
             var request = (IntentRequest)skillRequest.Request;
             var deckIdRaw = request.Intent.GetSlot(Constants.Slots.DeckId);
@@ -53,7 +51,7 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
 
             var userId = skillRequest.Context.System.User.UserId;
             var newRound = new OneNightUltimateWerewolfRound(roleSelection);
-            m_runningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
+            RunningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
 
             var response = ResponseBuilder.Tell(
                 $"Die Runde {GameName} wurde gestartet. " +
@@ -111,14 +109,14 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
                 Constants.Slots.DeckId);
         }
 
-        public SkillResponse DistributeRoles(SkillRequest request)
+        public override SkillResponse DistributeRoles(SkillRequest request)
         {
             return ResponseBuilder.Tell($"In dem Spiel {GameName} gibt es keine Rollenverteilung");
         }
 
-        public SkillResponse PerformNightPhase(SkillRequest request)
+        public override SkillResponse PerformNightPhase(SkillRequest request)
         {
-            if (!m_runningRounds.TryGetValue(request.Context.System.User.UserId, out var round) || round == null)
+            if (!RunningRounds.TryGetValue(request.Context.System.User.UserId, out var round) || round == null)
             {
                 return ResponseBuilder.Tell($"Für das Spiel {GameName} ist keine aktive Runde vorhanden.");
             }
@@ -216,14 +214,5 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
 
             return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = builder.ToString() });
         }
-
-        public bool IsPlaying(string userId)
-        {
-            return m_runningRounds.ContainsKey(userId);
-        }
-
-        public short GameNumber => Constants.GameNumbers.OneNightUltimateWerewolf;
-
-        public string GameName => "Vollmondnacht Werwölfe";
     }
 }
