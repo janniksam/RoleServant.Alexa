@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RoleShuffle.Application\RoleShuffle.Application.csproj" />
-    <ProjectReference Include="..\RoleShuffle.Domain.Services\RoleShuffle.Domain.Services.csproj" />
   </ItemGroup>
 
 </Project>

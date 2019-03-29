@@ -15,12 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoleShuffle.Base", "RoleShu
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "RoleShuffle.DependencyValidation", "RoleShuffle.DependencyValidation\RoleShuffle.DependencyValidation.modelproj", "{20DBC995-02A7-4EDD-BAB0-34583D900DF0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoleShuffle.Domain.Model", "RoleShuffle.Domain.Model\RoleShuffle.Domain.Model.csproj", "{661B019C-BE31-43D9-BCFF-32335578BF29}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoleShuffle.Domain.Services", "RoleShuffle.Domain.Services\RoleShuffle.Domain.Services.csproj", "{4291EE0B-7C55-4F7A-83D2-3A77F2368191}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoleShuffle.Domain.Services.Abstractions", "RoleShuffle.Domain.Services.Abstractions\RoleShuffle.Domain.Services.Abstractions.csproj", "{7209BC31-94D9-411F-8084-E8DC44415FCC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoleShuffle.IoC", "RoleShuffle.IoC\RoleShuffle.IoC.csproj", "{567F3B2B-E8FD-4953-B872-3B297D605FE3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoleShuffle.Web", "RoleShuffle.Web\RoleShuffle.Web.csproj", "{A901D379-E165-4CD9-9958-6D6E49F2DF2C}"
@@ -51,18 +45,6 @@ Global
 		{20DBC995-02A7-4EDD-BAB0-34583D900DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20DBC995-02A7-4EDD-BAB0-34583D900DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20DBC995-02A7-4EDD-BAB0-34583D900DF0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{661B019C-BE31-43D9-BCFF-32335578BF29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{661B019C-BE31-43D9-BCFF-32335578BF29}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{661B019C-BE31-43D9-BCFF-32335578BF29}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{661B019C-BE31-43D9-BCFF-32335578BF29}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4291EE0B-7C55-4F7A-83D2-3A77F2368191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4291EE0B-7C55-4F7A-83D2-3A77F2368191}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4291EE0B-7C55-4F7A-83D2-3A77F2368191}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4291EE0B-7C55-4F7A-83D2-3A77F2368191}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7209BC31-94D9-411F-8084-E8DC44415FCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7209BC31-94D9-411F-8084-E8DC44415FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7209BC31-94D9-411F-8084-E8DC44415FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7209BC31-94D9-411F-8084-E8DC44415FCC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{567F3B2B-E8FD-4953-B872-3B297D605FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{567F3B2B-E8FD-4953-B872-3B297D605FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{567F3B2B-E8FD-4953-B872-3B297D605FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU

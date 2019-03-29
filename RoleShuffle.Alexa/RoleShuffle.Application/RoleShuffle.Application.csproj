@@ -28,7 +28,6 @@
   <ItemGroup>
     <ProjectReference Include="..\RoleShuffle.Application.Abstractions\RoleShuffle.Application.Abstractions.csproj" />
     <ProjectReference Include="..\RoleShuffle.Base\RoleShuffle.Base.csproj" />
-    <ProjectReference Include="..\RoleShuffle.Domain.Services.Abstractions\RoleShuffle.Domain.Services.Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

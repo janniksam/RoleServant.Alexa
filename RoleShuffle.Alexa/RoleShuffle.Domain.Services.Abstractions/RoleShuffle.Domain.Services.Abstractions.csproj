@@ -22,8 +22,4 @@
     </AdditionalFiles>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\RoleShuffle.Domain.Model\RoleShuffle.Domain.Model.csproj" />
-  </ItemGroup>
-
 </Project>

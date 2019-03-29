@@ -50,18 +50,6 @@
       <Name>RoleShuffle.Base</Name>
       <Project>{442a0f55-233b-4661-8a68-12391767aef9}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\RoleShuffle.Domain.Model\RoleShuffle.Domain.Model.csproj">
-      <Name>RoleShuffle.Domain.Model</Name>
-      <Project>{661b019c-be31-43d9-bcff-32335578bf29}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\RoleShuffle.Domain.Services.Abstractions\RoleShuffle.Domain.Services.Abstractions.csproj">
-      <Name>RoleShuffle.Domain.Services.Abstractions</Name>
-      <Project>{7209bc31-94d9-411f-8084-e8dc44415fcc}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\RoleShuffle.Domain.Services\RoleShuffle.Domain.Services.csproj">
-      <Name>RoleShuffle.Domain.Services</Name>
-      <Project>{4291ee0b-7c55-4f7a-83d2-3a77f2368191}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\RoleShuffle.Web\RoleShuffle.Web.csproj">
       <Name>RoleShuffle.Web</Name>
       <Project>{a901d379-e165-4cd9-9958-6d6e49f2df2c}</Project>
