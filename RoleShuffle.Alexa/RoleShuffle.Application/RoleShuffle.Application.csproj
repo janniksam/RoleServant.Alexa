@@ -32,7 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Formatter\" />
     <Folder Include="Model\" />
     <Folder Include="Services\" />
   </ItemGroup>

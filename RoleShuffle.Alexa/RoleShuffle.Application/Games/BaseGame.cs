@@ -1,7 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using Alexa.NET.Request;
 using Alexa.NET.Response;
-using RoleShuffle.Application.Games.TheResistanceAvalon;
 
 namespace RoleShuffle.Application.Games
 {

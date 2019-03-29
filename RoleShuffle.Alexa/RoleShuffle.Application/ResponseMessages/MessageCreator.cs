@@ -18,8 +18,9 @@
                 
                 ErrorNotFound = "Entschuldigung, das habe ich nicht verstanden.",
                 ErrorNotFoundIntent = "Der Intent wurde nicht gefunden.",
-                ErrorNotFoundUser = "Es wurde keine Benutzerkennung übermittelt.",
                 ErrorRequestTypeNotSupported = "Der Requesttype \"{0}\" wird von diesem Skill nicht unterstützt.",
+
+                ErrorNoOpenGame = "Du hast aktuell kein offenes Spiel. Starte zuerst ein Spiel, um diese Funktionalität nutzen zu können."
             };
 
             return deDeResource;

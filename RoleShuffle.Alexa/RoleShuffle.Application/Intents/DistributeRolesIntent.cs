@@ -34,8 +34,7 @@ namespace RoleShuffle.Application.Intents
                 m_availableGames.FirstOrDefault(p => p.IsPlaying(skillRequest.Context.System.User.UserId));
             if (usersGame == null)
             {
-                return ResponseBuilder.Tell(
-                    "Du hast aktuell kein offenes Spiel. Starte zuerst ein Spiel, um diese Funktionalität nutzen zu können.");
+                return ResponseBuilder.Tell(m_messages.ErrorNoOpenGame);
             }
 
             return usersGame.DistributeRoles(skillRequest);

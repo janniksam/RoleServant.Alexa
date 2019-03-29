@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RoleShuffle.IoC;
-using RoleShuffle.Web.BackgroundTasks;
 
 namespace RoleShuffle.Web
 {

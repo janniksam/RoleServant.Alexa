@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Alexa.NET;
 using Alexa.NET.Request;
