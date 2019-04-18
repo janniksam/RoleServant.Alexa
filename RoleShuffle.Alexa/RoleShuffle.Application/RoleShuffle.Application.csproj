@@ -12,6 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckId.cshtml" />
+    <None Remove="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckIdConfirmation.cshtml" />
+    <None Remove="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckIdReAsk.cshtml" />
     <None Remove="Games\SecretHitler\SSMLViews\de-DE\ChooseNumberBetween.cshtml" />
     <None Remove="Games\SecretHitler\SSMLViews\de-DE\DistributeRoles.cshtml" />
     <None Remove="Games\SecretHitler\SSMLViews\de-DE\RoundStarted.cshtml" />
@@ -48,6 +51,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckIdReAsk.cshtml" />
+    <EmbeddedResource Include="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckIdConfirmation.cshtml" />
+    <EmbeddedResource Include="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckId.cshtml" />
     <EmbeddedResource Include="Games\SecretHitler\SSMLViews\de-DE\RoundStarted.cshtml" />
     <EmbeddedResource Include="Games\SecretHitler\SSMLViews\de-DE\ChooseNumberBetween.cshtml" />
     <EmbeddedResource Include="Games\SecretHitler\SSMLViews\de-DE\DistributeRoles.cshtml" />

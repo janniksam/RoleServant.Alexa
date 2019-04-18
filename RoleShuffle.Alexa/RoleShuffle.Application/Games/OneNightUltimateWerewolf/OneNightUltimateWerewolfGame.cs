@@ -13,6 +13,10 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
 {
     public class OneNightUltimateWerewolfGame : BaseGame<OneNightUltimateWerewolfRound>
     {
+        private const string ChooseDeckIdView = "ChooseDeckId";
+        private const string ChooseDeckIdConfirmationView = "ChooseDeckIdConfirmation";
+        private const string ChooseDeckIdReAskView = "ChooseDeckIdReAsk";
+
         private readonly IOneNightUltimateWerewolfRoleManager m_roleManager;
         private const string IdIpa = "<phoneme alphabet=\"ipa\" ph=\"ˈaiˈdiː\">ID</phoneme>";
 
@@ -22,97 +26,87 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
             m_roleManager = roleManager;
         }
 
-        public override async Task<SkillResponse> StartGameRequested(SkillRequest skillRequest)
+        public override Task<SkillResponse> StartGameRequested(SkillRequest request)
         {
-            var request = (IntentRequest)skillRequest.Request;
-            var deckIdRaw = request.Intent.GetSlot(Constants.Slots.DeckId);
+            var intentRequest = (IntentRequest)request.Request;
+            var deckIdRaw = intentRequest.Intent.GetSlot(Constants.Slots.DeckId);
             if (!int.TryParse(deckIdRaw, out var deckId))
             {
-                return AskForDeckId();
+                return AskForDeckId(request);
             }
 
             var roleSelection = m_roleManager.GetRoleSelection(deckId);
             if (roleSelection == null)
             {
-                return ReAskForDeckId();
+                return ReAskForDeckId(request);
             }
 
-            var confirmValue = request.Intent.GetSlot(Constants.Slots.ConfirmAction);
+            var confirmValue = intentRequest.Intent.GetSlot(Constants.Slots.ConfirmAction);
             if (confirmValue == null)
             {
-                return AskForDeckConfimation(roleSelection);
+                return AskForDeckConfimation(request, roleSelection);
             }
             if(!confirmValue.Equals(Constants.SlotResult.Yes, StringComparison.InvariantCultureIgnoreCase))
             {
-                request.Intent.Slots[Constants.Slots.ConfirmAction].Value = null;
-                request.Intent.Slots[Constants.Slots.DeckId].Value = null;
-                return AskForDeckId(request.Intent);
+                intentRequest.Intent.Slots[Constants.Slots.ConfirmAction].Value = null;
+                intentRequest.Intent.Slots[Constants.Slots.DeckId].Value = null;
+                return AskForDeckId(request, intentRequest.Intent);
             }
 
-            var userId = skillRequest.Context.System.User.UserId;
+            var userId = request.Context.System.User.UserId;
             var newRound = new OneNightUltimateWerewolfRound(roleSelection);
             RunningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
 
-            return await PerformDefaultStartGamePhaseWithNightPhaseContinuation(skillRequest).ConfigureAwait(false);
+            return PerformDefaultStartGamePhaseWithNightPhaseContinuation(request);
         }
 
-        private SkillResponse AskForDeckId(Intent updatedIntent = null)
+        private async Task<SkillResponse> AskForDeckId(SkillRequest request, Intent updatedIntent = null)
         {
-            var outputText = "<speak>";
-            outputText += $"Bitte wählen Sie für {GameName} eine Deck-{IdIpa} aus, die sie sich vorher generiert haben lassen.";
-            outputText += "</speak>";
+            var ssml = await GetSSMLAsync(ChooseDeckIdView, request.Request.Locale).ConfigureAwait(false);
             return ResponseBuilder.DialogElicitSlot(
                 new SsmlOutputSpeech
                 {
-                    Ssml = outputText
+                    Ssml = ssml
                 },
                 Constants.Slots.DeckId, 
                 updatedIntent);
         }
 
-        private SkillResponse AskForDeckConfimation(RoleSelection roleSelection)
+        private async Task<SkillResponse> AskForDeckConfimation(SkillRequest request, RoleSelection roleSelection)
         {
             if (roleSelection == null)
             {
                 throw new ArgumentNullException(nameof(roleSelection));
             }
 
-            var outputText = "<speak>";
-            outputText += "<p>Das ausgewählte Deck enthält folgende Karten:</p>";
-            outputText += $"<p>{roleSelection.DeckSummary}.</p>";
-            outputText += "<p>Soll das Spiel mit diesem Deck gestartet werden?</p>";
-            outputText += "</speak>";
+            var ssml = await GetSSMLAsync(ChooseDeckIdConfirmationView, request.Request.Locale, roleSelection).ConfigureAwait(false);
             return ResponseBuilder.DialogElicitSlot(
                 new SsmlOutputSpeech
                 {
-                    Ssml = outputText
+                    Ssml = ssml
                 },
                 Constants.Slots.ConfirmAction);
         }
 
-        private SkillResponse ReAskForDeckId()
+        private async Task<SkillResponse> ReAskForDeckId(SkillRequest request)
         {
-            var outputText = "<speak>";
-            outputText += $"<p>Die Deck-{IdIpa} konnte nicht gefunden werden.</p>";
-            outputText +=
-                $"<p>Bitte wählen Sie für {GameName} eine Deck-{IdIpa} aus, die sie sich vorher generiert haben lassen.</p>";
-            outputText += "</speak>";
+            var ssml = await GetSSMLAsync(ChooseDeckIdReAskView, request.Request.Locale).ConfigureAwait(false);
             return ResponseBuilder.DialogElicitSlot(
                 new SsmlOutputSpeech
                 {
-                    Ssml = outputText
+                    Ssml = ssml
                 },
                 Constants.Slots.DeckId);
         }
 
-        public override async Task<SkillResponse> PerformNightPhase(SkillRequest request)
+        public override Task<SkillResponse> PerformNightPhase(SkillRequest request)
         {
             if (!RunningRounds.TryGetValue(request.Context.System.User.UserId, out var round) || round == null)
             {
-                return ResponseBuilder.Tell($"Für das Spiel {GameName} ist keine aktive Runde vorhanden.");
+                return NoActiveGameOpen(request);
             }
 
-            return await PerformDefaultNightPhase(request, round).ConfigureAwait(false);
+            return PerformDefaultNightPhase(request, round);
         }
     }
 }

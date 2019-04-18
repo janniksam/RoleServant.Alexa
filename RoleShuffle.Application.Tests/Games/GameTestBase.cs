@@ -13,14 +13,14 @@ namespace RoleShuffle.Application.Tests.Games
 {
     public abstract class GameTestBase
     {
-        private IGame m_game;
-        private Verifier m_verifier;
+        protected IGame Game;
+        protected Verifier Verifier;
         private SkillRequest m_request;
 
         protected void Initialize(IGame game)
         {
-            m_game = game;
-            m_verifier = new Verifier();
+            Game = game;
+            Verifier = new Verifier();
             m_request = new SkillRequest()
             {
                 Request = new IntentRequest
@@ -50,47 +50,47 @@ namespace RoleShuffle.Application.Tests.Games
         [TestMethod]
         public async Task DoesReturnValidSSMLOnDistributeRoles()
         {
-            await m_game.StartGameRequested(m_request);
-            var distributeRolesResponse = await m_game.DistributeRoles(m_request);
+            await Game.StartGameRequested(m_request);
+            var distributeRolesResponse = await Game.DistributeRoles(m_request);
             var responseOutputSpeech = ((SsmlOutputSpeech)distributeRolesResponse.Response.OutputSpeech).Ssml;
-            var ssmlValidationErrors = m_verifier.Verify(responseOutputSpeech, SsmlPlatform.Amazon);
+            var ssmlValidationErrors = Verifier.Verify(responseOutputSpeech, SsmlPlatform.Amazon);
             Assert.AreEqual(0, ssmlValidationErrors.Count());
         }
 
         [TestMethod]
         public async Task DoesReturnValidSSMLOnDistributeRolesWithoutActiveGame()
         {
-            var distributeRolesResponse = await m_game.DistributeRoles(m_request);
+            var distributeRolesResponse = await Game.DistributeRoles(m_request);
             var responseOutputSpeech = ((SsmlOutputSpeech)distributeRolesResponse.Response.OutputSpeech).Ssml;
-            var ssmlValidationErrors = m_verifier.Verify(responseOutputSpeech, SsmlPlatform.Amazon);
+            var ssmlValidationErrors = Verifier.Verify(responseOutputSpeech, SsmlPlatform.Amazon);
             Assert.AreEqual(0, ssmlValidationErrors.Count());
         }
 
         [TestMethod]
         public async Task DoesReturnValidSSMLOnNightPhase()
         {
-            await m_game.StartGameRequested(m_request);
-            var nightphaseResponse = await m_game.PerformNightPhase(m_request);
+            await Game.StartGameRequested(m_request);
+            var nightphaseResponse = await Game.PerformNightPhase(m_request);
             var responseOutputSpeech = ((SsmlOutputSpeech)nightphaseResponse.Response.OutputSpeech).Ssml;
-            var ssmlValidationErrors = m_verifier.Verify(responseOutputSpeech, SsmlPlatform.Amazon);
+            var ssmlValidationErrors = Verifier.Verify(responseOutputSpeech, SsmlPlatform.Amazon);
             Assert.AreEqual(0, ssmlValidationErrors.Count());
         }
 
         [TestMethod]
         public async Task DoesReturnValidSSMLOnNightPhaseWithoutActiveGame()
         {
-            var nightphaseResponse = await m_game.PerformNightPhase(m_request);
+            var nightphaseResponse = await Game.PerformNightPhase(m_request);
             var responseOutputSpeech = ((SsmlOutputSpeech)nightphaseResponse.Response.OutputSpeech).Ssml;
-            var ssmlValidationErrors = m_verifier.Verify(responseOutputSpeech, SsmlPlatform.Amazon);
+            var ssmlValidationErrors = Verifier.Verify(responseOutputSpeech, SsmlPlatform.Amazon);
             Assert.AreEqual(0, ssmlValidationErrors.Count());
         }
 
         [TestMethod]
         public async Task DoesReturnValidSSMLOnStartGameRequested()
         {
-            var distributeRoles = await m_game.StartGameRequested(m_request);
+            var distributeRoles = await Game.StartGameRequested(m_request);
             var responseOutputSpeech = ((SsmlOutputSpeech)distributeRoles.Response.OutputSpeech).Ssml;
-            var ssmlValidationErrors = m_verifier.Verify(responseOutputSpeech, SsmlPlatform.Amazon);
+            var ssmlValidationErrors = Verifier.Verify(responseOutputSpeech, SsmlPlatform.Amazon);
             Assert.AreEqual(0, ssmlValidationErrors.Count());
         }
     }

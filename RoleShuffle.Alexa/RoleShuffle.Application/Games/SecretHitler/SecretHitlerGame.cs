@@ -14,7 +14,7 @@ namespace RoleShuffle.Application.Games.SecretHitler
         private const short MaxPlayers = 10;
         private const string ChooseNumberBetweenView = "ChooseNumberBetween";
         private const string RoundStartedView = "RoundStarted";
-        
+
         public SecretHitlerGame()
             : base("Secret Hitler", Constants.GameNumbers.SecretHitler)
         {

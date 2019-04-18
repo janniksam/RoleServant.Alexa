@@ -4,7 +4,7 @@ using RoleShuffle.Application.Games.SecretHitler;
 namespace RoleShuffle.Application.Tests.Games.SecretHitler
 {
     [TestClass]
-    public class SecretHitlerGameTests : GameTestBase
+    public class OneNightUltimateWerewolfTests : GameTestBase
     {
         [TestInitialize]
         public void TestFixture()
