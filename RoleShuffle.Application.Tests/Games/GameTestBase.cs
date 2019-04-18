@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Alexa.NET.Request;
 using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RoleShuffle.Application.Abstractions.Games;
+using RoleShuffle.Base;
 using SSMLVerifier;
 
 namespace RoleShuffle.Application.Tests.Games
@@ -23,7 +25,14 @@ namespace RoleShuffle.Application.Tests.Games
             {
                 Request = new IntentRequest
                 {
-                    Locale = "de-DE"
+                    Locale = "de-DE",
+                    Intent = new Intent
+                    {
+                        Slots = new Dictionary<string, Slot>
+                        {
+                            { Constants.Slots.PlayerAmount, new Slot { Value = "5" } }
+                        }
+                    }
                 },
                 Context = new Context
                 {

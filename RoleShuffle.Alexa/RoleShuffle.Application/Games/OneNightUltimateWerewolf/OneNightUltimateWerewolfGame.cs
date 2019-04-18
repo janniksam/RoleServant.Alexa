@@ -53,11 +53,7 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
             var newRound = new OneNightUltimateWerewolfRound(roleSelection);
             RunningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
 
-            var response = ResponseBuilder.Tell(
-                $"Die Runde {GameName} wurde gestartet. " +
-                "Falls du jetzt mit der Nacht Phase beginnen möchtest, kannst du jetzt \"Starte die Nacht Phase\" sagen.");
-            response.Response.ShouldEndSession = false;
-            return response;
+            return await PerformDefaultStartGamePhaseWithNightPhaseContinuation(skillRequest).ConfigureAwait(false);
         }
 
         private SkillResponse AskForDeckId(Intent updatedIntent = null)

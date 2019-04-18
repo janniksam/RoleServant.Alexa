@@ -14,16 +14,16 @@ namespace RoleShuffle.Application.SSMLResponses
 
         public static Task<string> GetSSMLAsync(string messageKey, string locale, object model = null)
         {
-            var templateKey = GetTemplateKey(messageKey, locale);
-            var ssmlStream = GetSSMLStream(DefaultType, DefaultNamespace, messageKey, locale);
-            return ConvertTemplate(ssmlStream, templateKey, model);
+            var ssmlManifestResourceKey = $"{DefaultNamespace}.{locale.Replace("-", "_")}.{messageKey}.cshtml";
+            var ssmlStream = GetSSMLStream(DefaultType, ssmlManifestResourceKey);
+            return ConvertTemplate(ssmlStream, ssmlManifestResourceKey, model);
         }
 
         public static Task<string> GetSSMLAsync(Type type, string resourceNamespace, string messageKey, string locale, object model = null)
         {
-            var templateKey = GetTemplateKey(messageKey, locale);
-            var ssmlStream = GetSSMLStream(type, resourceNamespace, messageKey, locale);
-            return ConvertTemplate(ssmlStream, templateKey, model);
+            var ssmlManifestResourceKey = $"{resourceNamespace}.{locale.Replace("-", "_")}.{messageKey}.cshtml";
+            var ssmlStream = GetSSMLStream(type, ssmlManifestResourceKey);
+            return ConvertTemplate(ssmlStream, ssmlManifestResourceKey, model);
         }
 
         private static Task<string> ConvertTemplate(Stream ssmlStream, string templateKey, object model = null)
@@ -44,9 +44,8 @@ namespace RoleShuffle.Application.SSMLResponses
             return $"{messageKey}_{locale}";
         }
 
-        private static Stream GetSSMLStream(Type type, string resourceNamespace, string action, string locale)
+        private static Stream GetSSMLStream(Type type, string ssmlManifestResourceKey)
         {
-            var ssmlManifestResourceKey = $"{resourceNamespace}.{locale.Replace("-", "_")}.{action}.cshtml";
             var assembly = type.GetTypeInfo().Assembly;
             var resource = assembly.GetManifestResourceStream(ssmlManifestResourceKey);
             return resource;

@@ -1,5 +1,4 @@
-﻿using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Alexa.NET;
 using Alexa.NET.Request;
 using Alexa.NET.Request.Type;
@@ -13,6 +12,8 @@ namespace RoleShuffle.Application.Games.SecretHitler
     {
         private const short MinPlayers = 5;
         private const short MaxPlayers = 10;
+        private const string ChooseNumberBetweenView = "ChooseNumberBetween";
+        private const string RoundStartedView = "RoundStarted";
         
         public SecretHitlerGame()
             : base("Secret Hitler", Constants.GameNumbers.SecretHitler)
@@ -26,7 +27,7 @@ namespace RoleShuffle.Application.Games.SecretHitler
                 return NoActiveGameOpen(request);
             }
 
-            return PerformDefaultNightPhase(request, round);
+            return PerformDefaultDistributionPhase(request, round);
         }
 
         public override async Task<SkillResponse> StartGameRequested(SkillRequest skillRequest)
@@ -35,10 +36,11 @@ namespace RoleShuffle.Application.Games.SecretHitler
             var playerAmountRaw = request.Intent.GetSlot(Constants.Slots.PlayerAmount);
             if (!short.TryParse(playerAmountRaw, out var playerAmount) || playerAmount < MinPlayers || playerAmount > MaxPlayers)
             {
+                var ssmlChoosePlayerNumber = await GetSSMLAsync(ChooseNumberBetweenView, skillRequest.Request.Locale, new {MinPlayers, MaxPlayers});                
                 return ResponseBuilder.DialogElicitSlot(
-                    new PlainTextOutputSpeech
+                    new SsmlOutputSpeech
                     {
-                        Text = $"Bitte wählen Sie für {GameName} eine Spielerzahl zwischen {MinPlayers} und {MaxPlayers} aus."
+                        Ssml = ssmlChoosePlayerNumber
                     }, 
                     Constants.Slots.PlayerAmount);
             }
@@ -46,10 +48,9 @@ namespace RoleShuffle.Application.Games.SecretHitler
             var userId = skillRequest.Context.System.User.UserId;
             var newRound = new SecretHitlerRound(playerAmount);
             RunningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
-            
-            var response = ResponseBuilder.Tell(
-                $"{GameName} wurde mit einer Spieleranzahl von {playerAmount} gestartet. " +
-                "Falls du jetzt mit der Rollenverteilung beginnen möchtest, kannst du jetzt \"Starte die Rollenverteilung\" sagen.");
+
+            var ssmlGameStarted = await GetSSMLAsync(RoundStartedView, skillRequest.Request.Locale, playerAmount);
+            var response = ResponseBuilder.Tell(new SsmlOutputSpeech {Ssml = ssmlGameStarted});
             response.Response.ShouldEndSession = false;
             return response;
         }

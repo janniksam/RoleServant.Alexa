@@ -12,7 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Games\SecretHitler\SSMLViews\de-DE\ChooseNumberBetween.cshtml" />
     <None Remove="Games\SecretHitler\SSMLViews\de-DE\DistributeRoles.cshtml" />
+    <None Remove="Games\SecretHitler\SSMLViews\de-DE\RoundStarted.cshtml" />
     <None Remove="Games\TheResistanceAvalon\SSMLViews\de-DE\DistributeRoles.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\ErrorIntentNotFound.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\ErrorMalformedRequest.cshtml" />
@@ -46,6 +48,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Games\SecretHitler\SSMLViews\de-DE\RoundStarted.cshtml" />
+    <EmbeddedResource Include="Games\SecretHitler\SSMLViews\de-DE\ChooseNumberBetween.cshtml" />
     <EmbeddedResource Include="Games\SecretHitler\SSMLViews\de-DE\DistributeRoles.cshtml" />
     <EmbeddedResource Include="Games\TheResistanceAvalon\SSMLViews\de-DE\DistributeRoles.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\de-DE\ErrorNoOpenGame.cshtml" />
