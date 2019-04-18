@@ -6,22 +6,19 @@ using Alexa.NET.Request;
 using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
 using Microsoft.Extensions.Logging;
-using RoleShuffle.Application.ResponseMessages;
+using RoleShuffle.Application.SSMLResponses;
 
 namespace RoleShuffle.Application.Intents
 {
     public class IntentHandler : IIntentHandler
     {
-        private readonly IMessages m_messages;
         private readonly IEnumerable<IIntent> m_intents;
         private readonly ILogger<IntentHandler> m_logger;
 
         public IntentHandler(
-            IMessages messages,
             IEnumerable<IIntent> intents,
             ILogger<IntentHandler> logger)
         {            
-            m_messages = messages;
             m_intents = intents;
             m_logger = logger;
         }
@@ -36,11 +33,9 @@ namespace RoleShuffle.Application.Intents
                 return await intent.GetResponse(request).ConfigureAwait(false);
             }
 
-            m_logger.LogWarning($"An intendhandler for {intentRequest.Intent.Name} hasn't been found.");
-            return ResponseBuilder.Tell(new PlainTextOutputSpeech
-            {
-                Text = m_messages.ErrorNotFoundIntent
-            });
+            m_logger.LogWarning($"An handler for intend {intentRequest.Intent.Name} hasn't been found.");
+            var ssml = await CommonResponseCreator.GetSSMLAsync(MessageKeys.ErrorIntentNotFound, request.Request.Locale).ConfigureAwait(false);
+            return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = ssml });
         }
     }
 }

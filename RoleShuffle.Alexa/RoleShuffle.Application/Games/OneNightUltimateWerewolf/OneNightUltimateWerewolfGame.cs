@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text;
+using System.Threading.Tasks;
 using Alexa.NET;
 using Alexa.NET.Request;
 using Alexa.NET.Request.Type;
@@ -22,7 +22,7 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
             m_roleManager = roleManager;
         }
 
-        public override SkillResponse StartGameRequested(SkillRequest skillRequest)
+        public override async Task<SkillResponse> StartGameRequested(SkillRequest skillRequest)
         {
             var request = (IntentRequest)skillRequest.Request;
             var deckIdRaw = request.Intent.GetSlot(Constants.Slots.DeckId);
@@ -109,110 +109,14 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
                 Constants.Slots.DeckId);
         }
 
-        public override SkillResponse DistributeRoles(SkillRequest request)
-        {
-            return ResponseBuilder.Tell($"In dem Spiel {GameName} gibt es keine Rollenverteilung");
-        }
-
-        public override SkillResponse PerformNightPhase(SkillRequest request)
+        public override async Task<SkillResponse> PerformNightPhase(SkillRequest request)
         {
             if (!RunningRounds.TryGetValue(request.Context.System.User.UserId, out var round) || round == null)
             {
                 return ResponseBuilder.Tell($"Für das Spiel {GameName} ist keine aktive Runde vorhanden.");
             }
 
-            var builder = new StringBuilder();
-            builder.AppendLine("<speak>");
-            builder.AppendLine("    <p>");
-            builder.AppendLine("        Die Nachtphase beginnt in");
-            builder.AppendLine("        5<break time='0.3s' />");
-            builder.AppendLine("        4<break time='0.3s' />");
-            builder.AppendLine("        3<break time='0.3s' />");
-            builder.AppendLine("        2<break time='0.3s' />");
-            builder.AppendLine("        1<break time='0.8s' />");
-            builder.AppendLine("        Alle Spieler schließen bitte jetzt die Augen!");
-            builder.AppendLine("        <break time='5s' />");
-
-            if (round.RoleSelection.Doppelganger > 0)
-            {
-                builder.AppendLine("        Dorfgängerin, bitte öffne deine Augen!");
-                builder.AppendLine("        <break time='10s' />");
-                builder.AppendLine("        Dorfgängerin, bitte schließe deine Augen wieder.");
-                builder.AppendLine("        <break time='3s' />");
-            }
-
-            if (round.RoleSelection.Werewolf > 0)
-            {
-                builder.AppendLine("        Werwölfe, bitte öffnet eure Augen!");
-                builder.AppendLine("        <break time='10s' />");
-                builder.AppendLine("        Werwölfe, bitte schließt eure Augen wieder.");
-                builder.AppendLine("        <break time='3s' />");
-            }
-
-            if (round.RoleSelection.Minion > 0)
-            {
-                builder.AppendLine("        Günstling, bitte öffne deine Augen!");
-                builder.AppendLine("        <break time='1.5s' />");
-                builder.AppendLine("        Werwölfe, bitte hebt mit Augen zu eure Daumen, damit der Günstling euch identifizieren kann!");
-                builder.AppendLine("        <break time='7s' />");
-                builder.AppendLine("        Günstling, bitte schließe deine Augen.");
-                builder.AppendLine("        Werwölfe, bitte nehmt jetzt eure Hände wieder in eine natürliche Position zurück.");
-                builder.AppendLine("        <break time='3s' />");
-            }
-
-            if (round.RoleSelection.Mason > 0)
-            {
-                builder.AppendLine("        Freimaurer, bitte öffnet die Augen!");
-                builder.AppendLine("        <break time='10s' />");
-                builder.AppendLine("        Freimaurer, bitte schließt eure Augen.");
-                builder.AppendLine("        <break time='3s' />");
-            }
-
-            if (round.RoleSelection.Seer > 0)
-            {
-                builder.AppendLine("        Seher, bitte öffne deine Augen!");
-                builder.AppendLine("        <break time='10s' />");
-                builder.AppendLine("        Seher, bitte schließe deine Augen.");
-                builder.AppendLine("        <break time='3s' />");
-            }
-
-            if (round.RoleSelection.Robber > 0)
-            {
-                builder.AppendLine("        Räuber, bitte öffne deine Augen!");
-                builder.AppendLine("        <break time='10s' />");
-                builder.AppendLine("        Räuber, bitte schließe deine Augen.");
-                builder.AppendLine("        <break time='3s' />");
-            }
-
-            if (round.RoleSelection.Troublemaker > 0)
-            {
-                builder.AppendLine("        Unruhestifterin, bitte öffne deine Augen!");
-                builder.AppendLine("        <break time='10s' />");
-                builder.AppendLine("        Unruhestifterin, bitte schließe deine Augen.");
-                builder.AppendLine("        <break time='3s' />");
-            }
-
-            if (round.RoleSelection.Drunk > 0)
-            {
-                builder.AppendLine("        Betrunkener, bitte öffne deine Augen!");
-                builder.AppendLine("        <break time='10s' />");
-                builder.AppendLine("        Betrunkener, bitte schließe deine Augen.");
-                builder.AppendLine("        <break time='3s' />");
-            }
-
-            if (round.RoleSelection.Insomniac > 0)
-            {
-                builder.AppendLine("        Schlaflose, bitte öffne deine Augen!");
-                builder.AppendLine("        <break time='10s' />");
-                builder.AppendLine("        Schlaflose, bitte schließe deine Augen.");
-                builder.AppendLine("        <break time='3s' />");
-            }
-
-            builder.AppendLine("        Alle Spieler dürfen ihre Augen wieder weit öffnen und die Tagesphase beginnt.");
-            builder.AppendLine("    </p>");
-            builder.AppendLine("</speak>");
-
-            return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = builder.ToString() });
+            return await PerformDefaultNightPhase(request, round).ConfigureAwait(false);
         }
     }
 }

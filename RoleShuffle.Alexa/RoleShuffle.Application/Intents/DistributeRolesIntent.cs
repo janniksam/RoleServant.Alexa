@@ -4,8 +4,9 @@ using System.Threading.Tasks;
 using Alexa.NET;
 using Alexa.NET.Request;
 using Alexa.NET.Response;
+using RoleShuffle.Application.Abstractions.Games;
 using RoleShuffle.Application.Games;
-using RoleShuffle.Application.ResponseMessages;
+using RoleShuffle.Application.SSMLResponses;
 using RoleShuffle.Base;
 
 namespace RoleShuffle.Application.Intents
@@ -13,14 +14,11 @@ namespace RoleShuffle.Application.Intents
     public class DistributeRolesIntent : IIntent
     {
         private readonly IEnumerable<IGame> m_availableGames;
-        private readonly IMessages m_messages;
 
         public DistributeRolesIntent(
-            IEnumerable<IGame> availableGames,
-            IMessages messages)
+            IEnumerable<IGame> availableGames)
         {
             m_availableGames = availableGames;
-            m_messages = messages;
         }
 
         public bool IsResponseFor(string intent)
@@ -28,16 +26,17 @@ namespace RoleShuffle.Application.Intents
             return intent == Constants.Intents.DistributeRoles;
         }
 
-        public async Task<SkillResponse> GetResponse(SkillRequest skillRequest)
+        public async Task<SkillResponse> GetResponse(SkillRequest request)
         {
             var usersGame =
-                m_availableGames.FirstOrDefault(p => p.IsPlaying(skillRequest.Context.System.User.UserId));
+                m_availableGames.FirstOrDefault(p => p.IsPlaying(request.Context.System.User.UserId));
             if (usersGame == null)
             {
-                return ResponseBuilder.Tell(m_messages.ErrorNoOpenGame);
+                var ssml = await CommonResponseCreator.GetSSMLAsync(MessageKeys.ErrorNoOpenGame, request.Request.Locale).ConfigureAwait(false);
+                return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = ssml });
             }
 
-            return usersGame.DistributeRoles(skillRequest);
+            return await usersGame.DistributeRoles(request).ConfigureAwait(false);
         }
     }
 }

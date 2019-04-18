@@ -2,31 +2,22 @@
 using Alexa.NET;
 using Alexa.NET.Request;
 using Alexa.NET.Response;
-using RoleShuffle.Application.ResponseMessages;
+using RoleShuffle.Application.SSMLResponses;
 using RoleShuffle.Base;
 
 namespace RoleShuffle.Application.Intents
 {
     public class AmazonStopIntent : IIntent
     {
-        private readonly IMessages m_messages;
-
-        public AmazonStopIntent(IMessages messages)
-        {
-            m_messages = messages;
-        }
-
         public bool IsResponseFor(string intent)
         {
             return intent == Constants.Intents.Stop;
         }
 
-        public Task<SkillResponse> GetResponse(SkillRequest request)
+        public async Task<SkillResponse> GetResponse(SkillRequest request)
         {
-            return Task.FromResult(ResponseBuilder.Tell(new PlainTextOutputSpeech
-            {
-                Text = m_messages.StopMessage
-            }));
+            var ssml = await CommonResponseCreator.GetSSMLAsync(MessageKeys.StopMessage, request.Request.Locale).ConfigureAwait(false); ;
+            return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = ssml });
         }
     }
 }

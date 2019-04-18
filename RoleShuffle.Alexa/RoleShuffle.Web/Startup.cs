@@ -14,7 +14,6 @@ namespace RoleShuffle.Web
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", false, true)
-                .AddDockerSecrets(p => p.Optional = true)
                 .AddEnvironmentVariables();
 
             if (env.IsDevelopment())

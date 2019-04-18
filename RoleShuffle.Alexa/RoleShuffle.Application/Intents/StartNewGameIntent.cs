@@ -5,9 +5,9 @@ using Alexa.NET;
 using Alexa.NET.Request;
 using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
+using RoleShuffle.Application.Abstractions.Games;
 using RoleShuffle.Application.Extensions;
 using RoleShuffle.Application.Games;
-using RoleShuffle.Application.ResponseMessages;
 using RoleShuffle.Base;
 
 namespace RoleShuffle.Application.Intents
@@ -15,14 +15,10 @@ namespace RoleShuffle.Application.Intents
     public class StartNewGameIntent : IIntent
     {
         private readonly IEnumerable<IGame> m_availableGames;
-        private readonly IMessages m_messages;
 
-        public StartNewGameIntent(
-            IEnumerable<IGame> availableGames,
-            IMessages messages)
+        public StartNewGameIntent(IEnumerable<IGame> availableGames)
         {
             m_availableGames = availableGames;
-            m_messages = messages;
         }
 
         public bool IsResponseFor(string intent)
@@ -55,7 +51,7 @@ namespace RoleShuffle.Application.Intents
             }
 
             var usersGame = m_availableGames.First(p => p.GameNumber == gameNumber);
-            return usersGame.StartGameRequested(skillRequest);
+            return await usersGame.StartGameRequested(skillRequest).ConfigureAwait(false);
         }
     }
 }

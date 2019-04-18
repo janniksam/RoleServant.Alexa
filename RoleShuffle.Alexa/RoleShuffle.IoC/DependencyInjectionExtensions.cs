@@ -1,14 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using RoleShuffle.Application.Abstractions.Games;
 using RoleShuffle.Application.Abstractions.RequestHandler;
 using RoleShuffle.Application.Abstractions.RoleManager;
-using RoleShuffle.Application.Games;
 using RoleShuffle.Application.Games.Insider;
 using RoleShuffle.Application.Games.OneNightUltimateWerewolf;
 using RoleShuffle.Application.Games.SecretHitler;
 using RoleShuffle.Application.Games.TheResistanceAvalon;
 using RoleShuffle.Application.Intents;
 using RoleShuffle.Application.RequestHandler;
-using RoleShuffle.Application.ResponseMessages;
 using RoleShuffle.Application.RoleManager;
 
 namespace RoleShuffle.IoC
@@ -33,8 +32,6 @@ namespace RoleShuffle.IoC
             services.AddSingleton<IGame, TheResistanceAvalonGame>();
 
             services.AddSingleton<IOneNightUltimateWerewolfRoleManager, OneNightUltimateWerewolfRoleManager>();
-
-            services.AddSingleton<IMessages>(MessageCreator.CreateMessages());
         }
     }
 }

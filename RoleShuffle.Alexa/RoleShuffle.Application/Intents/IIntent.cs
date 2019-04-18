@@ -8,6 +8,6 @@ namespace RoleShuffle.Application.Intents
     {
         bool IsResponseFor(string intent);
 
-        Task<SkillResponse> GetResponse(SkillRequest skillRequest);
+        Task<SkillResponse> GetResponse(SkillRequest request);
     }
 }

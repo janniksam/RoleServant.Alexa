@@ -5,19 +5,17 @@ VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C40D1BED-1BE5-4B5F-8491-A390F58DD109}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Validation", "Validation", "{3FCEBC9D-63C8-4287-BAAC-34BC9ACB5C2E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoleShuffle.Application", "RoleShuffle.Application\RoleShuffle.Application.csproj", "{3DE82C5A-E7DA-4F1A-92F0-66FFB0039FF5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoleShuffle.Application.Abstractions", "RoleShuffle.Application.Abstractions\RoleShuffle.Application.Abstractions.csproj", "{6A69B8CF-B87E-44C8-92DC-41153AD20434}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoleShuffle.Base", "RoleShuffle.Base\RoleShuffle.Base.csproj", "{442A0F55-233B-4661-8A68-12391767AEF9}"
 EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "RoleShuffle.DependencyValidation", "RoleShuffle.DependencyValidation\RoleShuffle.DependencyValidation.modelproj", "{20DBC995-02A7-4EDD-BAB0-34583D900DF0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoleShuffle.IoC", "RoleShuffle.IoC\RoleShuffle.IoC.csproj", "{567F3B2B-E8FD-4953-B872-3B297D605FE3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoleShuffle.Web", "RoleShuffle.Web\RoleShuffle.Web.csproj", "{A901D379-E165-4CD9-9958-6D6E49F2DF2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoleShuffle.Application.Tests", "..\RoleShuffle.Application.Tests\RoleShuffle.Application.Tests.csproj", "{6F391134-0D44-4246-ABFE-474D655A856F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{442A0F55-233B-4661-8A68-12391767AEF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{442A0F55-233B-4661-8A68-12391767AEF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{442A0F55-233B-4661-8A68-12391767AEF9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20DBC995-02A7-4EDD-BAB0-34583D900DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20DBC995-02A7-4EDD-BAB0-34583D900DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20DBC995-02A7-4EDD-BAB0-34583D900DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20DBC995-02A7-4EDD-BAB0-34583D900DF0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{567F3B2B-E8FD-4953-B872-3B297D605FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{567F3B2B-E8FD-4953-B872-3B297D605FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{567F3B2B-E8FD-4953-B872-3B297D605FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,12 +47,13 @@ Global
 		{A901D379-E165-4CD9-9958-6D6E49F2DF2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A901D379-E165-4CD9-9958-6D6E49F2DF2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A901D379-E165-4CD9-9958-6D6E49F2DF2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F391134-0D44-4246-ABFE-474D655A856F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F391134-0D44-4246-ABFE-474D655A856F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F391134-0D44-4246-ABFE-474D655A856F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F391134-0D44-4246-ABFE-474D655A856F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{20DBC995-02A7-4EDD-BAB0-34583D900DF0} = {3FCEBC9D-63C8-4287-BAAC-34BC9ACB5C2E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C3C5D141-CFA0-4159-96CA-B99112E2C634}

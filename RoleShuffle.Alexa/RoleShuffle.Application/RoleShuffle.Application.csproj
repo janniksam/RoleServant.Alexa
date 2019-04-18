@@ -12,10 +12,30 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Alexa.NET" Version="1.5.6" />
-    <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.9.0" />
+    <None Remove="Games\SecretHitler\SSMLViews\de-DE\DistributeRoles.cshtml" />
+    <None Remove="Games\TheResistanceAvalon\SSMLViews\de-DE\DistributeRoles.cshtml" />
+    <None Remove="SSMLResponses\Common\de-DE\ErrorIntentNotFound.cshtml" />
+    <None Remove="SSMLResponses\Common\de-DE\ErrorMalformedRequest.cshtml" />
+    <None Remove="SSMLResponses\Common\de-DE\ErrorNoOpenGame.cshtml" />
+    <None Remove="SSMLResponses\Common\de-DE\ErrorRequestTypeNotSupported.cshtml" />
+    <None Remove="SSMLResponses\Common\de-DE\GameNoActiveGame.cshtml" />
+    <None Remove="SSMLResponses\Common\de-DE\GameNoDistributionPhase.cshtml" />
+    <None Remove="SSMLResponses\Common\de-DE\GameNoNightPhase.cshtml" />
+    <None Remove="SSMLResponses\Common\de-DE\GameStartContinueWithDistributionPhase.cshtml" />
+    <None Remove="SSMLResponses\Common\de-DE\HelpMessage.cshtml" />
+    <None Remove="SSMLResponses\Common\de-DE\LaunchMessage.cshtml" />
+    <None Remove="SSMLResponses\Common\de-DE\StopMessage.cshtml" />
+    <None Remove="Games\Insider\SSMLViews\DistributeRoles.cshtml" />
+    <None Remove="Games\Insider\SSMLViews\Nightphase.cshtml" />
+    <None Remove="Games\Insider\SSMLViews\StartGame.cshtml" />
+    <None Remove="Games\OneNightUltimateWerewolf\SSMLViews\Nightphase.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Alexa.NET" Version="1.6.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.1.1" />
+    <PackageReference Include="SSMLBuilder" Version="0.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +43,28 @@
       <Link>DependencyValidation.layerdiagram</Link>
       <Visible>False</Visible>
     </AdditionalFiles>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Games\SecretHitler\SSMLViews\de-DE\DistributeRoles.cshtml" />
+    <EmbeddedResource Include="Games\TheResistanceAvalon\SSMLViews\de-DE\DistributeRoles.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\de-DE\ErrorNoOpenGame.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\de-DE\ErrorRequestTypeNotSupported.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\de-DE\ErrorIntentNotFound.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\de-DE\GameNoActiveGame.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\de-DE\GameNoNightPhase.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\de-DE\GameStartContinueWithDistributionPhase.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\de-DE\LaunchMessage.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\All\ErrorMalformedRequest.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\de-DE\GameNoDistributionPhase.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\de-DE\StopMessage.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\de-DE\HelpMessage.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\de-DE\GameStartContinueWithNightPhase.cshtml" />
+    <EmbeddedResource Include="Games\Insider\SSMLViews\de-DE\NightPhase.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\NightPhase.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

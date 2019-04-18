@@ -6,22 +6,20 @@ using Alexa.NET.Response;
 using Microsoft.Extensions.Logging;
 using RoleShuffle.Application.Abstractions.RequestHandler;
 using RoleShuffle.Application.Intents;
-using RoleShuffle.Application.ResponseMessages;
+using RoleShuffle.Application.SSMLResponses;
 
 namespace RoleShuffle.Application.RequestHandler
 {
     public class AlexaHandler : IAlexaHandler
     {
         private readonly IIntentHandler m_intentHandler;
-        private readonly IMessages m_messages;
         private readonly ILogger<AlexaHandler> m_logger;
+        private const string LocaleAll = "All";
 
         public AlexaHandler(
             IIntentHandler intentHandler, 
-            IMessages messages,
             ILogger<AlexaHandler> logger)
         {
-            m_messages = messages;
             m_logger = logger;
             m_intentHandler = intentHandler;
         }
@@ -37,12 +35,14 @@ namespace RoleShuffle.Application.RequestHandler
             if (request == null)
             {
                 m_logger.LogWarning("The request is malformed.");
-                return ResponseBuilder.Tell(m_messages.ErrorNotFound);
+                var ssml = await CommonResponseCreator.GetSSMLAsync(MessageKeys.AllLanguages.ErrorMalformedRequest, LocaleAll).ConfigureAwait(false);
+                return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = ssml });
             }
 
             if (request.GetRequestType() == typeof(LaunchRequest))
             {
-                var launchResponse = ResponseBuilder.Tell(m_messages.Launch);
+                var ssml = await CommonResponseCreator.GetSSMLAsync(MessageKeys.LaunchMessage, request.Request.Locale).ConfigureAwait(false);
+                var launchResponse = ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = ssml });
                 launchResponse.Response.ShouldEndSession = false;
                 return launchResponse;
             }
@@ -50,7 +50,9 @@ namespace RoleShuffle.Application.RequestHandler
             if (request.GetRequestType() != typeof(IntentRequest))
             {
                 m_logger.LogWarning($"The request-type {request.GetRequestType()} isn't supported.");
-                return ResponseBuilder.Tell(string.Format(m_messages.ErrorRequestTypeNotSupported, request.GetRequestType()));
+                var ssml = await CommonResponseCreator.GetSSMLAsync(MessageKeys.ErrorRequestTypeNotSupported,
+                    request.Request.Locale, request.GetRequestType()?.ToString()).ConfigureAwait(false);
+                return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = ssml });
             }
 
             var response = await m_intentHandler.GetResponseAsync(request).ConfigureAwait(false);
