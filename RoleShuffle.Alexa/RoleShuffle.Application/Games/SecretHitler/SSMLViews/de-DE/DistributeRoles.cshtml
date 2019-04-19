@@ -1,5 +1,4 @@
-﻿@using RazorEngine.Templating
-@inherits TemplateBase<RoleShuffle.Application.Games.SecretHitler.SecretHitlerRound>
+﻿@inherits RazorLight.TemplatePage<RoleShuffle.Application.Games.SecretHitler.SecretHitlerRound>
 
 <speak>
     <p>
@@ -13,44 +12,44 @@
 
         @if (Model.PlayerAmount == 5 || Model.PlayerAmount == 6)
         {
-            <p>
-                Alle Spieler schließen bitte jetzt die Augen!
-                <break time='5s' />
-                Faschist und Hitler öffnen die Augen und geben sich gegenseitig zu erkennen in
-                3<break time='0.3s' />
-                2<break time='0.3s' />
-                1<break time='0.3s' />
-                jetzt!
-                <break time='10s' />
-                OK! Hitler und Faschist schließen bitte ihre Augen in
-                3<break time='0.3s' />
-                2<break time='0.3s' />
-                1<break time='0.3s' />
-                jetzt!
-                <break time='4s' />
-            </p>
-        }
-        else
-        {
-            <p>
-                Alle Spieler strecken ihre Faust bitte nach vorne oder legen diese klar sichtbar vor sich auf den Tisch!
-                <break time='5s' />
-                Alle Spieler schließen bitte jetzt die Augen!
-                <break time='5s' />
-                Die Faschisten öffnen die Augen und Erkennen einander in
-                3<break time='0.3s' />
-                2<break time='0.3s' />
-                1<break time='0.3s' />
-                jetzt!
-                <break time='7s' />
-                Hitler hebt jetzt bitte den Daumen, aber lässt die Augen zu.
-                <break time='2s' />
-                Die Faschisten identifizieren Hitler.
-                <break time='7s' />
-                Alle Spieler ziehen die Arme an ihren Körper und schließen ihre Augen.
-                <break time='7s' />
-            </p>
-        }
+        <p>
+            Alle Spieler schließen bitte jetzt die Augen!
+            <break time='5s' />
+            Faschist und Hitler öffnen die Augen und geben sich gegenseitig zu erkennen in
+            3<break time='0.3s' />
+            2<break time='0.3s' />
+            1<break time='0.3s' />
+            jetzt!
+            <break time='10s' />
+            OK! Hitler und Faschist schließen bitte ihre Augen in
+            3<break time='0.3s' />
+            2<break time='0.3s' />
+            1<break time='0.3s' />
+            jetzt!
+            <break time='4s' />
+        </p>
+    }
+    else
+    {
+        <p>
+            Alle Spieler strecken ihre Faust bitte nach vorne oder legen diese klar sichtbar vor sich auf den Tisch!
+            <break time='5s' />
+            Alle Spieler schließen bitte jetzt die Augen!
+            <break time='5s' />
+            Die Faschisten öffnen die Augen und Erkennen einander in
+            3<break time='0.3s' />
+            2<break time='0.3s' />
+            1<break time='0.3s' />
+            jetzt!
+            <break time='7s' />
+            Hitler hebt jetzt bitte den Daumen, aber lässt die Augen zu.
+            <break time='2s' />
+            Die Faschisten identifizieren Hitler.
+            <break time='7s' />
+            Alle Spieler ziehen die Arme an ihren Körper und schließen ihre Augen.
+            <break time='7s' />
+        </p>
+    }
         Alle Spieler dürfen ihre Augen wieder weit öffnen und das Spiel beginnt.
-    </p>
-</speak>
+        </p>
+    </speak>

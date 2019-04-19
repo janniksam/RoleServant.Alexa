@@ -11,6 +11,8 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     <UserSecretsId>79461361-2c1b-49c9-8614-0b3b095b32e1</UserSecretsId>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +29,7 @@
 
   <ItemGroup>
     <PackageReference Include="Alexa.NET" Version="1.6.1" />
-    <PackageReference Include="Karambolo.Extensions.Logging.File" Version="2.1.1" />
+    <PackageReference Include="Karambolo.Extensions.Logging.File" Version="2.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="2.8.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="2.8.0" />
@@ -35,7 +37,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="SSMLBuilder" Version="0.0.3" />
+    <PackageReference Include="SSMLBuilder" Version="0.0.4" />
   </ItemGroup>
 
   <ItemGroup>

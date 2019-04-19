@@ -12,7 +12,7 @@ namespace RoleShuffle.Application.Games.SecretHitler
     {
         private const short MinPlayers = 5;
         private const short MaxPlayers = 10;
-        private const string ChooseNumberBetweenView = "ChooseNumberBetween";
+        private const string ChooseNumberBetweenView = "ChoosePlayerNumberBetween";
         private const string RoundStartedView = "RoundStarted";
 
         public SecretHitlerGame()
@@ -36,7 +36,7 @@ namespace RoleShuffle.Application.Games.SecretHitler
             var playerAmountRaw = request.Intent.GetSlot(Constants.Slots.PlayerAmount);
             if (!short.TryParse(playerAmountRaw, out var playerAmount) || playerAmount < MinPlayers || playerAmount > MaxPlayers)
             {
-                var ssmlChoosePlayerNumber = await GetSSMLAsync(ChooseNumberBetweenView, skillRequest.Request.Locale, new {MinPlayers, MaxPlayers});                
+                var ssmlChoosePlayerNumber = await GetSSMLAsync(ChooseNumberBetweenView, skillRequest.Request.Locale, new[] {MinPlayers, MaxPlayers});                
                 return ResponseBuilder.DialogElicitSlot(
                     new SsmlOutputSpeech
                     {
