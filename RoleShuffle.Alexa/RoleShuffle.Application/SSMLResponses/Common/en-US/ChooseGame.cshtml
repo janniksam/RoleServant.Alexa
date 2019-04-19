@@ -1,0 +1,20 @@
+﻿@using System.Linq;
+@using System.Collections.Generic;
+@using RoleShuffle.Application.Abstractions.Games;
+
+@inherits RazorLight.TemplatePage<IEnumerable<IGame>>
+
+<speak>
+    <p>
+        The following games are currently available:
+    </p>
+    <p>
+        @foreach (var game in ((IEnumerable<IGame>)Model)?.OrderBy(p => p.GameNumber).ToList() ?? new List<IGame>())
+        {
+            WriteLiteral($"{game.GameNumber}:. {game.GameName}.\r\n");
+        }
+    </p>
+    <p>
+        Please select a game by choosing the corresponding number.
+    </p>
+</speak>

@@ -34,6 +34,17 @@
     <None Remove="Games\Insider\SSMLViews\Nightphase.cshtml" />
     <None Remove="Games\Insider\SSMLViews\StartGame.cshtml" />
     <None Remove="Games\OneNightUltimateWerewolf\SSMLViews\Nightphase.cshtml" />
+    <None Remove="SSMLResponses\Common\en-US\ChooseGame.cshtml" />
+    <None Remove="SSMLResponses\Common\en-US\ErrorIntentNotFound.cshtml" />
+    <None Remove="SSMLResponses\Common\en-US\ErrorNoOpenGame.cshtml" />
+    <None Remove="SSMLResponses\Common\en-US\ErrorRequestTypeNotSupported.cshtml" />
+    <None Remove="SSMLResponses\Common\en-US\GameNoDistributionPhase.cshtml" />
+    <None Remove="SSMLResponses\Common\en-US\GameNoNightPhase.cshtml" />
+    <None Remove="SSMLResponses\Common\en-US\GameStartContinueWithDistributionPhase.cshtml" />
+    <None Remove="SSMLResponses\Common\en-US\GameStartContinueWithNightPhase.cshtml" />
+    <None Remove="SSMLResponses\Common\en-US\HelpMessage.cshtml" />
+    <None Remove="SSMLResponses\Common\en-US\LaunchMessage.cshtml" />
+    <None Remove="SSMLResponses\Common\en-US\StopMessage.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,6 +86,17 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\NightPhase.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\en-US\ChooseGame.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\en-US\ErrorIntentNotFound.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\en-US\ErrorNoOpenGame.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\en-US\ErrorRequestTypeNotSupported.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\en-US\GameNoDistributionPhase.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\en-US\GameNoNightPhase.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\en-US\GameStartContinueWithDistributionPhase.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\en-US\GameStartContinueWithNightPhase.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\en-US\HelpMessage.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\en-US\LaunchMessage.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\en-US\StopMessage.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

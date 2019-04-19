@@ -24,8 +24,8 @@
 
         public static class SlotResult
         {
-            public const string Yes = "Ja";
-            public const string No = "Nein";
+            public const string Yes = "Yes";
+            public const string No = "No";
         }
 
         public static class GameNumbers
