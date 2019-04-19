@@ -8,9 +8,8 @@ namespace RoleShuffle.Application.SSMLResponses
 {
     public static class CommonResponseCreator
     {
-        private static Type m_defaultType = typeof(CommonResponseCreator);
-        private static string m_defaultNamespace = $"{typeof(CommonResponseCreator).Namespace}.Common";
-
+        private static readonly Type m_defaultType = typeof(CommonResponseCreator);
+        private static readonly string m_defaultNamespace = $"{typeof(CommonResponseCreator).Namespace}.Common";
 
         public static Task<string> GetSSMLAsync(string messageKey, string locale, object model = null)
         {
