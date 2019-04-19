@@ -11,7 +11,8 @@
         public const string StopMessage = "StopMessage";
         public const string LaunchMessage = "LaunchMessage";
 
-        public const string GameNoActiveGame = "GameNoActiveGame";
+        public const string ChooseGame = "ChooseGame";
+
         public const string GameNoNightPhase = "GameNoNightPhase";
         public const string GameNoDistributionPhase = "GameNoDistributionPhase";
         public const string GameStartContinueWithDistributionPhase = "GameStartContinueWithDistributionPhase";

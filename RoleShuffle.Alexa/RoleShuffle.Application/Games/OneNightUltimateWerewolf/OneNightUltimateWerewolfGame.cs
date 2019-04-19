@@ -18,7 +18,6 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
         private const string ChooseDeckIdReAskView = "ChooseDeckIdReAsk";
 
         private readonly IOneNightUltimateWerewolfRoleManager m_roleManager;
-        private const string IdIpa = "<phoneme alphabet=\"ipa\" ph=\"ˈaiˈdiː\">ID</phoneme>";
 
         public OneNightUltimateWerewolfGame(IOneNightUltimateWerewolfRoleManager roleManager)
             : base("Vollmondnacht Werwölfe", Constants.GameNumbers.OneNightUltimateWerewolf)

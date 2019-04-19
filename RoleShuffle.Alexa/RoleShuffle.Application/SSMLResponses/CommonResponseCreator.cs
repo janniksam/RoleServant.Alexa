@@ -8,14 +8,14 @@ namespace RoleShuffle.Application.SSMLResponses
 {
     public static class CommonResponseCreator
     {
-        private static Type DefaultType = typeof(CommonResponseCreator);
-        private static string DefaultNamespace = $"{typeof(CommonResponseCreator).Namespace}.Common";
+        private static Type m_defaultType = typeof(CommonResponseCreator);
+        private static string m_defaultNamespace = $"{typeof(CommonResponseCreator).Namespace}.Common";
 
 
         public static Task<string> GetSSMLAsync(string messageKey, string locale, object model = null)
         {
-            var ssmlManifestResourceKey = $"{DefaultNamespace}.{locale.Replace("-", "_")}.{messageKey}.cshtml";
-            var ssmlStream = GetSSMLStream(DefaultType, ssmlManifestResourceKey);
+            var ssmlManifestResourceKey = $"{m_defaultNamespace}.{locale.Replace("-", "_")}.{messageKey}.cshtml";
+            var ssmlStream = GetSSMLStream(m_defaultType, ssmlManifestResourceKey);
             return ConvertTemplate(ssmlStream, ssmlManifestResourceKey, model);
         }
 

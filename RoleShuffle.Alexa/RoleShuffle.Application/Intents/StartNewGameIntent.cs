@@ -8,6 +8,9 @@ using Alexa.NET.Response;
 using RoleShuffle.Application.Abstractions.Games;
 using RoleShuffle.Application.Extensions;
 using RoleShuffle.Application.Games;
+using RoleShuffle.Application.Games.Insider;
+using RoleShuffle.Application.Games.TheResistanceAvalon;
+using RoleShuffle.Application.SSMLResponses;
 using RoleShuffle.Base;
 
 namespace RoleShuffle.Application.Intents
@@ -26,32 +29,29 @@ namespace RoleShuffle.Application.Intents
             return intent == Constants.Intents.StartNewGame;
         }
 
-        public async Task<SkillResponse> GetResponse(SkillRequest skillRequest)
+        public async Task<SkillResponse> GetResponse(SkillRequest request)
         {
-            var request = (IntentRequest) skillRequest.Request;
-            var gameNumberRaw = request.Intent.GetSlot(Constants.Slots.GameNumber);
+            var intentRequest = (IntentRequest) request.Request;
+            var gameNumberRaw = intentRequest.Intent.GetSlot(Constants.Slots.GameNumber);
             if (!short.TryParse(gameNumberRaw, out var gameNumber) ||
                 m_availableGames.All(p => p.GameNumber != gameNumber))
             {
-                var outputText = "<speak><p>Folgende Spiele sind zurzeit verfügbar:</p><p>";
-                foreach (var game in m_availableGames.OrderBy(p => p.GameNumber))
-                {
-                    outputText += $"{game.GameNumber}:. {game.GameName}. ";
-                }
-
-                outputText += "</p><p>Bitte suchen Sie ein Spiel aus, indem Sie die dazugehörige Zahl auswählen.</p></speak>";
+                var ssml = await CommonResponseCreator.GetSSMLAsync(
+                    MessageKeys.ChooseGame, 
+                    request.Request.Locale,
+                    m_availableGames).ConfigureAwait(false);
 
                 return ResponseBuilder.DialogElicitSlot(
                     new SsmlOutputSpeech
                     {
-                        Ssml = outputText
+                        Ssml = ssml
                     },
                     Constants.Slots.GameNumber,
-                    request.Intent);
+                    intentRequest.Intent);
             }
 
             var usersGame = m_availableGames.First(p => p.GameNumber == gameNumber);
-            return await usersGame.StartGameRequested(skillRequest).ConfigureAwait(false);
+            return await usersGame.StartGameRequested(request).ConfigureAwait(false);
         }
     }
 }

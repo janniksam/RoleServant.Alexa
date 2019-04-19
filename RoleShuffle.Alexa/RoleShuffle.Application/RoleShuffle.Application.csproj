@@ -19,11 +19,11 @@
     <None Remove="Games\SecretHitler\SSMLViews\de-DE\DistributeRoles.cshtml" />
     <None Remove="Games\SecretHitler\SSMLViews\de-DE\RoundStarted.cshtml" />
     <None Remove="Games\TheResistanceAvalon\SSMLViews\de-DE\DistributeRoles.cshtml" />
+    <None Remove="SSMLResponses\Common\de-DE\ChooseGame.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\ErrorIntentNotFound.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\ErrorMalformedRequest.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\ErrorNoOpenGame.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\ErrorRequestTypeNotSupported.cshtml" />
-    <None Remove="SSMLResponses\Common\de-DE\GameNoActiveGame.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\GameNoDistributionPhase.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\GameNoNightPhase.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\GameStartContinueWithDistributionPhase.cshtml" />
@@ -61,7 +61,7 @@
     <EmbeddedResource Include="SSMLResponses\Common\de-DE\ErrorNoOpenGame.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\de-DE\ErrorRequestTypeNotSupported.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\de-DE\ErrorIntentNotFound.cshtml" />
-    <EmbeddedResource Include="SSMLResponses\Common\de-DE\GameNoActiveGame.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Common\de-DE\ChooseGame.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\de-DE\GameNoNightPhase.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\de-DE\GameStartContinueWithDistributionPhase.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\de-DE\LaunchMessage.cshtml" />
@@ -84,6 +84,5 @@
 
   <ItemGroup>
     <Folder Include="Model\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 </Project>

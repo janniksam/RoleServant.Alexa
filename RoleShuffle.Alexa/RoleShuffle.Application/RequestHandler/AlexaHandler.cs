@@ -34,7 +34,6 @@ namespace RoleShuffle.Application.RequestHandler
         {
             if (request == null)
             {
-                m_logger.LogWarning("The request is malformed.");
                 var ssml = await CommonResponseCreator.GetSSMLAsync(MessageKeys.AllLanguages.ErrorMalformedRequest, LocaleAll).ConfigureAwait(false);
                 return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = ssml });
             }

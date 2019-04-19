@@ -5,6 +5,9 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RoleShuffle.Application.Abstractions.Games;
+using RoleShuffle.Application.Games.Insider;
+using RoleShuffle.Application.Games.TheResistanceAvalon;
 using RoleShuffle.Application.SSMLResponses;
 using SSMLVerifier;
 
@@ -92,6 +95,17 @@ namespace RoleShuffle.Application.Tests.SSMLResponses
         public async Task ShouldGetValidSSMLForGermanHelpMessage()
         {
             var ssml = await CommonResponseCreator.GetSSMLAsync(MessageKeys.HelpMessage, "de-DE");
+            var verifier = new Verifier();
+            var ssmlValidationErrors = verifier.Verify(ssml, SsmlPlatform.Amazon);
+            Assert.AreEqual(0, ssmlValidationErrors.Count());
+        }
+
+
+        [TestMethod]
+        public async Task ShouldGetValidSSMLForGermanChooseGameMessage()
+        {
+            var ssml = await CommonResponseCreator.GetSSMLAsync(MessageKeys.ChooseGame, "de-DE",
+                new List<IGame> {new TheResistanceAvalonGame(), new InsiderGame()});
             var verifier = new Verifier();
             var ssmlValidationErrors = verifier.Verify(ssml, SsmlPlatform.Amazon);
             Assert.AreEqual(0, ssmlValidationErrors.Count());

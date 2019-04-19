@@ -70,52 +70,5 @@ namespace RoleShuffle.Application.Abstractions.Model
         public DateTime Expiration { get; set; }
 
         public string PreSelection { get; set; }
-
-        public string DeckSummary
-        {
-            get
-            {
-                var rolesIncluded = new List<string>
-                {
-                    AddRoleToSummary(Drunk, "Ein Betrunkener", "Betrunkene"),
-                    AddRoleToSummary(Villager, "Ein Dorfbewohner", "Dorfbewohner"),
-                    AddRoleToSummary(Mason, "Ein Freimaurer", "Freimaurer"),
-                    AddRoleToSummary(Hunter, "Ein Jäger", "Jäger"),
-                    AddRoleToSummary(Robber, "Ein Räuber", "Räuber"),
-                    AddRoleToSummary(Insomniac, "Eine Schlaflose", "Schlaflose"),
-                    AddRoleToSummary(Seer, "Eine Seherin", "Seher"),
-                    AddRoleToSummary(Troublemaker, "Eine Unruhestifterin", "Unruhestifter"),
-                    AddRoleToSummary(Doppelganger, "Eine Doppelgängerin", "Doppelgänger"),
-                    AddRoleToSummary(Tanner, "Ein Gerber", "Gerber"),
-                    AddRoleToSummary(Minion, "Ein Günstling", "Günstlinge"),
-                    AddRoleToSummary(Werewolf, "Ein Werwolf", "Werwölfe")
-                };
-
-                rolesIncluded = rolesIncluded.Where(p => !string.IsNullOrEmpty(p)).ToList();
-
-                if (rolesIncluded.Count == 0)
-                {
-                    return null;
-                }
-
-                var summary = string.Join(", ", rolesIncluded.Take(rolesIncluded.Count - 1));
-                return $"{summary} und {rolesIncluded.Last()}";
-            }
-        }
-
-        private string AddRoleToSummary(short amount, string singular, string plural)
-        {
-            if (amount > 0)
-            {
-                if (amount == 1)
-                {
-                    return $"{singular}";
-                }
-
-                return $"{amount} {plural}";
-            }
-
-            return null;
-        }
     }
 }

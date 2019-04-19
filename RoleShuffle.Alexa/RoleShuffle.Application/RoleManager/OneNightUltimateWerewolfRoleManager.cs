@@ -39,7 +39,7 @@ namespace RoleShuffle.Application.RoleManager
                     }
                 }
 
-                throw new IndexOutOfRangeException("Es gibt aktuele zu viele Decks.");
+                throw new IndexOutOfRangeException("Es gibt aktuell zu viele Decks.");
             }
         }
 
