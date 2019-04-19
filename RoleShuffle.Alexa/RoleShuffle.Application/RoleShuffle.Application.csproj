@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Games\Insider\SSMLViews\en-US\NightPhase.cshtml" />
     <None Remove="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckId.cshtml" />
     <None Remove="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckIdConfirmation.cshtml" />
     <None Remove="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckIdReAsk.cshtml" />
@@ -62,6 +63,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Games\Insider\SSMLViews\en-US\NightPhase.cshtml" />
     <EmbeddedResource Include="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckIdReAsk.cshtml" />
     <EmbeddedResource Include="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckIdConfirmation.cshtml" />
     <EmbeddedResource Include="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckId.cshtml" />
