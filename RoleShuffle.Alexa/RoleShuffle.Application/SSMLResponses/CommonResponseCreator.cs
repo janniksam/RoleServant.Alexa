@@ -30,19 +30,6 @@ namespace RoleShuffle.Application.SSMLResponses
             return SSMLRazorBuilder.BuildFromAsync(ssmlStream, templateKey, model);
         }
 
-        private static string GetTemplateKey(string messageKey, string locale)
-        {
-            if (messageKey == null)
-            {
-                throw new ArgumentNullException(nameof(messageKey));
-            }
-            if (locale == null)
-            {
-                throw new ArgumentNullException(nameof(locale));
-            }
-            return $"{messageKey}_{locale}";
-        }
-
         private static Stream GetSSMLStream(Type type, string ssmlManifestResourceKey)
         {
             var assembly = type.GetTypeInfo().Assembly;

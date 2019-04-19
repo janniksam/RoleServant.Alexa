@@ -11,7 +11,7 @@
     <p>
         @foreach (var game in ((IEnumerable<IGame>)Model)?.OrderBy(p => p.GameNumber).ToList() ?? new List<IGame>())
         {
-            WriteLiteral($"{game.GameNumber}:. {game.GameName}.");
+            WriteLiteral($"{game.GameNumber}:. {game.GameName}.\r\n");
         }
     </p>
     <p>

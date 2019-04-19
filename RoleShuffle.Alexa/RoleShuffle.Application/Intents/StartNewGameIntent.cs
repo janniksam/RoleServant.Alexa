@@ -7,9 +7,6 @@ using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
 using RoleShuffle.Application.Abstractions.Games;
 using RoleShuffle.Application.Extensions;
-using RoleShuffle.Application.Games;
-using RoleShuffle.Application.Games.Insider;
-using RoleShuffle.Application.Games.TheResistanceAvalon;
 using RoleShuffle.Application.SSMLResponses;
 using RoleShuffle.Base;
 

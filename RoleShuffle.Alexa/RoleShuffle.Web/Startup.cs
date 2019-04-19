@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RoleShuffle.IoC;
+using RoleShuffle.Web.Services;
 
 namespace RoleShuffle.Web
 {
@@ -33,7 +34,7 @@ namespace RoleShuffle.Web
         {
             services.RegisterDependencies();
             services.AddSingleton(Configuration);
-            //services.AddHostedService<WorkItemQueueService>();
+            services.AddHostedService<WarmUpService>();
             services.AddMvc();
         }
 
