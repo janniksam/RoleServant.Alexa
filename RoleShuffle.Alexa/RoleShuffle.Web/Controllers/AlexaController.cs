@@ -1,8 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using Alexa.NET.Request;
 using Alexa.NET.Response;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using RoleShuffle.Application.Abstractions.RequestHandler;
+using RoleShuffle.Web.Validation;
 
 namespace RoleShuffle.Web.Controllers
 {
@@ -26,6 +31,14 @@ namespace RoleShuffle.Web.Controllers
         [HttpPost]
         public async Task<SkillResponse> Post([FromBody]SkillRequest request)
         {
+            var isValid = await AlexaRequestValidator.ValidateRequest(HttpContext.Request, request);
+            if (!isValid)
+            {
+                Response.StatusCode = 400;
+                return null;
+            }
+
+
             var result = await m_handler.HandleAync(request);
             return result;
         }
