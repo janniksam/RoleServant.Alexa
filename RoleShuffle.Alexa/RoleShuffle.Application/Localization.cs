@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security;
-
 namespace RoleShuffle.Application
 {
     public class Localization
@@ -13,9 +11,14 @@ namespace RoleShuffle.Application
             { "en-US", "en_US" },
         };
 
-        public string MapLocaleToFolderPath(string locale)
+        public static string MapLocaleToFolderPath(string locale)
         {
-            if (SupportedLocales.TryGetValue(locale, out string folderPath))
+            if (locale == "All")
+            {
+                return locale;
+            }
+
+            if (!SupportedLocales.TryGetValue(locale, out string folderPath))
             {
                 throw new NotSupportedException($"Locale {locale} is currently not supported.");
             }
@@ -23,7 +26,7 @@ namespace RoleShuffle.Application
             return folderPath;
         }
 
-        public bool IsSupported(string locale)
+        public static bool IsSupported(string locale)
         {
             return SupportedLocales.ContainsKey(locale);
         }
@@ -31,6 +34,11 @@ namespace RoleShuffle.Application
         public static string[] GetLocalesFolderPaths()
         {
             return SupportedLocales.Select(p => p.Value).Distinct().ToArray();
+        }
+
+        public static string[] GetSupportedLocales()
+        {
+            return SupportedLocales.Select(p => p.Key).Distinct().ToArray();
         }
     }
 }

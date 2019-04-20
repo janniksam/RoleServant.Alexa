@@ -26,13 +26,12 @@ namespace RoleShuffle.Application.Tests.SSMLResponses
 
             Assert.AreNotEqual(0, locatedResources.Count);
 
-            var locatedLocales = Localization.GetLocalesFolderPaths().ToList();
-            locatedLocales.Add("All");
+            var locatedLocaleFolders = Localization.GetLocalesFolderPaths().ToList();
 
             var requiredViewNames = MessageKeys.GetRequiredLocalizedSSMLViews().ToList();
             foreach (var requiredViewName in requiredViewNames)
             {
-                foreach (var locale in locatedLocales.Where(p => p != "All"))
+                foreach (var locale in locatedLocaleFolders)
                 {
                     var shouldBeThere = $"{namespacePrefix}.{locale}.{requiredViewName}.cshtml";
                     Assert.AreEqual(
@@ -42,10 +41,11 @@ namespace RoleShuffle.Application.Tests.SSMLResponses
                 }
             }
 
+            var supportedLocales = Localization.GetSupportedLocales();
             var verifier = new Verifier();
             foreach (var requiredViewName in requiredViewNames)
             {
-                foreach (var locale in locatedLocales.Where(p => p != "All"))
+                foreach (var locale in supportedLocales)
                 {
                     var toTest = $"{namespacePrefix}.{locale}.{requiredViewName}.cshtml";
                     var ssml = await CommonResponseCreator.GetSSMLAsync(requiredViewName, locale);

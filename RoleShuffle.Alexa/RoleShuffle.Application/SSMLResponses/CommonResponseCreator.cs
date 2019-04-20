@@ -13,14 +13,14 @@ namespace RoleShuffle.Application.SSMLResponses
 
         public static Task<string> GetSSMLAsync(string messageKey, string locale, object model = null)
         {
-            var ssmlManifestResourceKey = $"{m_defaultNamespace}.Common.{locale.Replace("-", "_")}.{messageKey}.cshtml";
+            var ssmlManifestResourceKey = $"{m_defaultNamespace}.Common.{Localization.MapLocaleToFolderPath(locale)}.{messageKey}.cshtml";
             var ssmlStream = GetSSMLStream(m_defaultType, ssmlManifestResourceKey);
             return ConvertTemplate(ssmlStream, ssmlManifestResourceKey, model);
         }
 
         public static Task<string> GetGameSpecificSSMLAsync(string gameFolder, string messageKey, string locale, object model)
         {
-            var ssmlManifestResourceKey = $"{m_defaultNamespace}.{gameFolder}.{locale.Replace("-", "_")}.{messageKey}.cshtml";
+            var ssmlManifestResourceKey = $"{m_defaultNamespace}.{gameFolder}.{Localization.MapLocaleToFolderPath(locale)}.{messageKey}.cshtml";
             var ssmlStream = GetSSMLStream(m_defaultType, ssmlManifestResourceKey);
             return ConvertTemplate(ssmlStream, ssmlManifestResourceKey, model);
         }
