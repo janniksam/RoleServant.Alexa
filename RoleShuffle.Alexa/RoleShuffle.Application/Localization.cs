@@ -8,6 +8,10 @@ namespace RoleShuffle.Application
         private static readonly Dictionary<string,string> SupportedLocales = new Dictionary<string, string>
         {
             { "de-DE", "de_DE" },
+            { "en-AU", "en_US" },
+            { "en-CA", "en_US" },
+            { "en-GB", "en_US" },
+            { "en-IN", "en_US" },
             { "en-US", "en_US" },
         };
 

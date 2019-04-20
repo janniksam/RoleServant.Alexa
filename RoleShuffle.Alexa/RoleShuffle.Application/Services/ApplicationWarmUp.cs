@@ -11,6 +11,7 @@ namespace RoleShuffle.Application.Services
         public async Task WarmUp()
         {
             await CommonResponseCreator.GetSSMLAsync(MessageKeys.ChooseGame, "de-DE", new List<IGame>());
+            await CommonResponseCreator.GetSSMLAsync(MessageKeys.ChooseGame, "en-US", new List<IGame>());
         }
     }
 }

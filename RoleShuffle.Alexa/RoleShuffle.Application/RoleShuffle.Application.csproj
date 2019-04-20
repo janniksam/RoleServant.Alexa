@@ -135,8 +135,4 @@
     <ProjectReference Include="..\RoleShuffle.Application.Abstractions\RoleShuffle.Application.Abstractions.csproj" />
     <ProjectReference Include="..\RoleShuffle.Base\RoleShuffle.Base.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
 </Project>

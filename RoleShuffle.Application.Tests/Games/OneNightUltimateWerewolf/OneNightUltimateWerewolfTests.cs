@@ -52,6 +52,22 @@ namespace RoleShuffle.Application.Tests.Games.OneNightUltimateWerewolf
 
             ssmlValidationErrors = Verifier.Verify(ssml, SsmlPlatform.Amazon);
             Assert.AreEqual(0, ssmlValidationErrors.Count());
+
+            ssml = await CommonResponseCreator.GetGameSpecificSSMLAsync(
+                "OneNightUltimateWerewolf",
+                "ChooseDeckIdConfirmation",
+                "en-GB",
+                new RoleSelection
+                {
+                    Drunk = 2,
+                    Mason = 2,
+                    Hunter = 1,
+                    Villager = 3,
+                    Werewolf = 2
+                });
+
+            ssmlValidationErrors = Verifier.Verify(ssml, SsmlPlatform.Amazon);
+            Assert.AreEqual(0, ssmlValidationErrors.Count());
         }
 
         [TestMethod]
