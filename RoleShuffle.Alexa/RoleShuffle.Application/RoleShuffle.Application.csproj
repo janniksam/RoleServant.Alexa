@@ -14,6 +14,10 @@
   <ItemGroup>
     <None Remove="SSMLResponses\Common\en-US\StopMessage.cshtml" />
     <None Remove="SSMLResponses\Insider\en-US\NightPhase.cshtml" />
+    <None Remove="SSMLResponses\OneNightUltimateWerewolf\en-US\ChooseDeckId.cshtml" />
+    <None Remove="SSMLResponses\OneNightUltimateWerewolf\en-US\ChooseDeckIdConfirmation.cshtml" />
+    <None Remove="SSMLResponses\OneNightUltimateWerewolf\en-US\ChooseDeckIdReAsk.cshtml" />
+    <None Remove="SSMLResponses\OneNightUltimateWerewolf\en-US\NightPhase.cshtml" />
     <None Remove="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckId.cshtml" />
     <None Remove="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckIdConfirmation.cshtml" />
     <None Remove="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckIdReAsk.cshtml" />
@@ -65,6 +69,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\en-US\ChooseDeckId.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\en-US\ChooseDeckIdConfirmation.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\en-US\ChooseDeckIdReAsk.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\en-US\NightPhase.cshtml" />
     <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckIdReAsk.cshtml" />
     <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckIdConfirmation.cshtml" />
     <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckId.cshtml" />

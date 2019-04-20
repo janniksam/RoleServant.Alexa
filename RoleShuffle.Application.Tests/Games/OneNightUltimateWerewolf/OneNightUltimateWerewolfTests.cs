@@ -36,6 +36,72 @@ namespace RoleShuffle.Application.Tests.Games.OneNightUltimateWerewolf
 
             var ssmlValidationErrors = Verifier.Verify(ssml, SsmlPlatform.Amazon);
             Assert.AreEqual(0, ssmlValidationErrors.Count());
+
+            ssml = await CommonResponseCreator.GetGameSpecificSSMLAsync(
+                "OneNightUltimateWerewolf",
+                "ChooseDeckIdConfirmation",
+                "en-US",
+                new RoleSelection
+                {
+                    Drunk = 2,
+                    Mason = 2,
+                    Hunter = 1,
+                    Villager = 3,
+                    Werewolf = 2
+                });
+
+            ssmlValidationErrors = Verifier.Verify(ssml, SsmlPlatform.Amazon);
+            Assert.AreEqual(0, ssmlValidationErrors.Count());
+        }
+
+        [TestMethod]
+        public async Task NightphaseReturnsValidSSML()
+        {
+            var ssml = await CommonResponseCreator.GetGameSpecificSSMLAsync(
+                "OneNightUltimateWerewolf",
+                "NightPhase",
+                "de-DE",
+                new OneNightUltimateWerewolfRound(new RoleSelection
+                {
+                    Drunk = 1,
+                    Mason = 2,
+                    Doppelganger = 1,
+                    Seer =  1,
+                    Werewolf = 1,
+                    Minion = 1,
+                    Villager = 2,
+                    Hunter = 1,
+                    Insomniac = 1,
+                    Robber = 1,
+                    Tanner = 1,
+                    Troublemaker = 1
+                }));
+
+            var ssmlValidationErrors = Verifier.Verify(ssml, SsmlPlatform.Amazon);
+            Assert.AreEqual(0, ssmlValidationErrors.Count());
+
+            ssml = await CommonResponseCreator.GetGameSpecificSSMLAsync(
+                "OneNightUltimateWerewolf",
+                "NightPhase",
+                "en-US",
+                new OneNightUltimateWerewolfRound(new RoleSelection
+                {
+                    Drunk = 1,
+                    Mason = 2,
+                    Doppelganger = 1,
+                    Seer = 1,
+                    Werewolf = 1,
+                    Minion = 1,
+                    Villager = 2,
+                    Hunter = 1,
+                    Insomniac = 1,
+                    Robber = 1,
+                    Tanner = 1,
+                    Troublemaker = 1
+                }));
+
+            ssmlValidationErrors = Verifier.Verify(ssml, SsmlPlatform.Amazon);
+            Assert.AreEqual(0, ssmlValidationErrors.Count());
         }
     }
 }

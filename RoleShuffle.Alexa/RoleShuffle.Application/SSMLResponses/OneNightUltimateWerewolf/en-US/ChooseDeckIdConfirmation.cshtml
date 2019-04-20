@@ -1,0 +1,62 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@inherits RazorLight.TemplatePage<RoleShuffle.Application.Abstractions.Model.RoleSelection>
+
+@{
+    string AddRoleToSummary(short amount, string singular, string plural = null)
+    {
+        if (string.IsNullOrEmpty(plural))
+        {
+            plural = singular;
+        }
+
+        if (amount > 0)
+        {
+            if (amount == 1)
+            {
+                return $"One {singular}";
+            }
+
+            return $"{amount} {plural}";
+        }
+
+        return null;
+    }
+
+    string BuildSummary()
+    {
+        var rolesIncluded = new List<string>
+{
+    AddRoleToSummary(Model.Drunk, "Drunk"),
+    AddRoleToSummary(Model.Villager, "Villager"),
+    AddRoleToSummary(Model.Mason, "Mason"),
+    AddRoleToSummary(Model.Hunter,"Hunter"),
+    AddRoleToSummary(Model.Robber, "Robber"),
+    AddRoleToSummary(Model.Insomniac, "Insomniac"),
+    AddRoleToSummary(Model.Seer, "Seer"),
+    AddRoleToSummary(Model.Troublemaker, "Troublemaker"),
+    AddRoleToSummary(Model.Doppelganger, "Doppelganger"),
+    AddRoleToSummary(Model.Tanner, "Tanner"),
+    AddRoleToSummary(Model.Minion, "Minion"),
+    AddRoleToSummary(Model.Werewolf, "Werwolf", "Werwolves")
+};
+
+        rolesIncluded = rolesIncluded.Where(p => !string.IsNullOrEmpty(p)).ToList();
+
+        if (rolesIncluded.Count == 0)
+        {
+            return null;
+        }
+
+        var summary = string.Join(", ", rolesIncluded.Take(rolesIncluded.Count - 1));
+        return $"{summary} and {rolesIncluded.Last()}";
+    }
+}
+
+<speak>
+    <p>The selected deck contains the following roles:</p>
+    <p>
+        @BuildSummary()
+    </p>
+    <p>Are you sure you want to continue with this deck?</p>
+</speak>

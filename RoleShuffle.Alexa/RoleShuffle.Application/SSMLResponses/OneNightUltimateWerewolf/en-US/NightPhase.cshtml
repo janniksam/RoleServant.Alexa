@@ -2,31 +2,34 @@
 
 <speak>
     <p>
-        Die Nachtphase beginnt in
+        The night phase starts in
         5<break time='0.3s' />
         4<break time='0.3s' />
         3<break time='0.3s' />
         2<break time='0.3s' />
         1<break time='0.8s' />
-        Alle Spieler schließen bitte jetzt die Augen!
+
+        Everybody, close your eyes!
         <break time='5s' />
 
         @if (Model.RoleSelection.Doppelganger > 0)
         {
-        <p>
-            Dorfgängerin, bitte öffne deine Augen!
-            <break time='10s' />
-            Dorfgängerin, bitte schließe deine Augen wieder.
-            <break time='3s' />
-        </p>
-    }
+            <p>
+                Doppelganger, please open your eyes.
+                <break time='10s' />
+
+                Doppelganger, please close your eyes.
+                <break time='3s' />
+            </p>
+        }
 
         @if (Model.RoleSelection.Werewolf > 0)
         {
             <p>
-                Werwölfe, bitte öffnet eure Augen!
+                Werewolves, please open your eyes.
                 <break time='10s' />
-                Werwölfe, bitte schließt eure Augen wieder.
+
+                Werewolves, please close your eyes.
                 <break time='3s' />
             </p>
         }
@@ -34,12 +37,14 @@
         @if (Model.RoleSelection.Minion > 0)
         {
             <p>
-                Günstling, bitte öffne deine Augen!
+                Minion, please open your eyes.
                 <break time='2s' />
-                Werwölfe, bitte hebt mit Augen zu eure Daumen, damit der Günstling euch identifizieren kann!
+
+                Werwolves, please extent your thumbs without looking, so the minion can recognise you.
                 <break time='7s' />
-                Günstling, bitte schließe deine Augen.
-                Werwölfe, bitte nehmt jetzt eure Hände wieder in eine natürliche Position zurück.
+
+                Minion, please close your eyes:
+                Werwolves, please put back your hands into a natural position.
                 <break time='3s' />
             </p>
         }
@@ -47,9 +52,10 @@
         @if (Model.RoleSelection.Mason > 0)
         {
             <p>
-                Freimaurer, bitte öffnet die Augen!
+                Mason, please open your eyes and recognise each other.
                 <break time='10s' />
-                Freimaurer, bitte schließt eure Augen.
+
+                Mason, please close your eyes.
                 <break time='3s' />
             </p>
         }
@@ -57,19 +63,21 @@
         @if (Model.RoleSelection.Seer > 0)
         {
             <p>
-                Seher, bitte öffne deine Augen!
-                <break time='10s'/>
-                Seher, bitte schließe deine Augen.
-                <break time='3s'/>
+                Seer, please open your eyes.
+                <break time='10s' />
+
+                Seer, please close your eyes.
+                <break time='3s' />
             </p>
         }
 
         @if (Model.RoleSelection.Robber > 0)
         {
             <p>
-                Räuber, bitte öffne deine Augen!
+                Robber, please open your eyes.
                 <break time='10s' />
-                Räuber, bitte schließe deine Augen.
+
+                Robber, please close your eyes.
                 <break time='3s' />
             </p>
         }
@@ -77,9 +85,10 @@
         @if (Model.RoleSelection.Troublemaker > 0)
         {
             <p>
-                Unruhestifterin, bitte öffne deine Augen!
+                Troublemaker, please open your eyes.
                 <break time='10s' />
-                Unruhestifterin, bitte schließe deine Augen.
+
+                Troublemaker, please close your eyes.
                 <break time='3s' />
             </p>
         }
@@ -87,9 +96,10 @@
         @if (Model.RoleSelection.Drunk > 0)
         {
             <p>
-                Betrunkener, bitte öffne deine Augen!
+                Drunk, please open your eyes.
                 <break time='10s' />
-                Betrunkener, bitte schließe deine Augen.
+
+                Drunk, please close your eyes.
                 <break time='3s' />
             </p>
         }
@@ -97,13 +107,14 @@
         @if (Model.RoleSelection.Insomniac > 0)
         {
             <p>
-                Schlaflose, bitte öffne deine Augen!
+                Insomniac, please open your eyes.
                 <break time='10s' />
-                Schlaflose, bitte schließe deine Augen.
+
+                Insomniac, please close your eyes.
                 <break time='3s' />
             </p>
         }
-
-        Alle Spieler dürfen ihre Augen wieder weit öffnen und die Tagesphase beginnt.
-        </p>
-    </speak>
+    
+        Everybody awake. It's daytime the round begins.
+    </p>
+</speak>
