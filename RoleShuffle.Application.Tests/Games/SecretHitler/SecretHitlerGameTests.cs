@@ -21,14 +21,16 @@ namespace RoleShuffle.Application.Tests.Games.SecretHitler
         [TestMethod]
         public async Task ChososeNumberBetweenReturnsValidSSML()
         {
-            const short MinPlayers = 5;
-            const short MaxPlayers = 10;
-            var ssml = await CommonResponseCreator.GetSSMLAsync(typeof(OneNightUltimateWerewolfRound),
-                typeof(SecretHitlerGame).Namespace + ".SSMLViews", "ChoosePlayerNumberBetween", "de-DE",
+            const short minPlayers = 5;
+            const short maxPlayers = 10;
+            var ssml = await CommonResponseCreator.GetGameSpecificSSMLAsync(
+                "SecretHitler",
+                "ChoosePlayerNumberBetween",
+                "de-DE",
                 new[]
                 {
-                    MinPlayers,
-                    MaxPlayers
+                    minPlayers,
+                    maxPlayers
                 });
 
             var ssmlValidationErrors = Verifier.Verify(ssml, SsmlPlatform.Amazon);

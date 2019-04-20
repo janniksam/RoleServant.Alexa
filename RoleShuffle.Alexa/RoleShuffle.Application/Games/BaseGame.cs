@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Alexa.NET;
 using Alexa.NET.Request;
@@ -10,14 +11,15 @@ namespace RoleShuffle.Application.Games
 {
     public abstract class BaseGame<TRound> : IGame where TRound : class
     {
-        private const string ActionNightPhase = "NightPhase";
-        private const string ActionDistributeRoles = "DistributeRoles";
+        protected const string NightPhaseView = "NightPhase";
+        protected const string DistributeRolesView = "DistributeRoles";
 
         protected readonly ConcurrentDictionary<string, TRound> RunningRounds;
 
-        protected BaseGame(string gameName, short gameNumber)
+        protected BaseGame(string gameName, string ssmlViewFolder, short gameNumber)
         {
             GameName = gameName;
+            SSMLViewFolder = ssmlViewFolder;
             GameNumber = gameNumber;
             RunningRounds = new ConcurrentDictionary<string, TRound>();
         }
@@ -26,17 +28,19 @@ namespace RoleShuffle.Application.Games
 
         public string GameName { get; }
 
+        public string SSMLViewFolder { get; }
+
         protected Task<string> GetSSMLAsync(string action, string locale, object model = null)
         {
-            var type = GetType();
-            var resourceNamespace = $"{type.Namespace}.SSMLViews";
-            return CommonResponseCreator.GetSSMLAsync(type, resourceNamespace, action, locale, model);
+            return CommonResponseCreator.GetGameSpecificSSMLAsync(SSMLViewFolder, action, locale, model);
         }
 
         public virtual bool IsPlaying(string userId)
         {
             return RunningRounds.ContainsKey(userId);
         }
+
+        public abstract IEnumerable<string> GetRequiredSSMLViews();
 
         public abstract Task<SkillResponse> StartGameRequested(SkillRequest skillRequest);
 
@@ -52,13 +56,13 @@ namespace RoleShuffle.Application.Games
 
         protected async Task<SkillResponse> PerformDefaultNightPhase(SkillRequest request, object model = null)
         {
-            var resultSSML = await GetSSMLAsync(ActionNightPhase, request.Request.Locale, model).ConfigureAwait(false);
+            var resultSSML = await GetSSMLAsync(NightPhaseView, request.Request.Locale, model).ConfigureAwait(false);
             return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = resultSSML });
         }
 
         protected async Task<SkillResponse> PerformDefaultDistributionPhase(SkillRequest request, object model = null)
         {
-            var resultSSML = await GetSSMLAsync(ActionDistributeRoles, request.Request.Locale, model)
+            var resultSSML = await GetSSMLAsync(DistributeRolesView, request.Request.Locale, model)
                 .ConfigureAwait(false);
             return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = resultSSML });
         }

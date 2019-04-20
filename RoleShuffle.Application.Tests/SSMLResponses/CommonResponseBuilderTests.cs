@@ -111,6 +111,43 @@ namespace RoleShuffle.Application.Tests.SSMLResponses
             Assert.AreEqual(0, ssmlValidationErrors.Count());
         }
 
+        [TestMethod]
+        public void CommonsViewsAreAllThereForEveryLanguage()
+        {
+            var namespacePrefix = $"{typeof(CommonResponseCreator).Namespace}.Common";
+            var allResources = typeof(CommonResponseCreator).GetTypeInfo().Assembly.GetManifestResourceNames()
+                .Where(p => p.StartsWith(namespacePrefix)).ToList();
+
+            var regex = new Regex($"^.+[{namespacePrefix}]\\.(.+)\\..+\\..+$");
+            var locatedLocales = allResources.Where(p => regex.IsMatch(p))
+                .Select(p => regex.Match(p).Groups[1].Captures[0].Value)
+                .Distinct()
+                .Where(p => p != "All")
+                .ToList();
+
+            foreach (var locatedLocale in locatedLocales)
+            {
+                var localePrefix = $"{namespacePrefix}.{locatedLocale}";
+                var localizedResources = allResources.Where(p => p.StartsWith(localePrefix)).ToList();
+                var requiredViews = MessageKeys.GetRequiredLocalizedSSMLViews()
+                    .Select(rv => $"{localePrefix}.{rv}.cshtml").ToList();
+
+                // Check if all resources are there, that are required:
+                foreach (var requiredView in requiredViews)
+                {
+                    Assert.IsTrue(localizedResources.Any(p => p.Equals(requiredView)),
+                        $"Missing resource '{requiredView}'");
+                }
+
+                // Check for unknown views that shouldnt be there:
+                foreach (var locatedResource in localizedResources)
+                {
+                    Assert.IsTrue(requiredViews.Contains(locatedResource),
+                        $"Unexpected view '{locatedResource}' found");
+                }
+            }
+        }
+
         private static IEnumerable<FieldInfo> GetConstants(Type type)
         {
             var fieldInfos = type.GetFields(BindingFlags.Public |

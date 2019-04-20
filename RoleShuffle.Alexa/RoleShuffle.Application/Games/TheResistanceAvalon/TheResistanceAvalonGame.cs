@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Alexa.NET;
 using Alexa.NET.Request;
@@ -10,8 +11,13 @@ namespace RoleShuffle.Application.Games.TheResistanceAvalon
     public class TheResistanceAvalonGame : BaseGame<TheResistanceAvalonRound>
     {
         public TheResistanceAvalonGame()
-            : base("The Resistance Avalon", Constants.GameNumbers.TheResistanceAvalon)
+            : base("The Resistance Avalon", "TheResistanceAvalon", Constants.GameNumbers.TheResistanceAvalon)
         {
+        }
+
+        public override IEnumerable<string> GetRequiredSSMLViews()
+        {
+            return new[] { DistributeRolesView };
         }
 
         public override Task<SkillResponse> DistributeRoles(SkillRequest request)

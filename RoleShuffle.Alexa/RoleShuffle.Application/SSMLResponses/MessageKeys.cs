@@ -1,4 +1,6 @@
-﻿namespace RoleShuffle.Application.SSMLResponses
+﻿using System.Collections.Generic;
+
+namespace RoleShuffle.Application.SSMLResponses
 {
     public static class MessageKeys
     {
@@ -21,5 +23,23 @@
         public const string ErrorIntentNotFound = "ErrorIntentNotFound";
         public const string ErrorRequestTypeNotSupported = "ErrorRequestTypeNotSupported";
         public const string ErrorNoOpenGame = "ErrorNoOpenGame";
+
+        public static IEnumerable<string> GetRequiredLocalizedSSMLViews()
+        {
+            return new[]
+            {
+                HelpMessage,
+                StopMessage,
+                LaunchMessage,
+                ChooseGame,
+                GameNoNightPhase,
+                GameNoDistributionPhase,
+                GameStartContinueWithDistributionPhase,
+                GameStartContinueWithNightPhase,
+                ErrorRequestTypeNotSupported,
+                ErrorIntentNotFound,
+                ErrorNoOpenGame
+            };
+        }
     }
 }

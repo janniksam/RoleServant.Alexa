@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Alexa.NET.Request;
 using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RoleShuffle.Application.Abstractions.Games;
+using RoleShuffle.Application.SSMLResponses;
 using RoleShuffle.Base;
 using SSMLVerifier;
 
@@ -92,6 +95,37 @@ namespace RoleShuffle.Application.Tests.Games
             var responseOutputSpeech = ((SsmlOutputSpeech)distributeRoles.Response.OutputSpeech).Ssml;
             var ssmlValidationErrors = Verifier.Verify(responseOutputSpeech, SsmlPlatform.Amazon);
             Assert.AreEqual(0, ssmlValidationErrors.Count());
+        }
+
+        [TestMethod]
+        public void GameViewsAreAllThereForEveryLanguage()
+        {
+            var namespacePrefix = $"{typeof(CommonResponseCreator).Namespace}.{Game.SSMLViewFolder}";
+            var allResources = Game.GetType()
+                .GetTypeInfo().Assembly.GetManifestResourceNames()
+                .Where(p => p.StartsWith(namespacePrefix)).ToList();
+
+            var regex = new Regex($"^.+[{namespacePrefix}]\\.(.+)\\..+\\..+$");
+            var locatedLocales = allResources.Where(p => regex.IsMatch(p)).Select(p => regex.Match(p).Groups[1].Captures[0].Value).Distinct().ToList();
+
+            foreach (var locatedLocale in locatedLocales)
+            {
+                var  localePrefix = $"{namespacePrefix}.{locatedLocale}";
+                var localizedResources = allResources.Where(p => p.StartsWith(localePrefix)).ToList();
+                var requiredViews = Game.GetRequiredSSMLViews().Select(rv => $"{localePrefix}.{rv}.cshtml").ToList();
+
+                // Check if all resources are there, that are required:
+                foreach (var requiredView in requiredViews)
+                {
+                    Assert.IsTrue(localizedResources.Any(p => p.Equals(requiredView)), $"Missing resource '{requiredView}'");
+                }
+
+                // Check for unknown views that shouldnt be there:
+                foreach (var locatedResource in localizedResources)
+                {
+                    Assert.IsTrue(requiredViews.Contains(locatedResource), $"Unexpected view '{locatedResource}' found");
+                }
+            }
         }
     }
 }

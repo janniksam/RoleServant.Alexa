@@ -12,14 +12,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Games\Insider\SSMLViews\en-US\NightPhase.cshtml" />
-    <None Remove="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckId.cshtml" />
-    <None Remove="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckIdConfirmation.cshtml" />
-    <None Remove="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckIdReAsk.cshtml" />
-    <None Remove="Games\SecretHitler\SSMLViews\de-DE\ChoosePlayerNumberBetween.cshtml" />
-    <None Remove="Games\SecretHitler\SSMLViews\de-DE\DistributeRoles.cshtml" />
-    <None Remove="Games\SecretHitler\SSMLViews\de-DE\RoundStarted.cshtml" />
-    <None Remove="Games\TheResistanceAvalon\SSMLViews\de-DE\DistributeRoles.cshtml" />
+    <None Remove="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckId.cshtml" />
+    <None Remove="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckIdConfirmation.cshtml" />
+    <None Remove="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckIdReAsk.cshtml" />
+    <None Remove="SSMLResponses\TheResistanceAvalon\de-DE\DistributeRoles.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\ChooseGame.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\ErrorIntentNotFound.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\ErrorMalformedRequest.cshtml" />
@@ -31,10 +27,7 @@
     <None Remove="SSMLResponses\Common\de-DE\HelpMessage.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\LaunchMessage.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\StopMessage.cshtml" />
-    <None Remove="Games\Insider\SSMLViews\DistributeRoles.cshtml" />
-    <None Remove="Games\Insider\SSMLViews\Nightphase.cshtml" />
-    <None Remove="Games\Insider\SSMLViews\StartGame.cshtml" />
-    <None Remove="Games\OneNightUltimateWerewolf\SSMLViews\Nightphase.cshtml" />
+    <None Remove="SSMLResponses\OneNightUltimateWerewolf\Nightphase.cshtml" />
     <None Remove="SSMLResponses\Common\en-US\ChooseGame.cshtml" />
     <None Remove="SSMLResponses\Common\en-US\ErrorIntentNotFound.cshtml" />
     <None Remove="SSMLResponses\Common\en-US\ErrorNoOpenGame.cshtml" />
@@ -46,6 +39,11 @@
     <None Remove="SSMLResponses\Common\en-US\HelpMessage.cshtml" />
     <None Remove="SSMLResponses\Common\en-US\LaunchMessage.cshtml" />
     <None Remove="SSMLResponses\Common\en-US\StopMessage.cshtml" />
+    <None Remove="SSMLResponses\Insider\de-DE\NightPhase.cshtml" />
+    <None Remove="SSMLResponses\Insider\en-US\NightPhase.cshtml" />
+    <None Remove="SSMLResponses\SecretHitler\de-DE\ChoosePlayerNumberBetween.cshtml" />
+    <None Remove="SSMLResponses\SecretHitler\de-DE\DistributeRoles.cshtml" />
+    <None Remove="SSMLResponses\SecretHitler\de-DE\RoundStarted.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,14 +61,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Games\Insider\SSMLViews\en-US\NightPhase.cshtml" />
-    <EmbeddedResource Include="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckIdReAsk.cshtml" />
-    <EmbeddedResource Include="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckIdConfirmation.cshtml" />
-    <EmbeddedResource Include="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\ChooseDeckId.cshtml" />
-    <EmbeddedResource Include="Games\SecretHitler\SSMLViews\de-DE\RoundStarted.cshtml" />
-    <EmbeddedResource Include="Games\SecretHitler\SSMLViews\de-DE\ChoosePlayerNumberBetween.cshtml" />
-    <EmbeddedResource Include="Games\SecretHitler\SSMLViews\de-DE\DistributeRoles.cshtml" />
-    <EmbeddedResource Include="Games\TheResistanceAvalon\SSMLViews\de-DE\DistributeRoles.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckIdReAsk.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckIdConfirmation.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckId.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\de-DE\DistributeRoles.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\de-DE\ErrorNoOpenGame.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\de-DE\ErrorRequestTypeNotSupported.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\de-DE\ErrorIntentNotFound.cshtml" />
@@ -83,11 +77,10 @@
     <EmbeddedResource Include="SSMLResponses\Common\de-DE\StopMessage.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\de-DE\HelpMessage.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\de-DE\GameStartContinueWithNightPhase.cshtml" />
-    <EmbeddedResource Include="Games\Insider\SSMLViews\de-DE\NightPhase.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Games\OneNightUltimateWerewolf\SSMLViews\de-DE\NightPhase.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\de-DE\NightPhase.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\en-US\ChooseGame.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\en-US\ErrorIntentNotFound.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\en-US\ErrorNoOpenGame.cshtml" />
@@ -99,6 +92,11 @@
     <EmbeddedResource Include="SSMLResponses\Common\en-US\HelpMessage.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\en-US\LaunchMessage.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\en-US\StopMessage.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Insider\de-DE\NightPhase.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Insider\en-US\NightPhase.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\SecretHitler\de-DE\ChoosePlayerNumberBetween.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\SecretHitler\de-DE\DistributeRoles.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\SecretHitler\de-DE\RoundStarted.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

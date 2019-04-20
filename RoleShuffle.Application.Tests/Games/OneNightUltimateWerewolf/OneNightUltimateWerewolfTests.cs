@@ -23,8 +23,10 @@ namespace RoleShuffle.Application.Tests.Games.OneNightUltimateWerewolf
         [TestMethod]
         public async Task RoleSummaryReturnsValidSSML()
         {
-            var ssml = await CommonResponseCreator.GetSSMLAsync(typeof(OneNightUltimateWerewolfRound),
-                typeof(OneNightUltimateWerewolfRound).Namespace + ".SSMLViews", "ChooseDeckIdConfirmation", "de-DE",
+            var ssml = await CommonResponseCreator.GetGameSpecificSSMLAsync(
+                "OneNightUltimateWerewolf", 
+                "ChooseDeckIdConfirmation", 
+                "de-DE",
                 new RoleSelection
                 {
                     Drunk = 2,
