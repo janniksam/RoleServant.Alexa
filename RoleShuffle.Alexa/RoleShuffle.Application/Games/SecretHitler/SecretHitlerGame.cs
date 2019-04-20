@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Alexa.NET;
 using Alexa.NET.Request;
@@ -18,13 +19,19 @@ namespace RoleShuffle.Application.Games.SecretHitler
         private const string RoundStartedView = "RoundStarted";
 
         public SecretHitlerGame()
-            : base("Secret Hitler", "SecretHitler", Constants.GameNumbers.SecretHitler)
+            : base("SecretHitler", Constants.GameNumbers.SecretHitler)
         {
         }
 
         public override IEnumerable<string> GetRequiredSSMLViews()
         {
-            return new[] {DistributeRolesView, ChoosePlayerNumberBetweenView, RoundStartedView};
+            return base.GetRequiredSSMLViews()
+                .Concat(new[]
+                {
+                    DistributeRolesView,
+                    ChoosePlayerNumberBetweenView,
+                    RoundStartedView
+                });
         }
 
         public override Task<SkillResponse> DistributeRoles(SkillRequest request)

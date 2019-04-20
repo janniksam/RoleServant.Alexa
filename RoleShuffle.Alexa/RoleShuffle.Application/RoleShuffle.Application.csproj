@@ -13,17 +13,24 @@
 
   <ItemGroup>
     <None Remove="SSMLResponses\Common\en-US\StopMessage.cshtml" />
+    <None Remove="SSMLResponses\Insider\de-DE\GameNamePartial.cshtml" />
+    <None Remove="SSMLResponses\Insider\en-US\GameNamePartial.cshtml" />
     <None Remove="SSMLResponses\Insider\en-US\NightPhase.cshtml" />
+    <None Remove="SSMLResponses\OneNightUltimateWerewolf\de-DE\GameNamePartial.cshtml" />
     <None Remove="SSMLResponses\OneNightUltimateWerewolf\en-US\ChooseDeckId.cshtml" />
     <None Remove="SSMLResponses\OneNightUltimateWerewolf\en-US\ChooseDeckIdConfirmation.cshtml" />
     <None Remove="SSMLResponses\OneNightUltimateWerewolf\en-US\ChooseDeckIdReAsk.cshtml" />
+    <None Remove="SSMLResponses\OneNightUltimateWerewolf\en-US\GameNamePartial.cshtml" />
     <None Remove="SSMLResponses\OneNightUltimateWerewolf\en-US\NightPhase.cshtml" />
     <None Remove="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckId.cshtml" />
     <None Remove="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckIdConfirmation.cshtml" />
     <None Remove="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckIdReAsk.cshtml" />
+    <None Remove="SSMLResponses\SecretHitler\de-DE\GameNamePartial.cshtml" />
     <None Remove="SSMLResponses\SecretHitler\en-US\ChoosePlayerNumberBetween.cshtml" />
     <None Remove="SSMLResponses\SecretHitler\en-US\DistributeRoles.cshtml" />
+    <None Remove="SSMLResponses\SecretHitler\en-US\GameNamePartial.cshtml" />
     <None Remove="SSMLResponses\SecretHitler\en-US\RoundStarted.cshtml" />
+    <None Remove="SSMLResponses\TheResistanceAvalon\de-DE\GameNamePartial.cshtml" />
     <None Remove="SSMLResponses\TheResistanceAvalon\en-US\DistributeRoles.cshtml" />
     <None Remove="SSMLResponses\TheResistanceAvalon\de-DE\DistributeRoles.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\ChooseGame.cshtml" />
@@ -52,6 +59,7 @@
     <None Remove="SSMLResponses\SecretHitler\de-DE\ChoosePlayerNumberBetween.cshtml" />
     <None Remove="SSMLResponses\SecretHitler\de-DE\DistributeRoles.cshtml" />
     <None Remove="SSMLResponses\SecretHitler\de-DE\RoundStarted.cshtml" />
+    <None Remove="SSMLResponses\TheResistanceAvalon\en-US\GameNamePartial.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -69,16 +77,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="SSMLResponses\Insider\de-DE\GameNamePartial.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Insider\en-US\GameNamePartial.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\de-DE\GameNamePartial.cshtml" />
     <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\en-US\ChooseDeckId.cshtml" />
     <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\en-US\ChooseDeckIdConfirmation.cshtml" />
     <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\en-US\ChooseDeckIdReAsk.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\en-US\GameNamePartial.cshtml" />
     <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\en-US\NightPhase.cshtml" />
     <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckIdReAsk.cshtml" />
     <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckIdConfirmation.cshtml" />
     <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\de-DE\ChooseDeckId.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\SecretHitler\de-DE\GameNamePartial.cshtml" />
     <EmbeddedResource Include="SSMLResponses\SecretHitler\en-US\ChoosePlayerNumberBetween.cshtml" />
     <EmbeddedResource Include="SSMLResponses\SecretHitler\en-US\DistributeRoles.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\SecretHitler\en-US\GameNamePartial.cshtml" />
     <EmbeddedResource Include="SSMLResponses\SecretHitler\en-US\RoundStarted.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\de-DE\GameNamePartial.cshtml" />
     <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\en-US\DistributeRoles.cshtml" />
     <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\de-DE\DistributeRoles.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\de-DE\ErrorNoOpenGame.cshtml" />
@@ -113,6 +128,7 @@
     <EmbeddedResource Include="SSMLResponses\SecretHitler\de-DE\ChoosePlayerNumberBetween.cshtml" />
     <EmbeddedResource Include="SSMLResponses\SecretHitler\de-DE\DistributeRoles.cshtml" />
     <EmbeddedResource Include="SSMLResponses\SecretHitler\de-DE\RoundStarted.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\en-US\GameNamePartial.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

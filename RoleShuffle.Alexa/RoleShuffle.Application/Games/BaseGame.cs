@@ -13,12 +13,12 @@ namespace RoleShuffle.Application.Games
     {
         protected const string NightPhaseView = "NightPhase";
         protected const string DistributeRolesView = "DistributeRoles";
+        protected const string GameNamePartialView = "GameNamePartial";
 
         protected readonly ConcurrentDictionary<string, TRound> RunningRounds;
 
-        protected BaseGame(string gameName, string ssmlViewFolder, short gameNumber)
+        protected BaseGame(string ssmlViewFolder, short gameNumber)
         {
-            GameName = gameName;
             SSMLViewFolder = ssmlViewFolder;
             GameNumber = gameNumber;
             RunningRounds = new ConcurrentDictionary<string, TRound>();
@@ -26,7 +26,10 @@ namespace RoleShuffle.Application.Games
         
         public short GameNumber { get; }
 
-        public string GameName { get; }
+        public Task<string> GetLocalizedGamename(string locale)
+        {
+            return CommonResponseCreator.GetGameSpecificSSMLAsync(SSMLViewFolder, GameNamePartialView, locale);
+        }
 
         public string SSMLViewFolder { get; }
 
@@ -40,7 +43,10 @@ namespace RoleShuffle.Application.Games
             return RunningRounds.ContainsKey(userId);
         }
 
-        public abstract IEnumerable<string> GetRequiredSSMLViews();
+        public virtual IEnumerable<string> GetRequiredSSMLViews()
+        {
+            return new[] {GameNamePartialView};
+        }
 
         public abstract Task<SkillResponse> StartGameRequested(SkillRequest skillRequest);
 
@@ -70,9 +76,10 @@ namespace RoleShuffle.Application.Games
 
         protected async Task<SkillResponse> PerformDefaultStartGamePhaseWithNightPhaseContinuation(SkillRequest request)
         {
+            var gameName = await GetLocalizedGamename(request.Request.Locale).ConfigureAwait(false);
             var resultSSML =
                 await CommonResponseCreator
-                    .GetSSMLAsync(MessageKeys.GameStartContinueWithNightPhase, request.Request.Locale, GameName)
+                    .GetSSMLAsync(MessageKeys.GameStartContinueWithNightPhase, request.Request.Locale, gameName)
                     .ConfigureAwait(false);
             var response = ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = resultSSML });
             response.Response.ShouldEndSession = false;
@@ -81,9 +88,10 @@ namespace RoleShuffle.Application.Games
 
         protected async Task<SkillResponse> PerformDefaultStartGamePhaseWithDistributionPhaseContinuation(SkillRequest request)
         {
+            var gameName = await GetLocalizedGamename(request.Request.Locale).ConfigureAwait(false);
             var resultSSML =
                 await CommonResponseCreator
-                    .GetSSMLAsync(MessageKeys.GameStartContinueWithDistributionPhase, request.Request.Locale, GameName)
+                    .GetSSMLAsync(MessageKeys.GameStartContinueWithDistributionPhase, request.Request.Locale, gameName)
                     .ConfigureAwait(false);
             var response = ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = resultSSML });
             response.Response.ShouldEndSession = false;
@@ -92,22 +100,29 @@ namespace RoleShuffle.Application.Games
 
         protected async Task<SkillResponse> NoActiveGameOpen(SkillRequest request)
         {
+            var gameName = await GetLocalizedGamename(request.Request.Locale).ConfigureAwait(false);
             var resultSSML =
-                await CommonResponseCreator.GetSSMLAsync(MessageKeys.GameNoDistributionPhase, request.Request.Locale, GameName).ConfigureAwait(false);
+                await CommonResponseCreator
+                    .GetSSMLAsync(MessageKeys.GameNoDistributionPhase, request.Request.Locale, gameName)
+                    .ConfigureAwait(false);
             return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = resultSSML });
         }
 
         private async Task<SkillResponse> NoDistributionPhase(SkillRequest request)
         {
+            var gameName = await GetLocalizedGamename(request.Request.Locale).ConfigureAwait(false);
             var resultSSML =
-                await CommonResponseCreator.GetSSMLAsync(MessageKeys.GameNoDistributionPhase, request.Request.Locale, GameName).ConfigureAwait(false);
+                await CommonResponseCreator
+                    .GetSSMLAsync(MessageKeys.GameNoDistributionPhase, request.Request.Locale, gameName)
+                    .ConfigureAwait(false);
             return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = resultSSML });
         }
 
         private async Task<SkillResponse> NoNightPhase(SkillRequest request)
         {
+            var gameName = await GetLocalizedGamename(request.Request.Locale).ConfigureAwait(false);
             var resultSSML =
-                await CommonResponseCreator.GetSSMLAsync(MessageKeys.GameNoNightPhase, request.Request.Locale, GameName).ConfigureAwait(false);
+                await CommonResponseCreator.GetSSMLAsync(MessageKeys.GameNoNightPhase, request.Request.Locale, gameName).ConfigureAwait(false);
             return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = resultSSML });
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Alexa.NET;
 using Alexa.NET.Request;
@@ -21,20 +22,21 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
         private readonly IOneNightUltimateWerewolfRoleManager m_roleManager;
 
         public OneNightUltimateWerewolfGame(IOneNightUltimateWerewolfRoleManager roleManager)
-            : base("Vollmondnacht Werwölfe", "OneNightUltimateWerewolf", Constants.GameNumbers.OneNightUltimateWerewolf)
+            : base("OneNightUltimateWerewolf", Constants.GameNumbers.OneNightUltimateWerewolf)
         {
             m_roleManager = roleManager;
         }
 
         public override IEnumerable<string> GetRequiredSSMLViews()
         {
-            return new[]
-            {
-                ChooseDeckIdReAskView,
-                ChooseDeckIdConfirmationView,
-                ChooseDeckIdView,
-                NightPhaseView
-            };
+            return base.GetRequiredSSMLViews()
+                .Concat(new[]
+                {
+                    ChooseDeckIdReAskView,
+                    ChooseDeckIdConfirmationView,
+                    ChooseDeckIdView,
+                    NightPhaseView
+                });
         }
 
         public override Task<SkillResponse> StartGameRequested(SkillRequest request)

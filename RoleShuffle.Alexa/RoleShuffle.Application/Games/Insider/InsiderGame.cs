@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Alexa.NET.Request;
 using Alexa.NET.Response;
@@ -9,13 +11,14 @@ namespace RoleShuffle.Application.Games.Insider
     public class InsiderGame : BaseGame<InsiderRound>
     {
         public InsiderGame()
-            : base("Insider", "Insider", Constants.GameNumbers.Insider)
+            : base("Insider", Constants.GameNumbers.Insider)
         {
         }
 
         public override IEnumerable<string> GetRequiredSSMLViews()
         {
-            return new[] { NightPhaseView };
+            return base.GetRequiredSSMLViews()
+                .Concat(new[] {NightPhaseView});
         }
 
         public override Task<SkillResponse> PerformNightPhase(SkillRequest request)

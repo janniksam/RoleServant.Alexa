@@ -17,9 +17,9 @@ namespace RoleShuffle.Application.Abstractions.Games
         
         bool IsPlaying(string userId);
 
-        short GameNumber { get; }
+        Task<string> GetLocalizedGamename(string locale);
 
-        string GameName { get; }
+        short GameNumber { get; }
 
         string SSMLViewFolder { get; }
     }
