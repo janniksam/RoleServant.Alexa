@@ -26,10 +26,10 @@ namespace RoleShuffle.Application.Tests.SSMLResponses
 
             Assert.AreNotEqual(0, locatedResources.Count);
 
-            var regex = new Regex($"^.+[{namespacePrefix}]\\.(.+)\\..+\\..+$");
-            var locatedLocales = locatedResources.Where(p => regex.IsMatch(p)).Select(p => regex.Match(p).Groups[1].Captures[0].Value).Distinct().ToList();
-            
-            var requiredViewNames = GetConstants(typeof(MessageKeys)).Select(p => p.GetRawConstantValue().ToString()).ToList();
+            var locatedLocales = Localization.GetLocalesFolderPaths().ToList();
+            locatedLocales.Add("All");
+
+            var requiredViewNames = MessageKeys.GetRequiredLocalizedSSMLViews().ToList();
             foreach (var requiredViewName in requiredViewNames)
             {
                 foreach (var locale in locatedLocales.Where(p => p != "All"))
@@ -65,9 +65,9 @@ namespace RoleShuffle.Application.Tests.SSMLResponses
 
             Assert.AreNotEqual(0, locatedResources.Count);
 
-            var regex = new Regex($"^.+[{namespacePrefix}]\\.(.+)\\..+\\..+$");
-            var locatedLocales = locatedResources.Where(p => regex.IsMatch(p)).Select(p => regex.Match(p).Groups[1].Captures[0].Value).Distinct().ToList();
-
+            var locatedLocales = Localization.GetLocalesFolderPaths().ToList();
+            locatedLocales.Add("All");
+            
             var requiredViewNames = GetConstants(typeof(MessageKeys.AllLanguages)).Select(p => p.GetRawConstantValue());
             foreach (var requiredViewName in requiredViewNames)
             {
@@ -118,13 +118,7 @@ namespace RoleShuffle.Application.Tests.SSMLResponses
             var allResources = typeof(CommonResponseCreator).GetTypeInfo().Assembly.GetManifestResourceNames()
                 .Where(p => p.StartsWith(namespacePrefix)).ToList();
 
-            var regex = new Regex($"^.+[{namespacePrefix}]\\.(.+)\\..+\\..+$");
-            var locatedLocales = allResources.Where(p => regex.IsMatch(p))
-                .Select(p => regex.Match(p).Groups[1].Captures[0].Value)
-                .Distinct()
-                .Where(p => p != "All")
-                .ToList();
-
+            var locatedLocales = Localization.GetLocalesFolderPaths();
             foreach (var locatedLocale in locatedLocales)
             {
                 var localePrefix = $"{namespacePrefix}.{locatedLocale}";

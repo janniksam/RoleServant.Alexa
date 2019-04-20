@@ -105,9 +105,7 @@ namespace RoleShuffle.Application.Tests.Games
                 .GetTypeInfo().Assembly.GetManifestResourceNames()
                 .Where(p => p.StartsWith(namespacePrefix)).ToList();
 
-            var regex = new Regex($"^.+[{namespacePrefix}]\\.(.+)\\..+\\..+$");
-            var locatedLocales = allResources.Where(p => regex.IsMatch(p)).Select(p => regex.Match(p).Groups[1].Captures[0].Value).Distinct().ToList();
-
+            var locatedLocales = Localization.GetLocalesFolderPaths();
             foreach (var locatedLocale in locatedLocales)
             {
                 var  localePrefix = $"{namespacePrefix}.{locatedLocale}";
