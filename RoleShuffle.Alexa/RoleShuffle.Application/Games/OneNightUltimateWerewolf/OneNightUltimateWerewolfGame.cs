@@ -60,7 +60,7 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
                 return AskForDeckConfimation(request, roleSelection);
             }
 
-            if (!confirmValue.Equals(Constants.SlotResult.Yes, StringComparison.InvariantCultureIgnoreCase))
+            if (!confirmValue.Equals(Constants.SlotYesNoResult.Yes, StringComparison.InvariantCultureIgnoreCase))
             {
                 intentRequest.Intent.Slots[Constants.Slots.ConfirmAction].Value = null;
                 intentRequest.Intent.Slots[Constants.Slots.DeckId].Value = null;

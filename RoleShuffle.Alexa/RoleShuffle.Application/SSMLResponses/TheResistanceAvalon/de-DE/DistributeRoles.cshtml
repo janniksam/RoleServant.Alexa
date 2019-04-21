@@ -1,4 +1,5 @@
-﻿´<speak>
+﻿@inherits RazorLight.TemplatePage<RoleShuffle.Application.Games.TheResistanceAvalon.TheResistanceAvalonRound>
+<speak>
     <p>
         Die Rollenverteilung beginnt in
         5<break time='0.3s' />
@@ -8,24 +9,40 @@
         1<break time='0.8s' />
         Alle Spieler schließen bitte jetzt die Augen!
         <break time='5s' />
-        
+
         Alle Spieler strecken ihre Faust bitte nach vorne oder legen diese klar sichtbar vor sich auf den Tisch!
         <break time='5s' />
 
-        Die Minions von Mordred öffnen die Augen und Erkennen einander in 
+        @if (Model.Oberon)
+        {
+            @:Die Minions von Mordred, mit Ausnahme von Oberon, öffnen die Augen und Erkennen einander in
+        }
+        else
+        {
+            @:Die Minions von Mordred öffnen die Augen und Erkennen einander in
+        }
+
         3<break time='0.3s' />
         2<break time='0.3s' />
         1<break time='0.3s' />
         jetzt!
         <break time='7s' />
-        
+
         Minions von Mordred, bitte schließt eure Augen.
         <break time='3s' />
-        
-        Die Minions von Mordred heben jetzt bitte den Daumen, lassen dabei aber die Augen zu.
+
+        @if (Model.Mordred)
+        {
+            @:Die Minions von Mordred, mit Ausnahme von Mordred selbst, heben jetzt bitte den Daumen, lassen dabei aber die Augen zu.
+        }
+        else
+        {
+            @:Die Minions von Mordred heben jetzt bitte den Daumen, lassen dabei aber die Augen zu.
+        }
+
         <break time='5s' />
 
-        Merlin, bitte öffne die Augen und Identifiziere die Minions von Mordred in 
+        Merlin, bitte öffne die Augen und Identifiziere die Minions von Mordred in
         3<break time='0.3s' />
         2<break time='0.3s' />
         1<break time='0.3s' />
@@ -35,8 +52,28 @@
         Merlin, bitte schließe deine Augen wieder.
         <break time='5s' />
 
+        @if (Model.Percival)
+        {
+            if (Model.Morgana)
+            {
+                @:Merlin und Morgana, hebt jetzt bitte den Daumen, lasst dabei aber die Augen zu.
+            }
+            else
+            {
+                @:Merlin, hebt jetzt bitte den Daumen, lassen dabei aber die Augen zu.
+            }
+            <break time='5s' />
+
+            @:Percival,  öffne jetzt deine Augen und identifiziere, wer den Daumen gehoben hat.
+            <break time='8s' />
+
+            @:Percival, bitte schließe deine Augen wieder.
+            <break time='5s' />
+        }
+
         Alle Spieler ziehen die Arme an ihren Körper und halten ihre Augen geschlossen.
+
         <break time='5s' />
-        Alle Spieler dürfen ihre Augen wieder weit öffnen und die Runde beginnt. 
+        Alle Spieler dürfen ihre Augen wieder weit öffnen und die Runde beginnt.
     </p>
 </speak>

@@ -31,14 +31,15 @@ namespace RoleShuffle.Web.Controllers
         [HttpPost]
         public async Task<SkillResponse> Post([FromBody]SkillRequest request)
         {
+#if !DEBUG
             var isValid = await AlexaRequestValidator.ValidateRequest(HttpContext.Request, request);
             if (!isValid)
             {
                 Response.StatusCode = 400;
                 return null;
             }
-
-
+#endif
+            
             var result = await m_handler.HandleAync(request);
             return result;
         }

@@ -31,6 +31,9 @@
     <None Remove="SSMLResponses\SecretHitler\en-US\GameNamePartial.cshtml" />
     <None Remove="SSMLResponses\SecretHitler\en-US\RoundStarted.cshtml" />
     <None Remove="SSMLResponses\TheResistanceAvalon\de-DE\GameNamePartial.cshtml" />
+    <None Remove="SSMLResponses\TheResistanceAvalon\de-DE\SpecialCharMorganaPrompt.cshtml" />
+    <None Remove="SSMLResponses\TheResistanceAvalon\de-DE\SpecialCharOberonPrompt.cshtml" />
+    <None Remove="SSMLResponses\TheResistanceAvalon\de-DE\SpecialCharPercivalPrompt.cshtml" />
     <None Remove="SSMLResponses\TheResistanceAvalon\en-US\DistributeRoles.cshtml" />
     <None Remove="SSMLResponses\TheResistanceAvalon\de-DE\DistributeRoles.cshtml" />
     <None Remove="SSMLResponses\Common\de-DE\ChooseGame.cshtml" />
@@ -60,6 +63,11 @@
     <None Remove="SSMLResponses\SecretHitler\de-DE\DistributeRoles.cshtml" />
     <None Remove="SSMLResponses\SecretHitler\de-DE\RoundStarted.cshtml" />
     <None Remove="SSMLResponses\TheResistanceAvalon\en-US\GameNamePartial.cshtml" />
+    <None Remove="SSMLResponses\TheResistanceAvalon\en-US\SpecialCharMordredPrompt.cshtml" />
+    <None Remove="SSMLResponses\TheResistanceAvalon\en-US\SpecialCharMorganaPrompt.cshtml" />
+    <None Remove="SSMLResponses\TheResistanceAvalon\en-US\SpecialCharOberonPrompt.cshtml" />
+    <None Remove="SSMLResponses\TheResistanceAvalon\en-US\SpecialCharPercivalPrompt.cshtml" />
+    <None Remove="SSMLResponses\TheResistanceAvalon\SpecialCharMordredPrompt.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -93,6 +101,9 @@
     <EmbeddedResource Include="SSMLResponses\SecretHitler\en-US\DistributeRoles.cshtml" />
     <EmbeddedResource Include="SSMLResponses\SecretHitler\en-US\GameNamePartial.cshtml" />
     <EmbeddedResource Include="SSMLResponses\SecretHitler\en-US\RoundStarted.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\de-DE\SpecialCharMorganaPrompt.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\de-DE\SpecialCharOberonPrompt.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\de-DE\SpecialCharPercivalPrompt.cshtml" />
     <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\de-DE\GameNamePartial.cshtml" />
     <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\en-US\DistributeRoles.cshtml" />
     <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\de-DE\DistributeRoles.cshtml" />
@@ -129,6 +140,11 @@
     <EmbeddedResource Include="SSMLResponses\SecretHitler\de-DE\DistributeRoles.cshtml" />
     <EmbeddedResource Include="SSMLResponses\SecretHitler\de-DE\RoundStarted.cshtml" />
     <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\en-US\GameNamePartial.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\en-US\SpecialCharMorganaPrompt.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\en-US\SpecialCharMordredPrompt.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\en-US\SpecialCharOberonPrompt.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\en-US\SpecialCharPercivalPrompt.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\TheResistanceAvalon\de-DE\SpecialCharMordredPrompt.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

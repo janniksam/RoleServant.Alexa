@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Alexa.NET.Request;
 using Alexa.NET.Request.Type;
@@ -26,6 +25,16 @@ namespace RoleShuffle.Application.Tests.Games
             Verifier = new Verifier();
             m_request = new SkillRequest()
             {
+                Session = new Session()
+                {
+                    Attributes = new Dictionary<string, object>
+                    {
+                        { "AskForPercival", Constants.SlotYesNoResult.Yes },
+                        { "AskForMorgana", Constants.SlotYesNoResult.Yes },
+                        { "AskForMordred", Constants.SlotYesNoResult.Yes },
+                        { "AskForOberon", Constants.SlotYesNoResult.Yes }
+                    }
+                },
                 Request = new IntentRequest
                 {
                     Locale = "de-DE",

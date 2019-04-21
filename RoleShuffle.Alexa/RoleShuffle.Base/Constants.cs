@@ -22,7 +22,7 @@
         }
 
 
-        public static class SlotResult
+        public static class SlotYesNoResult
         {
             public const string Yes = "Yes";
             public const string No = "No";
