@@ -6,8 +6,8 @@
 
 #### Special thanks to:
 
-https://github.com/toddams/RazorLight
-https://github.com/timheuer/alexa-skills-dotnet
+- https://github.com/toddams/RazorLight
+- https://github.com/timheuer/alexa-skills-dotnet
 
 ### English description:
 
