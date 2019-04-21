@@ -9,7 +9,7 @@
 - https://github.com/toddams/RazorLight
 - https://github.com/timheuer/alexa-skills-dotnet
 
-### English description:
+### Description:
 
 The Role Servant takes charge of the moderation role in multiple role-playing games.
 
@@ -23,17 +23,17 @@ The list of currently supported is
 
 The skill is helping the players in executing the night phases or in exchanging hidden roles (e.g. in Secret Hitler).
 
+### Currently supporting the following locales:
 
-### German description:
+- de-DE
+- en-AU
+- en-CA
+- en-GB
+- en-IN
+- en-US
 
-Der Rollen Knecht übernimmt für Euch die Rolle des Moderatos in verschiedenen Rollenspielen.
+### Contributions
 
-Zu den Rollenspielen zählen u.a.
+Any feedback like bug reports or new game / feature suggestions is always welcome.
+Also, if you are capable of translating it into another language like frensh, feel free to do so.
 
-    Secret Hitler
-    Vollmondnacht: Werwölfe
-    Insider
-    The Resistance: Avalon
-    ... weitere Spiele folgen
-
-Er hilft euch bei der Durchführung der Nachtphase und bei der Verteilung der Rollen der einzelnen Spieler. 
