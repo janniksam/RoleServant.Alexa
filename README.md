@@ -34,6 +34,4 @@ The skill is helping the players in executing the night phases or in exchanging 
 
 ### Contributions
 
-Any feedback like bug reports or new game / feature suggestions is always welcome.
-Also, if you are capable of translating it into another language like frensh, feel free to do so.
-
+Any feedback like bug reports or new game / feature suggestions is always welcome. Also, if you are capable of translating it into another language like frensh, don't hesitate to do so.
