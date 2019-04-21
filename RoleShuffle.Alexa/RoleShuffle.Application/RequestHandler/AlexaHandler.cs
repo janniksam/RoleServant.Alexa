@@ -13,15 +13,15 @@ namespace RoleShuffle.Application.RequestHandler
     public class AlexaHandler : IAlexaHandler
     {
         private readonly IIntentHandler m_intentHandler;
-        private readonly ILogger<AlexaHandler> m_logger;
+        private readonly ILaunchRequestHandler m_launchRequestHandler;
         private const string LocaleAll = "All";
 
         public AlexaHandler(
-            IIntentHandler intentHandler, 
-            ILogger<AlexaHandler> logger)
+            IIntentHandler intentHandler,
+            ILaunchRequestHandler launchRequestHandler)
         {
-            m_logger = logger;
             m_intentHandler = intentHandler;
+            m_launchRequestHandler = launchRequestHandler;
         }
 
         public Task<SkillResponse> HandleAync(SkillRequest request)
@@ -40,15 +40,12 @@ namespace RoleShuffle.Application.RequestHandler
 
             if (request.GetRequestType() == typeof(LaunchRequest))
             {
-                var ssml = await CommonResponseCreator.GetSSMLAsync(MessageKeys.LaunchMessage, request.Request.Locale).ConfigureAwait(false);
-                var launchResponse = ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = ssml });
-                launchResponse.Response.ShouldEndSession = false;
-                return launchResponse;
+                return await m_launchRequestHandler.GetResponseAsync(request)
+                    .ConfigureAwait(false);
             }
-
+            
             if (request.GetRequestType() != typeof(IntentRequest))
             {
-                m_logger.LogWarning($"The request-type {request.GetRequestType()} isn't supported.");
                 var ssml = await CommonResponseCreator.GetSSMLAsync(MessageKeys.ErrorRequestTypeNotSupported,
                     request.Request.Locale, request.GetRequestType()?.ToString()).ConfigureAwait(false);
                 return ResponseBuilder.Tell(new SsmlOutputSpeech { Ssml = ssml });
@@ -57,5 +54,7 @@ namespace RoleShuffle.Application.RequestHandler
             var response = await m_intentHandler.GetResponseAsync(request).ConfigureAwait(false);
             return response;
         }
+
+      
     }
 }

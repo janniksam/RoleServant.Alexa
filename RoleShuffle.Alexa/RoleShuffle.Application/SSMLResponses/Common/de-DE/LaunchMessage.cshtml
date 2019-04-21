@@ -1,13 +1,30 @@
-﻿<speak>
+﻿@inherits RazorLight.TemplatePage<RoleShuffle.Application.Abstractions.Games.IGame>
+
+<speak>
     <p>
         Rollen Knecht wurde gestartet.
     </p>
-    <p>
-        Du kannst ein neues Spiel starten, indem du es ganz einfach mir sagst.
-    </p>
-    <p>
-        Falls du bereits ein Spiel gestartet hast, kannst du mir entweder sagen dass ich die Nachtphase starten soll oder dass ich die Rollenverteilung beginnen sollen.
-    </p>
+    @if (Model != null)
+    {
+        <p>
+            Du hast aktuell eine Runde "@await Model.GetLocalizedGamename("de-DE")" offen.
+        </p>
+        <p>
+            Du kannst mir entweder sagen, dass ich die Nacht-Phase starten soll oder dass ich die Rollenverteilung beginnen sollen.
+        </p>
+        <p>
+            Falls du ein anderes Spiel spielen möchtest, kannst du mir auch das sagen.
+        </p>
+    }
+    else
+    {
+        <p>
+            Du kannst ein neues Spiel starten, indem du es ganz einfach mir sagst.
+        </p>
+        <p>
+            Falls du bereits ein Spiel gestartet hast, kannst du mir entweder sagen dass ich die Nachtphase starten soll oder dass ich die Rollenverteilung beginnen sollen.
+        </p>  
+    }
     <p>
         Was soll ich tun?
     </p>

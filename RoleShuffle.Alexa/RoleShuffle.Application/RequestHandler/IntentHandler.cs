@@ -6,9 +6,11 @@ using Alexa.NET.Request;
 using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
 using Microsoft.Extensions.Logging;
+using RoleShuffle.Application.Abstractions.RequestHandler;
+using RoleShuffle.Application.Intents;
 using RoleShuffle.Application.SSMLResponses;
 
-namespace RoleShuffle.Application.Intents
+namespace RoleShuffle.Application.RequestHandler
 {
     public class IntentHandler : IIntentHandler
     {

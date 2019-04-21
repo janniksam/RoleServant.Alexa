@@ -22,6 +22,7 @@ namespace RoleShuffle.IoC
 
             services.AddTransient<IAlexaHandler, AlexaHandler>();
             services.AddTransient<IIntentHandler, IntentHandler>();
+            services.AddTransient<ILaunchRequestHandler, LaunchRequestHandler>();
 
             services.AddTransient<IIntent, AmazonHelpIntent>();
             services.AddTransient<IIntent, AmazonStopIntent>();

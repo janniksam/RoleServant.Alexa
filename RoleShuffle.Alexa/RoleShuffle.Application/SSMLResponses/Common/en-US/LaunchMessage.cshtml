@@ -1,13 +1,29 @@
-﻿<speak>
+﻿@inherits RazorLight.TemplatePage<RoleShuffle.Application.Abstractions.Games.IGame>
+<speak>
     <p>
         Role Servant has been started.
     </p>
-    <p>
-        To start a new game, just tell me to start a new game.
-    </p>
-    <p>
-        If you've already started a game, tell me to either start the night phase or start the role distribution.
-    </p>
+    @if (Model != null)
+    {
+        <p>
+            You're currently playing "@await Model.GetLocalizedGamename("en-US")".
+        </p>
+        <p>
+            You can either tell me to start the night phase or to start the role distribution.
+        </p>
+        <p>
+            If you'd like to start a new game, just tell me to start a new game.
+        </p>
+    }
+    else
+    {
+        <p>
+            To start a new game, just tell me to start a new game.
+        </p>
+        <p>
+            If you've already started a game, tell me to either start the night phase or to start the role distribution.
+        </p>
+    }
     <p>
         What should I do?
     </p>

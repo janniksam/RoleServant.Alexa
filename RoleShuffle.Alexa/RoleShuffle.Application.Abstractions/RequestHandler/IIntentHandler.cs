@@ -2,7 +2,7 @@
 using Alexa.NET.Request;
 using Alexa.NET.Response;
 
-namespace RoleShuffle.Application.Intents
+namespace RoleShuffle.Application.Abstractions.RequestHandler
 {
     public interface IIntentHandler
     {
