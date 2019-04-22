@@ -12,5 +12,10 @@ namespace RoleShuffle.Application.Tests.Games.Insider
             var game = new InsiderGame();
             Initialize(game);
         }
+
+        protected override object GetTestModelFor(string view)
+        {
+            return null;
+        }
     }
 }

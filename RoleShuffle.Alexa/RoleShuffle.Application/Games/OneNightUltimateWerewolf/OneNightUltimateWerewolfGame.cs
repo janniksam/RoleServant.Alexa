@@ -16,7 +16,7 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
     public class OneNightUltimateWerewolfGame : BaseGame<OneNightUltimateWerewolfRound>
     {
         private const string ChooseDeckIdView = "ChooseDeckId";
-        private const string ChooseDeckIdConfirmationView = "ChooseDeckIdConfirmation";
+        public const string ChooseDeckIdConfirmationView = "ChooseDeckIdConfirmation";
         private const string ChooseDeckIdReAskView = "ChooseDeckIdReAsk";
 
         private readonly IOneNightUltimateWerewolfRoleManager m_roleManager;

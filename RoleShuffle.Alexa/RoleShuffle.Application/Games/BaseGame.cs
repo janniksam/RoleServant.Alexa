@@ -11,8 +11,8 @@ namespace RoleShuffle.Application.Games
 {
     public abstract class BaseGame<TRound> : IGame where TRound : class
     {
-        protected const string NightPhaseView = "NightPhase";
-        protected const string DistributeRolesView = "DistributeRoles";
+        public const string NightPhaseView = "NightPhase";
+        public const string DistributeRolesView = "DistributeRoles";
         protected const string GameNamePartialView = "GameNamePartial";
 
         protected readonly ConcurrentDictionary<string, TRound> RunningRounds;

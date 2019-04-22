@@ -1,6 +1,6 @@
 ﻿@using System.Collections.Generic
 @using System.Linq
-@inherits RazorLight.TemplatePage<RoleShuffle.Application.Abstractions.Model.RoleSelection>
+@inherits SSMLBuilder.SSMLPage<RoleShuffle.Application.Abstractions.Model.RoleSelection>
 
 @{
     string AddRoleToSummary(short amount, string singular, string plural = null)
@@ -25,21 +25,25 @@
 
     string BuildSummary()
     {
+        if(Model == null)
+        {
+            return string.Empty;
+        }
         var rolesIncluded = new List<string>
-{
-    AddRoleToSummary(Model.Drunk, "Drunk"),
-    AddRoleToSummary(Model.Villager, "Villager"),
-    AddRoleToSummary(Model.Mason, "Mason"),
-    AddRoleToSummary(Model.Hunter,"Hunter"),
-    AddRoleToSummary(Model.Robber, "Robber"),
-    AddRoleToSummary(Model.Insomniac, "Insomniac"),
-    AddRoleToSummary(Model.Seer, "Seer"),
-    AddRoleToSummary(Model.Troublemaker, "Troublemaker"),
-    AddRoleToSummary(Model.Doppelganger, "Doppelganger"),
-    AddRoleToSummary(Model.Tanner, "Tanner"),
-    AddRoleToSummary(Model.Minion, "Minion"),
-    AddRoleToSummary(Model.Werewolf, "Werwolf", "Werwolves")
-};
+        {
+            AddRoleToSummary(Model.Drunk, "Drunk"),
+            AddRoleToSummary(Model.Villager, "Villager"),
+            AddRoleToSummary(Model.Mason, "Mason"),
+            AddRoleToSummary(Model.Hunter,"Hunter"),
+            AddRoleToSummary(Model.Robber, "Robber"),
+            AddRoleToSummary(Model.Insomniac, "Insomniac"),
+            AddRoleToSummary(Model.Seer, "Seer"),
+            AddRoleToSummary(Model.Troublemaker, "Troublemaker"),
+            AddRoleToSummary(Model.Doppelganger, "Doppelganger"),
+            AddRoleToSummary(Model.Tanner, "Tanner"),
+            AddRoleToSummary(Model.Minion, "Minion"),
+            AddRoleToSummary(Model.Werewolf, "Werwolf", "Werwolves")
+        };
 
         rolesIncluded = rolesIncluded.Where(p => !string.IsNullOrEmpty(p)).ToList();
 

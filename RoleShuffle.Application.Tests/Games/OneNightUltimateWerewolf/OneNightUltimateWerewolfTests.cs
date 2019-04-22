@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RoleShuffle.Application.Abstractions.Model;
+using RoleShuffle.Application.Games;
 using RoleShuffle.Application.Games.OneNightUltimateWerewolf;
 using RoleShuffle.Application.RoleManager;
 using RoleShuffle.Application.SSMLResponses;
@@ -70,54 +71,36 @@ namespace RoleShuffle.Application.Tests.Games.OneNightUltimateWerewolf
             Assert.AreEqual(0, ssmlValidationErrors.Count());
         }
 
-        [TestMethod]
-        public async Task NightphaseReturnsValidSSML()
+        protected override object GetTestModelFor(string view)
         {
-            var ssml = await CommonResponseCreator.GetGameSpecificSSMLAsync(
-                "OneNightUltimateWerewolf",
-                "NightPhase",
-                "de-DE",
-                new OneNightUltimateWerewolfRound(new RoleSelection
-                {
-                    Drunk = 1,
-                    Mason = 2,
-                    Doppelganger = 1,
-                    Seer =  1,
-                    Werewolf = 1,
-                    Minion = 1,
-                    Villager = 2,
-                    Hunter = 1,
-                    Insomniac = 1,
-                    Robber = 1,
-                    Tanner = 1,
-                    Troublemaker = 1
-                }));
+            switch (view)
+            {
+                case OneNightUltimateWerewolfGame.ChooseDeckIdConfirmationView:
+                    return GetTestRound().RoleSelection;
+                case BaseGame<OneNightUltimateWerewolfGame>.NightPhaseView:
+                    return GetTestRound();
+            }
 
-            var ssmlValidationErrors = Verifier.Verify(ssml, SsmlPlatform.Amazon);
-            Assert.AreEqual(0, ssmlValidationErrors.Count());
+            return null;
+        }
 
-            ssml = await CommonResponseCreator.GetGameSpecificSSMLAsync(
-                "OneNightUltimateWerewolf",
-                "NightPhase",
-                "en-US",
-                new OneNightUltimateWerewolfRound(new RoleSelection
-                {
-                    Drunk = 1,
-                    Mason = 2,
-                    Doppelganger = 1,
-                    Seer = 1,
-                    Werewolf = 1,
-                    Minion = 1,
-                    Villager = 2,
-                    Hunter = 1,
-                    Insomniac = 1,
-                    Robber = 1,
-                    Tanner = 1,
-                    Troublemaker = 1
-                }));
-
-            ssmlValidationErrors = Verifier.Verify(ssml, SsmlPlatform.Amazon);
-            Assert.AreEqual(0, ssmlValidationErrors.Count());
+        private static OneNightUltimateWerewolfRound GetTestRound()
+        {
+            return new OneNightUltimateWerewolfRound(new RoleSelection
+            {
+                Drunk = 1,
+                Mason = 2,
+                Doppelganger = 1,
+                Seer = 1,
+                Werewolf = 1,
+                Minion = 1,
+                Villager = 2,
+                Hunter = 1,
+                Insomniac = 1,
+                Robber = 1,
+                Tanner = 1,
+                Troublemaker = 1
+            });
         }
     }
 }

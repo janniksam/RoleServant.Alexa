@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -134,5 +135,30 @@ namespace RoleShuffle.Application.Tests.Games
                 }
             }
         }
+
+        [TestMethod]
+        public async Task GameViewsAllResultInValidSSML()
+        {
+            var requiredViews = Game.GetRequiredSSMLViews();
+            var locales = Localization.GetSupportedLocales();
+            foreach (var requiredView in requiredViews.Where(p => p != "GameNamePartial"))
+            {
+                foreach (var locale in locales)
+                {
+                    var ssml = await CommonResponseCreator.GetGameSpecificSSMLAsync(Game.SSMLViewFolder, requiredView, locale, GetTestModelFor(requiredView));
+                    try
+                    {
+                        var ssmlValidationErrors = Verifier.Verify(ssml, SsmlPlatform.Amazon);
+                        Assert.AreEqual(0, ssmlValidationErrors.Count());
+                    }
+                    catch (Exception e)
+                    {
+                        Assert.Fail($"Error verifying {Game.SSMLViewFolder}.{locale}.{requiredView}. Exception: {0}", e);
+                    }
+                }
+            }
+        }
+
+        protected abstract object GetTestModelFor(string view);
     }
 }

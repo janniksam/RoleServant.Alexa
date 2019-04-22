@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RoleShuffle.Application.Games.OneNightUltimateWerewolf;
+using RoleShuffle.Application.Games;
 using RoleShuffle.Application.Games.SecretHitler;
+using RoleShuffle.Application.Games.TheResistanceAvalon;
 using RoleShuffle.Application.SSMLResponses;
 using SSMLVerifier;
 
@@ -35,6 +36,24 @@ namespace RoleShuffle.Application.Tests.Games.SecretHitler
 
             var ssmlValidationErrors = Verifier.Verify(ssml, SsmlPlatform.Amazon);
             Assert.AreEqual(0, ssmlValidationErrors.Count());
+        }
+
+        protected override object GetTestModelFor(string view)
+        {
+            switch (view)
+            {
+                case BaseGame<SecretHitlerGame>.DistributeRolesView:
+                    return GetTestRound();
+                case SecretHitlerGame.ChoosePlayerNumberBetweenView:
+                    return new short[] {5, 10};
+            }
+
+            return null;
+        }
+
+        private SecretHitlerRound GetTestRound()
+        {
+            return new SecretHitlerRound(10);
         }
     }
 }

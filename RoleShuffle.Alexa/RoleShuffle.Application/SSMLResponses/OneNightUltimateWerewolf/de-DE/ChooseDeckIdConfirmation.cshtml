@@ -1,6 +1,6 @@
 ﻿@using System.Collections.Generic
 @using System.Linq
-@inherits RazorLight.TemplatePage<RoleShuffle.Application.Abstractions.Model.RoleSelection>
+@inherits SSMLBuilder.SSMLPage<RoleShuffle.Application.Abstractions.Model.RoleSelection>
 
 @{
     string AddRoleToSummary(short amount, string singular, string plural)
@@ -21,20 +21,20 @@
     string BuildSummary()
     {
         var rolesIncluded = new List<string>
-{
-    AddRoleToSummary(Model.Drunk, "Ein Betrunkener", "Betrunkene"),
-    AddRoleToSummary(Model.Villager, "Ein Dorfbewohner", "Dorfbewohner"),
-    AddRoleToSummary(Model.Mason, "Ein Freimaurer", "Freimaurer"),
-    AddRoleToSummary(Model.Hunter, "Ein Jäger", "Jäger"),
-    AddRoleToSummary(Model.Robber, "Ein Räuber", "Räuber"),
-    AddRoleToSummary(Model.Insomniac, "Eine Schlaflose", "Schlaflose"),
-    AddRoleToSummary(Model.Seer, "Eine Seherin", "Seher"),
-    AddRoleToSummary(Model.Troublemaker, "Eine Unruhestifterin", "Unruhestifter"),
-    AddRoleToSummary(Model.Doppelganger, "Eine Doppelgängerin", "Doppelgänger"),
-    AddRoleToSummary(Model.Tanner, "Ein Gerber", "Gerber"),
-    AddRoleToSummary(Model.Minion, "Ein Günstling", "Günstlinge"),
-    AddRoleToSummary(Model.Werewolf, "Ein Werwolf", "Werwölfe")
-};
+        {
+            AddRoleToSummary(Model.Drunk, "Ein Betrunkener", "Betrunkene"),
+            AddRoleToSummary(Model.Villager, "Ein Dorfbewohner", "Dorfbewohner"),
+            AddRoleToSummary(Model.Mason, "Ein Freimaurer", "Freimaurer"),
+            AddRoleToSummary(Model.Hunter, "Ein Jäger", "Jäger"),
+            AddRoleToSummary(Model.Robber, "Ein Räuber", "Räuber"),
+            AddRoleToSummary(Model.Insomniac, "Eine Schlaflose", "Schlaflose"),
+            AddRoleToSummary(Model.Seer, "Eine Seherin", "Seher"),
+            AddRoleToSummary(Model.Troublemaker, "Eine Unruhestifterin", "Unruhestifter"),
+            AddRoleToSummary(Model.Doppelganger, "Eine Doppelgängerin", "Doppelgänger"),
+            AddRoleToSummary(Model.Tanner, "Ein Gerber", "Gerber"),
+            AddRoleToSummary(Model.Minion, "Ein Günstling", "Günstlinge"),
+            AddRoleToSummary(Model.Werewolf, "Ein Werwolf", "Werwölfe")
+        };
 
         rolesIncluded = rolesIncluded.Where(p => !string.IsNullOrEmpty(p)).ToList();
 
