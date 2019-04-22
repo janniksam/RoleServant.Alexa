@@ -13,7 +13,7 @@
 
 The Role Servant takes charge of the moderation role in multiple role-playing games.
 
-The list of currently supported is
+currently, The list of supported games is
 
     - Secret Hitler,
     - One Night Ultimate Werewolf,
