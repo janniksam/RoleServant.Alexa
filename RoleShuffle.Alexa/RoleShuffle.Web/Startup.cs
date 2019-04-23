@@ -44,7 +44,7 @@ namespace RoleShuffle.Web
             IHostingEnvironment env,
             IServiceProvider serviceProvider)
         {
-            app.UsePathBase("/rollengehilfe");
+            app.UsePathBase("/roleservant");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
