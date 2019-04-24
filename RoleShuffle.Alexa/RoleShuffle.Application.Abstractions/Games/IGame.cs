@@ -22,5 +22,7 @@ namespace RoleShuffle.Application.Abstractions.Games
         short GameNumber { get; }
 
         string SSMLViewFolder { get; }
+
+        void StopPlaying(SkillRequest request);
     }
 }

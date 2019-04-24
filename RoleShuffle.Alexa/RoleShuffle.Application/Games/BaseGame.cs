@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Alexa.NET;
 using Alexa.NET.Request;
 using Alexa.NET.Response;
+using Microsoft.CodeAnalysis.Semantics;
 using RoleShuffle.Application.Abstractions.Games;
 using RoleShuffle.Application.SSMLResponses;
 
@@ -32,6 +33,17 @@ namespace RoleShuffle.Application.Games
         }
 
         public string SSMLViewFolder { get; }
+
+        public virtual void StopPlaying(SkillRequest request)
+        {
+            var userId = request?.Context?.System?.User?.UserId;
+            if (userId == null)
+            {
+                return;
+            }
+
+            RunningRounds.TryRemove(userId, out _);
+        }
 
         protected Task<string> GetSSMLAsync(string action, string locale, object model = null)
         {

@@ -47,6 +47,11 @@ namespace RoleShuffle.Application.Intents
                     intentRequest.Intent);
             }
 
+            foreach (var availableGame in m_availableGames)
+            {
+                availableGame.StopPlaying(request);
+            }
+
             var usersGame = m_availableGames.First(p => p.GameNumber == gameNumber);
             return await usersGame.StartGameRequested(request).ConfigureAwait(false);
         }

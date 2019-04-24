@@ -1,18 +1,18 @@
-FROM microsoft/aspnetcore:2.0.9 AS base
+FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
 EXPOSE 80
+EXPOSE 443
 
-FROM microsoft/aspnetcore-build:2.0 AS build
+FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY RoleShuffle.Alexa.sln ./
-COPY RoleShuffle.Web/RoleShuffle.Web.csproj RoleShuffle.Web/
-RUN dotnet restore -nowarn:msb3202,nu1503
+COPY ["RoleShuffle.Web/RoleShuffle.Web.csproj", "RoleShuffle.Web/"]
+RUN dotnet restore "RoleShuffle.Web/RoleShuffle.Web.csproj"
 COPY . .
-WORKDIR /src/RoleShuffle.Web
-RUN dotnet build -c Release -o /app
+WORKDIR "/src/RoleShuffle.Web"
+RUN dotnet build "RoleShuffle.Web.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish -c Release -o /app
+RUN dotnet publish "RoleShuffle.Web.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
