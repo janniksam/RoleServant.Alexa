@@ -34,7 +34,11 @@ namespace RoleShuffle.Application.Games.Insider
         public override Task<SkillResponse> StartGameRequested(SkillRequest request)
         {
             var userId = request.Context.System.User.UserId;
-            var newRound = new InsiderRound();
+            var newRound = new InsiderRound
+            {
+                CreationLocale = request.Request.Locale
+            };
+
             RunningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
 
             return PerformDefaultStartGamePhaseWithNightPhaseContinuation(request);

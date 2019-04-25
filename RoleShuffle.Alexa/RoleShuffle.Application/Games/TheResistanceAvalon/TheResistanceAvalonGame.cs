@@ -78,12 +78,13 @@ namespace RoleShuffle.Application.Games.TheResistanceAvalon
             var withOberon = request.Session.Attributes["AskForOberon"].ToString() == Constants.SlotYesNoResult.Yes;
 
             var userId = request.Context.System.User.UserId;
-            var newRound = new TheResistanceAvalonRound()
+            var newRound = new TheResistanceAvalonRound
             {
                 Morgana = withMorgana,
                 Percival = witPercival,
                 Mordred = withMordred,
-                Oberon = withOberon
+                Oberon = withOberon,
+                CreationLocale =  request.Request.Locale
             };
             RunningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
 

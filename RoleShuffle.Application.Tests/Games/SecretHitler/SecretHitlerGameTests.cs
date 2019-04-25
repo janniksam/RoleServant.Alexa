@@ -42,7 +42,7 @@ namespace RoleShuffle.Application.Tests.Games.SecretHitler
         {
             switch (view)
             {
-                case BaseGame<SecretHitlerGame>.DistributeRolesView:
+                case BaseGame<SecretHitlerRound>.DistributeRolesView:
                     return GetTestRound();
                 case SecretHitlerGame.ChoosePlayerNumberBetweenView:
                     return new short[] {5, 10};

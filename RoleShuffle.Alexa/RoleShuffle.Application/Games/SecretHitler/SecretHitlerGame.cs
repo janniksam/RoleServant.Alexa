@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net.Cache;
 using System.Threading.Tasks;
 using Alexa.NET;
 using Alexa.NET.Request;
@@ -54,7 +55,11 @@ namespace RoleShuffle.Application.Games.SecretHitler
                 return await ChoosePlayerNumber(skillRequest);
             }
 
-            var newRound = new SecretHitlerRound(playerAmount);
+            var newRound = new SecretHitlerRound(playerAmount)
+            {
+                CreationLocale = request.Locale
+            };
+
             var userId = skillRequest.Context.System.User.UserId;
             RunningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
 

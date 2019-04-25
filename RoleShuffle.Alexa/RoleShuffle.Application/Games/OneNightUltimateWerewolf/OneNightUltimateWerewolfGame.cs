@@ -68,7 +68,10 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
             }
 
             var userId = request.Context.System.User.UserId;
-            var newRound = new OneNightUltimateWerewolfRound(roleSelection);
+            var newRound = new OneNightUltimateWerewolfRound(roleSelection)
+            {
+                CreationLocale = request.Request.Locale
+            };
             RunningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
 
             return PerformDefaultStartGamePhaseWithNightPhaseContinuation(request);

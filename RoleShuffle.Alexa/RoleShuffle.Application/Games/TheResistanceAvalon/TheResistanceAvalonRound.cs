@@ -1,9 +1,13 @@
-﻿namespace RoleShuffle.Application.Games.TheResistanceAvalon
+﻿using System;
+using RoleShuffle.Application.Abstractions.Games;
+
+namespace RoleShuffle.Application.Games.TheResistanceAvalon
 {
-    public class TheResistanceAvalonRound
+    public class TheResistanceAvalonRound : IGameRound
     {
         public TheResistanceAvalonRound()
         {
+            CreationTime = DateTime.UtcNow;
         }
 
         public bool Percival { get; set; }
@@ -13,5 +17,9 @@
         public bool Mordred { get; set; }
 
         public bool Oberon { get; set; }
+
+        public string CreationLocale { get; set; }
+
+        public DateTime CreationTime { get; }
     }
 }

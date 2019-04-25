@@ -18,7 +18,7 @@ namespace RoleShuffle.Application.Tests.Games.TheResistanceAvalon
         {
             switch (view)
             {
-                case BaseGame<TheResistanceAvalonGame>.DistributeRolesView:
+                case BaseGame<TheResistanceAvalonRound>.DistributeRolesView:
                     return GetTestRound();
             }
 
@@ -33,6 +33,7 @@ namespace RoleShuffle.Application.Tests.Games.TheResistanceAvalon
                 Mordred = true,
                 Oberon = true,
                 Percival = true,
+                CreationLocale = "de_DE"
             };
         }
     }

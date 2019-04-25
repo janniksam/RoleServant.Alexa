@@ -24,5 +24,7 @@ namespace RoleShuffle.Application.Abstractions.Games
         string SSMLViewFolder { get; }
 
         void StopPlaying(SkillRequest request);
+
+        IEnumerable<IGameRound> GetOpenGames();
     }
 }

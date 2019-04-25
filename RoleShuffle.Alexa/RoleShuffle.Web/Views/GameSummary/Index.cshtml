@@ -1,0 +1,60 @@
+﻿@using RoleShuffle.Application.Abstractions.Games
+@model IEnumerable<IGame>
+
+@{
+    var gameRounds = new Dictionary<string, IEnumerable<IGameRound>>();
+    foreach (var game in Model)
+    {
+        gameRounds.Add(await game.GetLocalizedGamename("en-US"), game.GetOpenGames());
+    }
+
+    var gameRoundCount = gameRounds.Sum(p => p.Value.Count());
+    var locales = gameRounds.SelectMany(p => p.Value).Select(p => p.CreationLocale).Distinct().OrderBy(p => p).ToList();
+}
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <title>Game Summary.</title>
+        <style>
+            .button {
+                background-color: #555555; /* Green */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+            }
+        </style>
+    </head>
+    <body style="background: #191919; color: white">
+        <div>
+            <h1>Game Summary</h1>
+
+            <h2>Open games: </h2>
+
+            <p>
+                <h4>There is a total of @gameRoundCount open games..</h4>
+            </p>
+
+            @foreach(var game in gameRounds.OrderByDescending(p => p.Value.Count()).ThenBy(p => p.Key))
+            {
+                var gameCount = game.Value.Count();
+                <p>
+                    <b>@game.Key:</b><br/>
+                    @gameCount open games<br/>
+                    @foreach (var locale in locales)
+                    {
+                        var localeCount = game.Value.Count(p => p.CreationLocale == locale);
+                        if (localeCount > 0)
+                        {
+                            @:@locale: @localeCount open games.<br/>
+                        }
+                    }
+                </p>
+            }
+        </div>
+    </body>
+</html>

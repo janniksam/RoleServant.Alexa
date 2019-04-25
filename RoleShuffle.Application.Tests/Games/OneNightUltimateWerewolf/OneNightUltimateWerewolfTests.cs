@@ -77,7 +77,7 @@ namespace RoleShuffle.Application.Tests.Games.OneNightUltimateWerewolf
             {
                 case OneNightUltimateWerewolfGame.ChooseDeckIdConfirmationView:
                     return GetTestRound().RoleSelection;
-                case BaseGame<OneNightUltimateWerewolfGame>.NightPhaseView:
+                case BaseGame<OneNightUltimateWerewolfRound>.NightPhaseView:
                     return GetTestRound();
             }
 
