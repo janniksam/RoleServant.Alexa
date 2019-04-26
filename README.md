@@ -2,7 +2,7 @@
 
 ## An open source alexa skill
 
-[Visit the RoleServant Homepage](http://www.role-servant.me/)
+[Visit the Role Servant Homepage](http://www.role-servant.me/)
 
 #### Special thanks to:
 
