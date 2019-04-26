@@ -13,7 +13,7 @@ using RoleShuffle.Base;
 
 namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
 {
-    public class OneNightUltimateWerewolfGame : BaseGame<OneNightUltimateWerewolfRound>
+    public class OneNightUltimateWerewolfGame : BaseSSMLGame<OneNightUltimateWerewolfRound>
     {
         private const string ChooseDeckIdView = "ChooseDeckId";
         public const string ChooseDeckIdConfirmationView = "ChooseDeckIdConfirmation";
@@ -68,11 +68,14 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
             }
 
             var userId = request.Context.System.User.UserId;
-            var newRound = new OneNightUltimateWerewolfRound(roleSelection)
+            var newRound = new OneNightUltimateWerewolfRound
             {
-                CreationLocale = request.Request.Locale
+                UserId = userId,
+                CreationLocale = request.Request.Locale,
+                RoleSelection = roleSelection
             };
-            RunningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
+            
+            CreateRound(newRound);
 
             return PerformDefaultStartGamePhaseWithNightPhaseContinuation(request);
         }
@@ -118,12 +121,7 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
 
         public override Task<SkillResponse> PerformNightPhase(SkillRequest request)
         {
-            if (!RunningRounds.TryGetValue(request.Context.System.User.UserId, out var round) || round == null)
-            {
-                return NoActiveGameOpen(request);
-            }
-
-            return PerformDefaultNightPhase(request, round);
+            return PerformDefaultNightPhase(request);
         }
     }
 }

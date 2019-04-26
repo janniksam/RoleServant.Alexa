@@ -86,21 +86,24 @@ namespace RoleShuffle.Application.Tests.Games.OneNightUltimateWerewolf
 
         private static OneNightUltimateWerewolfRound GetTestRound()
         {
-            return new OneNightUltimateWerewolfRound(new RoleSelection
+            return new OneNightUltimateWerewolfRound
             {
-                Drunk = 1,
-                Mason = 2,
-                Doppelganger = 1,
-                Seer = 1,
-                Werewolf = 1,
-                Minion = 1,
-                Villager = 2,
-                Hunter = 1,
-                Insomniac = 1,
-                Robber = 1,
-                Tanner = 1,
-                Troublemaker = 1
-            });
+                RoleSelection = new RoleSelection
+                {
+                    Drunk = 1,
+                    Mason = 2,
+                    Doppelganger = 1,
+                    Seer = 1,
+                    Werewolf = 1,
+                    Minion = 1,
+                    Villager = 2,
+                    Hunter = 1,
+                    Insomniac = 1,
+                    Robber = 1,
+                    Tanner = 1,
+                    Troublemaker = 1
+                }
+            };
         }
     }
 }

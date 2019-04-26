@@ -110,7 +110,7 @@ namespace RoleShuffle.Application.Tests.Games
         [TestMethod]
         public void GameViewsAreAllThereForEveryLanguage()
         {
-            var namespacePrefix = $"{typeof(CommonResponseCreator).Namespace}.{Game.SSMLViewFolder}";
+            var namespacePrefix = $"{typeof(CommonResponseCreator).Namespace}.{Game.GameId}";
             var allResources = Game.GetType()
                 .GetTypeInfo().Assembly.GetManifestResourceNames()
                 .Where(p => p.StartsWith(namespacePrefix)).ToList();
@@ -145,7 +145,7 @@ namespace RoleShuffle.Application.Tests.Games
             {
                 foreach (var locale in locales)
                 {
-                    var ssml = await CommonResponseCreator.GetGameSpecificSSMLAsync(Game.SSMLViewFolder, requiredView, locale, GetTestModelFor(requiredView));
+                    var ssml = await CommonResponseCreator.GetGameSpecificSSMLAsync(Game.GameId, requiredView, locale, GetTestModelFor(requiredView));
                     try
                     {
                         var ssmlValidationErrors = Verifier.Verify(ssml, SsmlPlatform.Amazon);
@@ -153,7 +153,7 @@ namespace RoleShuffle.Application.Tests.Games
                     }
                     catch (Exception e)
                     {
-                        Assert.Fail($"Error verifying {Game.SSMLViewFolder}.{locale}.{requiredView}. Exception: {0}", e);
+                        Assert.Fail($"Error verifying {Game.GameId}.{locale}.{requiredView}. Exception: {0}", e);
                     }
                 }
             }

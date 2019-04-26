@@ -10,8 +10,10 @@ namespace RoleShuffle.Application.Games.Insider
             CreationTime = DateTime.UtcNow;
         }
 
+        public string UserId { get; set; }
+
         public string CreationLocale { get; set; }
 
-        public DateTime CreationTime { get; }
+        public DateTime CreationTime { get; set; }
     }
 }

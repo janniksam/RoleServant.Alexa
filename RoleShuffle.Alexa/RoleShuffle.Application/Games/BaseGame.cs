@@ -1,38 +1,32 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Alexa.NET;
 using Alexa.NET.Request;
-using Alexa.NET.Response;
 using RoleShuffle.Application.Abstractions.Games;
-using RoleShuffle.Application.SSMLResponses;
+using RoleShuffle.Application.Abstractions.Model;
 
 namespace RoleShuffle.Application.Games
 {
-    public abstract class BaseGame<TRound> : IGame where TRound : IGameRound
+    public abstract class BaseGame<TRound> where TRound : IGameRound
     {
         public const string NightPhaseView = "NightPhase";
         public const string DistributeRolesView = "DistributeRoles";
-        protected const string GameNamePartialView = "GameNamePartial";
 
+        protected const string GameNamePartialView = "GameNamePartial";
         protected readonly ConcurrentDictionary<string, TRound> RunningRounds;
 
-        protected BaseGame(string ssmlViewFolder, short gameNumber)
+        private GameStats m_stats = new GameStats();
+        
+        protected BaseGame(string gameId, short gameNumber)
         {
-            SSMLViewFolder = ssmlViewFolder;
+            GameId = gameId;
             GameNumber = gameNumber;
             RunningRounds = new ConcurrentDictionary<string, TRound>();
         }
 
+        public string GameId { get; }
+
         public short GameNumber { get; }
-
-        public Task<string> GetLocalizedGamename(string locale)
-        {
-            return CommonResponseCreator.GetGameSpecificSSMLAsync(SSMLViewFolder, GameNamePartialView, locale);
-        }
-
-        public string SSMLViewFolder { get; }
 
         public virtual void StopPlaying(SkillRequest request)
         {
@@ -61,99 +55,45 @@ namespace RoleShuffle.Application.Games
             return openGames;
         }
 
-        protected Task<string> GetSSMLAsync(string action, string locale, object model = null)
+        public GameStats GetCurrentStats()
         {
-            return CommonResponseCreator.GetGameSpecificSSMLAsync(SSMLViewFolder, action, locale, model);
+            return (GameStats)m_stats.Clone();
+        }
+
+        public void InitFromConfiguration(SavedGame savedGame)
+        {
+            m_stats = (GameStats) savedGame.GameStats.Clone();
+
+            foreach (var round in savedGame.GameRounds)
+            {
+                if (!(round is TRound concreteRound))
+                {
+                    return;
+                }
+
+                RunningRounds.TryAdd(concreteRound.UserId, concreteRound);
+            }
+        }
+
+        protected void CreateRound(TRound newRound)
+        {
+            RunningRounds.AddOrUpdate(newRound.UserId, newRound, (k, v) => newRound);
+            m_stats.IncrementGameStarted();
+        }
+
+        protected void NightPhaseStarted()
+        {
+            m_stats.IncrementNightPhases();
+        }
+
+        protected void DistributionPhaseStarted()
+        {
+            m_stats.IncrementDistributionPhases();
         }
 
         public virtual bool IsPlaying(string userId)
         {
             return RunningRounds.ContainsKey(userId);
-        }
-
-        public virtual IEnumerable<string> GetRequiredSSMLViews()
-        {
-            return new[] {GameNamePartialView};
-        }
-
-        public abstract Task<SkillResponse> StartGameRequested(SkillRequest skillRequest);
-
-        public virtual Task<SkillResponse> DistributeRoles(SkillRequest request)
-        {
-            return NoDistributionPhase(request);
-        }
-
-        public virtual Task<SkillResponse> PerformNightPhase(SkillRequest request)
-        {
-            return NoNightPhase(request);
-        }
-
-        protected async Task<SkillResponse> PerformDefaultNightPhase(SkillRequest request, object model = null)
-        {
-            var resultSSML = await GetSSMLAsync(NightPhaseView, request.Request.Locale, model).ConfigureAwait(false);
-            return ResponseBuilder.Tell(new SsmlOutputSpeech {Ssml = resultSSML});
-        }
-
-        protected async Task<SkillResponse> PerformDefaultDistributionPhase(SkillRequest request, object model = null)
-        {
-            var resultSSML = await GetSSMLAsync(DistributeRolesView, request.Request.Locale, model)
-                .ConfigureAwait(false);
-            return ResponseBuilder.Tell(new SsmlOutputSpeech {Ssml = resultSSML});
-        }
-
-
-        protected async Task<SkillResponse> PerformDefaultStartGamePhaseWithNightPhaseContinuation(SkillRequest request)
-        {
-            var gameName = await GetLocalizedGamename(request.Request.Locale).ConfigureAwait(false);
-            var resultSSML =
-                await CommonResponseCreator
-                    .GetSSMLAsync(MessageKeys.GameStartContinueWithNightPhase, request.Request.Locale, gameName)
-                    .ConfigureAwait(false);
-            var response = ResponseBuilder.Tell(new SsmlOutputSpeech {Ssml = resultSSML});
-            response.Response.ShouldEndSession = false;
-            return response;
-        }
-
-        protected async Task<SkillResponse> PerformDefaultStartGamePhaseWithDistributionPhaseContinuation(
-            SkillRequest request)
-        {
-            var gameName = await GetLocalizedGamename(request.Request.Locale).ConfigureAwait(false);
-            var resultSSML =
-                await CommonResponseCreator
-                    .GetSSMLAsync(MessageKeys.GameStartContinueWithDistributionPhase, request.Request.Locale, gameName)
-                    .ConfigureAwait(false);
-            var response = ResponseBuilder.Tell(new SsmlOutputSpeech {Ssml = resultSSML});
-            response.Response.ShouldEndSession = false;
-            return response;
-        }
-
-        protected async Task<SkillResponse> NoActiveGameOpen(SkillRequest request)
-        {
-            var gameName = await GetLocalizedGamename(request.Request.Locale).ConfigureAwait(false);
-            var resultSSML =
-                await CommonResponseCreator
-                    .GetSSMLAsync(MessageKeys.GameNoDistributionPhase, request.Request.Locale, gameName)
-                    .ConfigureAwait(false);
-            return ResponseBuilder.Tell(new SsmlOutputSpeech {Ssml = resultSSML});
-        }
-
-        private async Task<SkillResponse> NoDistributionPhase(SkillRequest request)
-        {
-            var gameName = await GetLocalizedGamename(request.Request.Locale).ConfigureAwait(false);
-            var resultSSML =
-                await CommonResponseCreator
-                    .GetSSMLAsync(MessageKeys.GameNoDistributionPhase, request.Request.Locale, gameName)
-                    .ConfigureAwait(false);
-            return ResponseBuilder.Tell(new SsmlOutputSpeech {Ssml = resultSSML});
-        }
-
-        private async Task<SkillResponse> NoNightPhase(SkillRequest request)
-        {
-            var gameName = await GetLocalizedGamename(request.Request.Locale).ConfigureAwait(false);
-            var resultSSML =
-                await CommonResponseCreator.GetSSMLAsync(MessageKeys.GameNoNightPhase, request.Request.Locale, gameName)
-                    .ConfigureAwait(false);
-            return ResponseBuilder.Tell(new SsmlOutputSpeech {Ssml = resultSSML});
         }
     }
 }

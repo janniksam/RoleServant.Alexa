@@ -11,7 +11,7 @@ using RoleShuffle.Base;
 
 namespace RoleShuffle.Application.Games.SecretHitler
 {
-    public class SecretHitlerGame : BaseGame<SecretHitlerRound>
+    public class SecretHitlerGame : BaseSSMLGame<SecretHitlerRound>
     {
         private const short MinPlayers = 5;
         private const short MaxPlayers = 10;
@@ -37,12 +37,7 @@ namespace RoleShuffle.Application.Games.SecretHitler
 
         public override Task<SkillResponse> DistributeRoles(SkillRequest request)
         {
-            if (!RunningRounds.TryGetValue(request.Context.System.User.UserId, out var round) || round == null)
-            {
-                return NoActiveGameOpen(request);
-            }
-
-            return PerformDefaultDistributionPhase(request, round);
+            return PerformDefaultDistributionPhase(request);
         }
 
         public override async Task<SkillResponse> StartGameRequested(SkillRequest skillRequest)
@@ -55,13 +50,15 @@ namespace RoleShuffle.Application.Games.SecretHitler
                 return await ChoosePlayerNumber(skillRequest);
             }
 
-            var newRound = new SecretHitlerRound(playerAmount)
+            var userId = skillRequest.Context.System.User.UserId;
+            var newRound = new SecretHitlerRound
             {
-                CreationLocale = request.Locale
+                UserId = userId,
+                CreationLocale = request.Locale,
+                PlayerAmount = playerAmount
             };
 
-            var userId = skillRequest.Context.System.User.UserId;
-            RunningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
+            CreateRound(newRound);
 
             return await GameStarted(skillRequest, playerAmount);
         }

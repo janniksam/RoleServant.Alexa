@@ -2,10 +2,10 @@
 @model IEnumerable<IGame>
 
 @{
-    var gameRounds = new Dictionary<string, IEnumerable<IGameRound>>();
+    var gameRounds = new Dictionary<IGame, IEnumerable<IGameRound>>();
     foreach (var game in Model)
     {
-        gameRounds.Add(await game.GetLocalizedGamename("en-US"), game.GetOpenGames());
+        gameRounds.Add(game, game.GetOpenGames());
     }
 
     var gameRoundCount = gameRounds.Sum(p => p.Value.Count());
@@ -39,18 +39,29 @@
                 <h4>There is a total of @gameRoundCount open games..</h4>
             </p>
 
-            @foreach(var game in gameRounds.OrderByDescending(p => p.Value.Count()).ThenBy(p => p.Key))
+            @foreach (var game in gameRounds.OrderByDescending(p => p.Value.Count()).ThenBy(p => p.Key.GameId))
             {
                 var gameCount = game.Value.Count();
+                var stats = game.Key.GetCurrentStats();
                 <p>
-                    <b>@game.Key:</b><br/>
-                    @gameCount open games<br/>
+                    <b>@await game.Key.GetLocalizedGamename("en-US"):</b><br/>
+                    @stats.TotalGamesCreated total games.<br/>
+                    @gameCount active games.<br/>
+                    @if (stats.TotalNightPhases > 0)
+                    {
+                        @:@stats.TotalNightPhases nightphases performed in total.<br/>
+                    }
+                    @if (stats.TotalDistributionPhases > 0)
+                    {
+                        @:@stats.TotalDistributionPhases distribution phases performed in total.<br/>
+                    }
+
                     @foreach (var locale in locales)
                     {
                         var localeCount = game.Value.Count(p => p.CreationLocale == locale);
                         if (localeCount > 0)
                         {
-                            @:@locale: @localeCount open games.<br/>
+                            @:@locale: @localeCount active games.<br/>
                         }
                     }
                 </p>

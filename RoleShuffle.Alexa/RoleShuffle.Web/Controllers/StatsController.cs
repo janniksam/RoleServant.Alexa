@@ -5,11 +5,11 @@ using RoleShuffle.Application.Abstractions.Games;
 namespace RoleShuffle.Web.Controllers
 {
     [Route("api/[controller]")]
-    public class GameSummaryController : Controller
+    public class StatsController : Controller
     {
         private readonly IEnumerable<IGame> m_availableGames;
 
-        public GameSummaryController(IEnumerable<IGame> availableGames)
+        public StatsController(IEnumerable<IGame> availableGames)
         {
             m_availableGames = availableGames;
         }

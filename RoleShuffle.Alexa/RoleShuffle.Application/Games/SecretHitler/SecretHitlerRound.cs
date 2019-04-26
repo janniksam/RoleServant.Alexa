@@ -5,16 +5,17 @@ namespace RoleShuffle.Application.Games.SecretHitler
 {
     public class SecretHitlerRound : IGameRound
     {
-        public SecretHitlerRound(short playerAmount)
+        public SecretHitlerRound()
         {
             CreationTime = DateTime.UtcNow;
-            PlayerAmount = playerAmount;
         }
 
-        public short PlayerAmount { get; }
+        public string UserId { get; set; }
+
+        public short PlayerAmount { get; set;  }
 
         public string CreationLocale { get; set; }
 
-        public DateTime CreationTime { get; }
+        public DateTime CreationTime { get; set; }
     }
 }

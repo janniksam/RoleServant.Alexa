@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Alexa.NET.Request;
 using Alexa.NET.Response;
+using RoleShuffle.Application.Abstractions.Model;
 
 namespace RoleShuffle.Application.Abstractions.Games
 {
@@ -21,10 +22,14 @@ namespace RoleShuffle.Application.Abstractions.Games
 
         short GameNumber { get; }
 
-        string SSMLViewFolder { get; }
+        string GameId { get; }
 
         void StopPlaying(SkillRequest request);
 
         IEnumerable<IGameRound> GetOpenGames();
+
+        void InitFromConfiguration(SavedGame game);
+
+        GameStats GetCurrentStats();
     }
 }

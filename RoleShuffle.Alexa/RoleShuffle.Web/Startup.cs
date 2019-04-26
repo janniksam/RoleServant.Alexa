@@ -35,6 +35,7 @@ namespace RoleShuffle.Web
             services.RegisterDependencies();
             services.AddSingleton(Configuration);
             services.AddHostedService<WarmUpService>();
+            services.AddHostedService<ConfigurationWorkerService>();
             services.AddMvc();
         }
 

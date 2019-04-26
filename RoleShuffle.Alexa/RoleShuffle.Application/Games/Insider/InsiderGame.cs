@@ -8,7 +8,7 @@ using RoleShuffle.Base;
 
 namespace RoleShuffle.Application.Games.Insider
 {
-    public class InsiderGame : BaseGame<InsiderRound>
+    public class InsiderGame : BaseSSMLGame<InsiderRound>
     {
         public InsiderGame()
             : base("Insider", Constants.GameNumbers.Insider)
@@ -23,11 +23,6 @@ namespace RoleShuffle.Application.Games.Insider
 
         public override Task<SkillResponse> PerformNightPhase(SkillRequest request)
         {
-            if (!RunningRounds.TryGetValue(request.Context.System.User.UserId, out var round) || round == null)
-            {
-                return NoActiveGameOpen(request);
-            }
-
             return PerformDefaultNightPhase(request);
         }
 
@@ -36,10 +31,11 @@ namespace RoleShuffle.Application.Games.Insider
             var userId = request.Context.System.User.UserId;
             var newRound = new InsiderRound
             {
+                UserId = userId,
                 CreationLocale = request.Request.Locale
             };
 
-            RunningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
+            CreateRound(newRound);
 
             return PerformDefaultStartGamePhaseWithNightPhaseContinuation(request);
         }

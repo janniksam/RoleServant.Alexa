@@ -11,7 +11,7 @@ using RoleShuffle.Base;
 
 namespace RoleShuffle.Application.Games.TheResistanceAvalon
 {
-    public class TheResistanceAvalonGame : BaseGame<TheResistanceAvalonRound>
+    public class TheResistanceAvalonGame : BaseSSMLGame<TheResistanceAvalonRound>
     {
         private const string SpecialCharPercivalPromptView = "SpecialCharPercivalPrompt";
         private const string SpecialCharMorganaPromptView = "SpecialCharMorganaPrompt";
@@ -43,7 +43,7 @@ namespace RoleShuffle.Application.Games.TheResistanceAvalon
                 return NoActiveGameOpen(request);
             }
 
-            return PerformDefaultDistributionPhase(request, round);
+            return PerformDefaultDistributionPhase(request);
         }
 
         public override async Task<SkillResponse> StartGameRequested(SkillRequest request)
@@ -80,13 +80,15 @@ namespace RoleShuffle.Application.Games.TheResistanceAvalon
             var userId = request.Context.System.User.UserId;
             var newRound = new TheResistanceAvalonRound
             {
+                UserId = userId,
                 Morgana = withMorgana,
                 Percival = witPercival,
                 Mordred = withMordred,
                 Oberon = withOberon,
                 CreationLocale =  request.Request.Locale
             };
-            RunningRounds.AddOrUpdate(userId, newRound, (k, v) => newRound);
+
+            CreateRound(newRound);
 
             return await PerformDefaultStartGamePhaseWithDistributionPhaseContinuation(request).ConfigureAwait(false);
         }

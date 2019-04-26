@@ -53,7 +53,10 @@ namespace RoleShuffle.Application.Tests.Games.SecretHitler
 
         private SecretHitlerRound GetTestRound()
         {
-            return new SecretHitlerRound(10);
+            return new SecretHitlerRound
+            {
+                PlayerAmount = 10
+            };
         }
     }
 }

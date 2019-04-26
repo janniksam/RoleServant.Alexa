@@ -19,6 +19,8 @@ namespace RoleShuffle.IoC
         public static void RegisterDependencies(this IServiceCollection services)
         {
             services.AddTransient<IApplicationWarmUp, ApplicationWarmUp>();
+            services.AddTransient<IConfigurationWorker, ConfigurationWorker>();
+            services.AddSingleton<IConfigurationManager, ConfigurationManager>();
 
             services.AddTransient<IAlexaHandler, AlexaHandler>();
             services.AddTransient<IIntentHandler, IntentHandler>();

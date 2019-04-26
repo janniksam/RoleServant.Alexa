@@ -6,16 +6,17 @@ namespace RoleShuffle.Application.Games.OneNightUltimateWerewolf
 {
     public class OneNightUltimateWerewolfRound : IGameRound
     {
-        public OneNightUltimateWerewolfRound(RoleSelection roleSelection)
+        public OneNightUltimateWerewolfRound()
         {
             CreationTime = DateTime.UtcNow;
-            RoleSelection = roleSelection ?? throw new ArgumentNullException(nameof(roleSelection));
         }
 
-        public RoleSelection RoleSelection { get; }
+        public string UserId { get; set; }
+
+        public RoleSelection RoleSelection { get; set; }
 
         public string CreationLocale { get; set; }
 
-        public DateTime CreationTime { get; }
+        public DateTime CreationTime { get; set; }
     }
 }

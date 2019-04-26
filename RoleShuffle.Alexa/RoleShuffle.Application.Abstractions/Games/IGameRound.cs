@@ -4,7 +4,10 @@ namespace RoleShuffle.Application.Abstractions.Games
 {
     public interface IGameRound
     {
-        string CreationLocale { get; }
+        string CreationLocale { get; set; }
+
         DateTime CreationTime { get; }
+
+        string UserId { get; set;  }
     }
 }
