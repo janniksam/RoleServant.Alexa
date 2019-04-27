@@ -1,4 +1,5 @@
-﻿@using RoleShuffle.Application.Abstractions.Games
+﻿@using RoleShuffle.Application
+@using RoleShuffle.Application.Abstractions.Games
 @model IEnumerable<IGame>
 
 @{
@@ -9,63 +10,101 @@
     }
 
     var gameRoundCount = gameRounds.Sum(p => p.Value.Count());
-    var locales = gameRounds.SelectMany(p => p.Value).Select(p => p.CreationLocale).Distinct().OrderBy(p => p).ToList();
+    var totalRoundsStarted = gameRounds.Sum(p => p.Key.GetCurrentStats().TotalGamesCreated);
 }
-    <!DOCTYPE html>
+<!DOCTYPE html>
 
-    <html>
-    <head>
-        <title>Game Statistics</title>
-        <style>
-            .button {
-                background-color: #555555; /* Green */
-                border: none;
-                color: white;
-                padding: 15px 32px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-            }
-        </style>
-    </head>
-    <body style="background: #191919; color: white">
+<html>
+<head>
+    <title>Game Statistics</title>
+    <style>
+        .button {
+            background-color: #555555;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        div {
+            font-family: Tahoma, Verdana, Segoe, sans-serif;
+            padding: 10px;
+        }
+
+        .child-game {
+            margin: 10px;
+            background-color: #828282;
+            min-width: 390px;
+            min-height: 390px;
+            float: left;
+        }
+    </style>
+</head>
+<body style="background: #191919; color: white">
+    <div>
+        <h1>Game Summary</h1>
+
+        <h4>@totalRoundsStarted games were started already.</h4>
         <div>
-            <h1>Game Summary</h1>
-
             <h2>Open games: </h2>
-
             <p>
-                <h4>There is a total of @gameRoundCount open games..</h4>
+                <h4>Currently there are a total of @gameRoundCount games up and running.</h4>
             </p>
+        </div>
 
+        <div>
             @foreach (var game in gameRounds.OrderByDescending(p => p.Value.Count()).ThenBy(p => p.Key.GameId))
             {
                 var gameCount = game.Value.Count();
                 var stats = game.Key.GetCurrentStats();
-                <p>
-                    <b>@await game.Key.GetLocalizedGamename("en-US"):</b><br/>
-                    @stats.TotalGamesCreated total games.<br/>
-                    @gameCount active games.<br/>
-                    @if (stats.TotalNightPhases > 0)
-                    {
-                        @:@stats.TotalNightPhases night phases performed in total.<br/>
-                    }
-                    @if (stats.TotalDistributionPhases > 0)
-                    {
-                        @:@stats.TotalDistributionPhases distribution phases performed in total.<br/>
-                    }
 
-                    @foreach (var locale in locales)
-                    {
-                        var localeCount = game.Value.Count(p => p.CreationLocale == locale);
-                        if (localeCount > 0)
+                <div class="child-game">
+                    <p>
+                    <p>
+                        <h2>@await game.Key.GetLocalizedGamename("en-US"):</h2>
+                        <b>@stats.TotalGamesCreated total games.</b><br />
+                        <b>@gameCount active games.</b><br />
+                        <br />
+                        @if (stats.TotalNightPhases > 0 && stats.TotalDistributionPhases > 0)
                         {
-                            @:@locale: @localeCount active games.<br/>
+                            @:@stats.TotalNightPhases night phases performed in total.<br />
+                            @:@stats.TotalDistributionPhases distribution phases performed in total.<br />
                         }
+                        else if (stats.TotalNightPhases > 0)
+                        {
+                            @:@stats.TotalNightPhases night phases performed in total.<br /><br />
+                        }
+                        else if (stats.TotalDistributionPhases > 0)
+                        {
+                            @:@stats.TotalDistributionPhases distribution phases performed in total.<br /><br />
+                        }
+                        else
+                        {
+                            <br />
+                            <br />
+                        }
+                    </p>
+
+
+                    @foreach (var locale in Localization.GetSupportedLocales())
+                    {
+                        var latestRound = game.Value.Where(p => p.CreationLocale == locale).Max(p => p.LastUsed);
+                        var latestRoundString = latestRound.HasValue ? latestRound.Value.ToString("g") : "Never";
+
+                        var localeCount = game.Value.Count(p => p.CreationLocale == locale);
+                        <p>
+                            <b>@locale:</b><br />
+                            @localeCount games running.<br />
+                            Last phase performed: @latestRoundString
+                        </p>
                     }
-                </p>
+                    </p>
+                </div>
             }
         </div>
-    </body>
+    </div>
+</body>
 </html>

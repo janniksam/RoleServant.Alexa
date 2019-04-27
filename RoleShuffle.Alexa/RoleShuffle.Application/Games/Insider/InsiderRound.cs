@@ -1,19 +1,6 @@
-﻿using System;
-using RoleShuffle.Application.Abstractions.Games;
-
-namespace RoleShuffle.Application.Games.Insider
+﻿namespace RoleShuffle.Application.Games.Insider
 {
-    public class InsiderRound : IGameRound
+    public class InsiderRound : BaseRound
     {
-        public InsiderRound()
-        {
-            CreationTime = DateTime.UtcNow;
-        }
-
-        public string UserId { get; set; }
-
-        public string CreationLocale { get; set; }
-
-        public DateTime CreationTime { get; set; }
     }
 }

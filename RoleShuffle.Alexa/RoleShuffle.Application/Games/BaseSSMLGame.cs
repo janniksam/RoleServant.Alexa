@@ -43,11 +43,13 @@ namespace RoleShuffle.Application.Games
 
         protected async Task<SkillResponse> PerformDefaultNightPhase(SkillRequest request)
         {
-            if (!RunningRounds.TryGetValue(request.Context.System.User.UserId, out var round) || round == null)
+            var userId = request.Context.System.User.UserId;
+            if (!RunningRounds.TryGetValue(userId, out var round) || round == null)
             {
                 return await NoActiveGameOpen(request).ConfigureAwait(false);
             }
 
+            round.UpdateLastUsed();
             NightPhaseStarted();
 
             var resultSSML = await GetSSMLAsync(NightPhaseView, request.Request.Locale, round).ConfigureAwait(false);
@@ -56,11 +58,13 @@ namespace RoleShuffle.Application.Games
 
         protected async Task<SkillResponse> PerformDefaultDistributionPhase(SkillRequest request)
         {
-            if (!RunningRounds.TryGetValue(request.Context.System.User.UserId, out var round) || round == null)
+            var userId = request.Context.System.User.UserId;
+            if (!RunningRounds.TryGetValue(userId, out var round) || round == null)
             {
                 return await NoActiveGameOpen(request).ConfigureAwait(false);
             }
 
+            round.UpdateLastUsed();
             DistributionPhaseStarted();
             
             var resultSSML = await GetSSMLAsync(DistributeRolesView, request.Request.Locale, round)

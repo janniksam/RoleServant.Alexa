@@ -21,4 +21,8 @@
       <Visible>False</Visible>
     </AdditionalFiles>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RoleShuffle.Base\RoleShuffle.Base.csproj" />
+  </ItemGroup>
 </Project>

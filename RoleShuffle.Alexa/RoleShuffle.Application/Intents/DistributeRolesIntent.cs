@@ -5,7 +5,6 @@ using Alexa.NET;
 using Alexa.NET.Request;
 using Alexa.NET.Response;
 using RoleShuffle.Application.Abstractions.Games;
-using RoleShuffle.Application.Games;
 using RoleShuffle.Application.SSMLResponses;
 using RoleShuffle.Base;
 

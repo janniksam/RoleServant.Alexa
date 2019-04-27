@@ -1,10 +1,13 @@
 ﻿using System;
+using AspectCore.Configuration;
+using AspectCore.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RoleShuffle.IoC;
 using RoleShuffle.Web.Services;
+using RoleShuffle.Web.Validation;
 
 namespace RoleShuffle.Web
 {
@@ -29,14 +32,23 @@ namespace RoleShuffle.Web
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(
+        public IServiceProvider ConfigureServices(
             IServiceCollection services)
         {
             services.RegisterDependencies();
             services.AddSingleton(Configuration);
+            services.AddSingleton<IAlexaRequestValidator,AlexaRequestValidator>();
+
             services.AddHostedService<WarmUpService>();
             services.AddHostedService<ConfigurationWorkerService>();
             services.AddMvc();
+
+            services.ConfigureDynamicProxy(config =>
+            {
+                config.Interceptors.AddDelegate((ctx, next) => next(ctx));
+            });
+
+            return services.BuildDynamicProxyServiceProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -95,8 +95,8 @@ namespace RoleShuffle.Application.Services
 
         private string GetConfigLocation()
         {
-            var currentDirectory = Directory.GetCurrentDirectory();
-            var path = Path.Combine(currentDirectory, "config");
+            var currentDirectory = AppContext.BaseDirectory;
+            var path = Path.Combine(currentDirectory, "data");
             return path;
         }
 

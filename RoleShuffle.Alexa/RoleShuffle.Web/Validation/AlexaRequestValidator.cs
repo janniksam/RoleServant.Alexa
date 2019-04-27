@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Http.Internal;
 
 namespace RoleShuffle.Web.Validation
 {
-    public static class AlexaRequestValidator
+    public class AlexaRequestValidator : IAlexaRequestValidator
     {
-        public static async Task<bool> ValidateRequest(HttpRequest request, SkillRequest skillRequest)
+        public async Task<bool> ValidateRequest(HttpRequest request, SkillRequest skillRequest)
         {
             var isTimestampValid = RequestVerification.RequestTimestampWithinTolerance(skillRequest);
             try

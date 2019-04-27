@@ -5,7 +5,7 @@ namespace RoleShuffle.Application
 {
     public class Localization
     {
-        private static readonly Dictionary<string,string> SupportedLocales = new Dictionary<string, string>
+        private static readonly Dictionary<string,string> m_supportedLocales = new Dictionary<string, string>
         {
             { "de-DE", "de_DE" },
             { "en-AU", "en_US" },
@@ -22,7 +22,7 @@ namespace RoleShuffle.Application
                 return locale;
             }
 
-            if (!SupportedLocales.TryGetValue(locale, out string folderPath))
+            if (!m_supportedLocales.TryGetValue(locale, out string folderPath))
             {
                 throw new NotSupportedException($"Locale {locale} is currently not supported.");
             }
@@ -32,17 +32,17 @@ namespace RoleShuffle.Application
 
         public static bool IsSupported(string locale)
         {
-            return SupportedLocales.ContainsKey(locale);
+            return m_supportedLocales.ContainsKey(locale);
         }
 
         public static string[] GetLocalesFolderPaths()
         {
-            return SupportedLocales.Select(p => p.Value).Distinct().ToArray();
+            return m_supportedLocales.Select(p => p.Value).Distinct().ToArray();
         }
 
         public static string[] GetSupportedLocales()
         {
-            return SupportedLocales.Select(p => p.Key).Distinct().ToArray();
+            return m_supportedLocales.Select(p => p.Key).Distinct().ToArray();
         }
     }
 }
