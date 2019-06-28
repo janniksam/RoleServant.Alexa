@@ -90,7 +90,7 @@ namespace RoleShuffle.Application.Services
                 configuration.SavedGames.Add(new SavedGame
                 {
                     Id = game.GameId,
-                    GameRounds = game.GetOpenGames().Where(p => p.CreationTime.AddDays(7) > now).ToList(),
+                    GameRounds = game.GetOpenGames().Where(p => p.CreationTime.AddMonths(6) > now).ToList(),
                     GameStats = game.GetCurrentStats()
                 });
             }

@@ -22,7 +22,7 @@ namespace RoleShuffle.Application.Services
             {
                 try
                 {
-                    await Task.Delay(TimeSpan.FromMinutes(20), cancellationToken);
+                    await Task.Delay(TimeSpan.FromMinutes(20), cancellationToken).ConfigureAwait(false);
                     await m_configurationManager.WriteToDiskAsync(cancellationToken).ConfigureAwait(false);
                 }
                 catch (Exception e)
