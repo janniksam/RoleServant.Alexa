@@ -1,17 +1,6 @@
 ﻿@using RoleShuffle.Application
-@using RoleShuffle.Application.Abstractions.Games
-@model IEnumerable<IGame>
+@model RoleShuffle.Web.Models.Statistics
 
-@{
-    var gameRounds = new Dictionary<IGame, IEnumerable<IGameRound>>();
-    foreach (var game in Model)
-    {
-        gameRounds.Add(game, game.GetOpenGames());
-    }
-
-    var gameRoundCount = gameRounds.Sum(p => p.Value.Count());
-    var totalRoundsStarted = gameRounds.Sum(p => p.Key.GetCurrentStats().TotalGamesCreated);
-}
 <!DOCTYPE html>
 
 <html>
@@ -45,21 +34,34 @@
 </head>
 <body style="background: #191919; color: white">
     <div>
-        <h1>Game Summary</h1>
+        <p style="text-align:left;">
+            <h1>Game Summary</h1>
+            @if (Model.BackupDate != DateTime.MinValue)
+            {
+                <span style="float:right;">Last backup: @Model.BackupDate</span>
+            }
+        </p>
 
-        <h4>@totalRoundsStarted games were started already.</h4>
+
+        <h4>@Model.TotalRoundsStarted games were started already.</h4>
         <div>
             <h2>Open games: </h2>
             <p>
-                <h4>Currently there are a total of @gameRoundCount games up and running.</h4>
+                <h4>Currently there are a total of @Model.TotalGameRoundsUpAndRunning games up and running.</h4>
+                @if (Model.LatestRoundOfTotal.HasValue)
+                {
+                    <h4>Last phase performed: @Model.LatestRoundOfTotalString</h4>
+                }
             </p>
         </div>
 
         <div>
-            @foreach (var game in gameRounds.OrderByDescending(p => p.Value.Count()).ThenBy(p => p.Key.GameId))
+            @foreach (var game in Model.GameRoundsPerGame.OrderByDescending(p => p.Value.Count()).ThenBy(p => p.Key.GameId))
             {
                 var gameCount = game.Value.Count();
                 var stats = game.Key.GetCurrentStats();
+                var latestRoundOfGame = game.Value.Max(p => p.LastUsed);
+                var latestRoundOfGameString = latestRoundOfGame.HasValue ? latestRoundOfGame.Value.ToString("g") : "Never";
 
                 <div class="child-game">
                     <p>
@@ -72,14 +74,17 @@
                         {
                             @:@stats.TotalNightPhases night phases performed in total.<br />
                             @:@stats.TotalDistributionPhases distribution phases performed in total.<br />
+                            @:Last phase performed: @latestRoundOfGameString<br />
                         }
                         else if (stats.TotalNightPhases > 0)
                         {
                             @:@stats.TotalNightPhases night phases performed in total.<br /><br />
+                            @:Last phase performed: @latestRoundOfGameString<br />
                         }
                         else if (stats.TotalDistributionPhases > 0)
                         {
                             @:@stats.TotalDistributionPhases distribution phases performed in total.<br /><br />
+                            @:Last phase performed: @latestRoundOfGameString<br />
                         }
                         else
                         {

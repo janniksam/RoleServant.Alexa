@@ -14,15 +14,19 @@ namespace RoleShuffle.Application.Services
     public class ConfigurationManager : IConfigurationManager
     {
         private readonly IEnumerable<IGame> m_games;
+        private DateTime m_lastBackupDate = DateTime.MinValue;
 
         public ConfigurationManager(IEnumerable<IGame> games)
         {
             m_games = games;
         }
 
+        public DateTime GetLastBackupDate() => m_lastBackupDate;
+    
         public async Task LoadAsync(CancellationToken cancellationToken)
         {
             var configuration = await ReadFromFileAsync(cancellationToken).ConfigureAwait(false);
+            m_lastBackupDate = configuration.LastBackupDate;
             foreach (var configurationSavedGame in configuration.SavedGames)
             {
                 var game = m_games.FirstOrDefault(p => p.GameId == configurationSavedGame.Id);
@@ -71,6 +75,7 @@ namespace RoleShuffle.Application.Services
                 TypeNameHandling = TypeNameHandling.Auto,
                 TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple
             });
+            
             await File.WriteAllTextAsync(GetConfigFilePath(), serializeObject, cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -90,6 +95,8 @@ namespace RoleShuffle.Application.Services
                 });
             }
 
+            m_lastBackupDate = DateTime.UtcNow;
+            configuration.LastBackupDate = m_lastBackupDate;
             return configuration;
         }
 
