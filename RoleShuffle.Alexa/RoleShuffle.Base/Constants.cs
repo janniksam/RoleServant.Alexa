@@ -34,6 +34,7 @@
             public const short OneNightUltimateWerewolf = 2;
             public const short Insider = 3;
             public const short TheResistanceAvalon = 4;
+            public const short ActOfTreason = 5;
         }
     }
 }

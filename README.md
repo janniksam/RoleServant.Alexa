@@ -19,6 +19,7 @@ Currently, the list of supported games is
     - One Night Ultimate Werewolf,
     - The Resistance: Avalon,
     - Insider
+    - Act of Treason
     - ... (more are coming soon)
 
 The skill is helping the players in executing the night phases or in exchanging hidden roles (e.g. in Secret Hitler).

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Globals">
     <SccProjectName>SAK</SccProjectName>
@@ -12,8 +12,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="SSMLResponses\ActOfTreason\de-DE\DistributeRoles.cshtml" />
+    <None Remove="SSMLResponses\ActOfTreason\de-DE\GameNamePartial.cshtml" />
+    <None Remove="SSMLResponses\ActOfTreason\en-US\DistributeRoles.cshtml" />
+    <None Remove="SSMLResponses\ActOfTreason\en-US\GameNamePartial.cshtml" />
     <None Remove="SSMLResponses\Common\en-US\StopMessage.cshtml" />
+    <None Remove="SSMLResponses\Insider\de-DE\DistributeRoles.cshtml" />
     <None Remove="SSMLResponses\Insider\de-DE\GameNamePartial.cshtml" />
+    <None Remove="SSMLResponses\Insider\de-DE\NightPhase.cshtml" />
     <None Remove="SSMLResponses\Insider\en-US\GameNamePartial.cshtml" />
     <None Remove="SSMLResponses\Insider\en-US\NightPhase.cshtml" />
     <None Remove="SSMLResponses\OneNightUltimateWerewolf\de-DE\GameNamePartial.cshtml" />
@@ -58,7 +64,6 @@
     <None Remove="SSMLResponses\Common\en-US\GameStartContinueWithNightPhase.cshtml" />
     <None Remove="SSMLResponses\Common\en-US\HelpMessage.cshtml" />
     <None Remove="SSMLResponses\Common\en-US\LaunchMessage.cshtml" />
-    <None Remove="SSMLResponses\Insider\de-DE\NightPhase.cshtml" />
     <None Remove="SSMLResponses\SecretHitler\de-DE\ChoosePlayerNumberBetween.cshtml" />
     <None Remove="SSMLResponses\SecretHitler\de-DE\DistributeRoles.cshtml" />
     <None Remove="SSMLResponses\SecretHitler\de-DE\RoundStarted.cshtml" />
@@ -85,8 +90,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="SSMLResponses\ActOfTreason\de-DE\GameNamePartial.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\ActOfTreason\de-DE\DistributeRoles.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\ActOfTreason\en-US\DistributeRoles.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\ActOfTreason\en-US\GameNamePartial.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Insider\de-DE\GameNamePartial.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Insider\de-DE\NightPhase.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Insider\en-US\GameNamePartial.cshtml" />
+    <EmbeddedResource Include="SSMLResponses\Insider\en-US\NightPhase.cshtml" />
     <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\de-DE\GameNamePartial.cshtml" />
     <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\en-US\ChooseDeckId.cshtml" />
     <EmbeddedResource Include="SSMLResponses\OneNightUltimateWerewolf\en-US\ChooseDeckIdConfirmation.cshtml" />
@@ -134,8 +145,6 @@
     <EmbeddedResource Include="SSMLResponses\Common\en-US\HelpMessage.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\en-US\LaunchMessage.cshtml" />
     <EmbeddedResource Include="SSMLResponses\Common\en-US\StopMessage.cshtml" />
-    <EmbeddedResource Include="SSMLResponses\Insider\de-DE\NightPhase.cshtml" />
-    <EmbeddedResource Include="SSMLResponses\Insider\en-US\NightPhase.cshtml" />
     <EmbeddedResource Include="SSMLResponses\SecretHitler\de-DE\ChoosePlayerNumberBetween.cshtml" />
     <EmbeddedResource Include="SSMLResponses\SecretHitler\de-DE\DistributeRoles.cshtml" />
     <EmbeddedResource Include="SSMLResponses\SecretHitler\de-DE\RoundStarted.cshtml" />

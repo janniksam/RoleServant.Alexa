@@ -56,7 +56,11 @@
         </div>
 
         <div>
-            @foreach (var game in Model.GameRoundsPerGame.OrderByDescending(p => p.Value.Count()).ThenBy(p => p.Key.GameId))
+            @foreach (var game in Model.GameRoundsPerGame
+                .OrderByDescending(p => p.Value.Max(r => r.LastUsed))
+                .ThenByDescending(p => p.Value.Count())
+                .ThenByDescending(p => p.Key.GetCurrentStats().TotalGamesCreated)
+                .ThenBy(p => p.Key.GameId))
             {
                 var gameCount = game.Value.Count();
                 var stats = game.Key.GetCurrentStats();
@@ -67,8 +71,7 @@
                     <p>
                     <p>
                         <h2>@await game.Key.GetLocalizedGamename("en-US"):</h2>
-                        <b>@stats.TotalGamesCreated total games played.</b><br />
-                        <b>@gameCount active games.</b><br />
+                        <b>@gameCount active games. (@stats.TotalGamesCreated total games played.)</b><br />
                         <br />
                         @if (stats.TotalNightPhases > 0 && stats.TotalDistributionPhases > 0)
                         {
@@ -88,6 +91,7 @@
                         }
                         else
                         {
+                            <br />
                             <br />
                             <br />
                         }

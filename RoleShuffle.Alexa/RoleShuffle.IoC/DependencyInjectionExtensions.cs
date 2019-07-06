@@ -3,6 +3,7 @@ using RoleShuffle.Application.Abstractions.Games;
 using RoleShuffle.Application.Abstractions.RequestHandler;
 using RoleShuffle.Application.Abstractions.RoleManager;
 using RoleShuffle.Application.Abstractions.Services;
+using RoleShuffle.Application.Games.ActOfTreason;
 using RoleShuffle.Application.Games.Insider;
 using RoleShuffle.Application.Games.OneNightUltimateWerewolf;
 using RoleShuffle.Application.Games.SecretHitler;
@@ -37,7 +38,8 @@ namespace RoleShuffle.IoC
             services.AddSingleton<IGame, OneNightUltimateWerewolfGame>();
             services.AddSingleton<IGame, InsiderGame>();
             services.AddSingleton<IGame, TheResistanceAvalonGame>();
-
+            services.AddSingleton<IGame, ActOfTreasonGame>();
+            
             services.AddSingleton<IOneNightUltimateWerewolfRoleManager, OneNightUltimateWerewolfRoleManager>();
         }
     }
